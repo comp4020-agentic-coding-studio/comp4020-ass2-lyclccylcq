@@ -1,4 +1,5 @@
 ---
+import { getPublishedCollection } from "astro-course-university/content";
 import Card from "astro-theme-university/components/Card.astro";
 import CardGrid from "astro-theme-university/components/CardGrid.astro";
 import ContentLayout from "astro-theme-university/layouts/ContentLayout.astro";
@@ -12,6 +13,7 @@ import { siteConfig } from "../site-config";
 import { withBase } from "astro-theme-university/url";
 import "../styles/photo.css";
 
+const lectures = await getPublishedCollection("lectures");
 const weeks = Array.from({ length: 12 }, (_, i) => i + 1);
 ---
 
@@ -40,13 +42,18 @@ const weeks = Array.from({ length: 12 }, (_, i) => i + 1);
     <h2 id="section-02"><span class="photo-frame-number">02</span> The Semester</h2>
     <CardGrid columns={3}>
       {
-        weeks.map((week) => (
-          <Card
-            headingLevel="h3"
-            title={`Week ${String(week).padStart(2, "0")}`}
-            href={`/weeks/${String(week).padStart(2, "0")}/`}
-          />
-        ))
+        weeks.map((week) => {
+          const lecture = lectures.find((entry) => entry.data.week === week);
+          return (
+            <Card
+              headingLevel="h3"
+              title={`Week ${String(week).padStart(2, "0")}`}
+              href={`/weeks/${String(week).padStart(2, "0")}/`}
+            >
+              {lecture && <p>{lecture.data.title}</p>}
+            </Card>
+          );
+        })
       }
     </CardGrid>
   </section>

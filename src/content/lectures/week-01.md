@@ -1,8 +1,9 @@
 ---
-title: Opening lecture
+title: Why Are You Bad at Taking Photos of Me?
 description:
-  The first lecture — what the course is, why it is shaped this way, and what
-  happens in week 1
+  The course prologue — the most familiar argument in a relationship, retold
+  through real photo disagreements, and why it isn't just a camera-skills
+  problem
 week: 1
 date: 2027-02-22
 teachers:
@@ -12,19 +13,18 @@ related:
   - sessions/01-getting-started
 ---
 
-<!-- STARTER_CONTENT: replace this lecture, then remove this comment. -->
+A prologue, not a technique lecture. This week collects the recognisable
+argument — one partner unhappy with the photo the other just took — through a
+handful of real-world examples, and uses them to open the question the rest
+of the semester answers.
 
-Replace this page. A lecture entry says what was covered and links to the pages
-that own the detail, so the lecture stays short and nothing is explained twice.
+No settings, no technique yet. The point of week 1 is only to establish that
+the disagreement is real, common, and worth taking seriously as a design
+problem rather than a joke.
 
-The `related:` ref above is a graph edge: it renders on this page and on the
-session's, so declare a connection once, on whichever side is convenient.
+## Themes for development
 
-The page renders its `slides:` link automatically. Decks are markdown too,
-under `src/decks/`; the path is part of the lecture's API metadata.
-
-## Outline
-
-- what the course is for
-- how the weeks are shaped
-- what to do before the first session
+- concrete, recognisable conflict scenarios (to be gathered, not invented on
+  the spot)
+- reframing "you're just bad at this" as a two-person negotiation problem
+- setting up Act I: diagnosis before technique

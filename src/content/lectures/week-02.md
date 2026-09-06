@@ -1,7 +1,8 @@
 ---
-title: Second lecture
+title: The Boyfriend Photographer Problem
 description:
-  Week 2 — the first substantive material, and the run-up to the first review
+  Why bad partner photography became a recognisable stereotype — read through
+  visual literacy and unequal interest, not as a joke about men
 week: 2
 date: 2027-03-01
 teachers:
@@ -11,13 +12,15 @@ related:
   - assessments/assessment-01
 ---
 
-<!-- STARTER_CONTENT: replace this lecture, then remove this comment. -->
+Takes the "boyfriend photographer" / "Instagram husband" stereotype seriously
+as a cultural pattern rather than a punchline. The stereotype exists because
+something real sits underneath it — worth naming precisely, and worth being
+playful about without landing on "men are bad photographers."
 
-Replace this page. It exists so the lectures listing sorts by week and the
-related block has more than one edge to draw.
+## Themes for development
 
-## Outline
-
-- the first substantive material, and where it shows up in practice
-- what the first review is looking for
-- reading before next week
+- visual literacy: not everyone reads a frame the same way
+- social-media expectations shaping what "a good photo" even means
+- unequal interest in the activity itself, and what that does to effort
+- documenting a moment versus presenting a person
+- photography as a form of relational labour
