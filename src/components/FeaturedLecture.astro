@@ -1,0 +1,28 @@
+---
+import { getPublishedCollection } from "astro-course-university/content";
+import Callout from "astro-theme-university/components/Callout.astro";
+import { withBase } from "astro-theme-university/url";
+
+const lectures = await getPublishedCollection("lectures");
+const featured = lectures
+  .filter((lecture) => lecture.data.slides)
+  .sort((a, b) => a.data.week - b.data.week)
+  .at(0);
+---
+
+{
+  featured ? (
+    <div class="featured-lecture photo-frame">
+      <p class="photo-frame-number">WEEK {String(featured.data.week).padStart(2, "0")}</p>
+      <h3>{featured.data.title}</h3>
+      <p>{featured.data.description}</p>
+      <a class="photo-cta" href={withBase(featured.data.slides!)}>
+        Open the slides
+      </a>
+    </div>
+  ) : (
+    <Callout type="info">
+      <p>Developing… no lecture has slides linked yet.</p>
+    </Callout>
+  )
+}

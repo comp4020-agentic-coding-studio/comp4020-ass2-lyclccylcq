@@ -1,0 +1,71 @@
+---
+import { withBase } from "astro-theme-university/url";
+
+export interface ContactSheetFrame {
+  /** Frame number label, e.g. "01". */
+  number: string;
+  /** Frame title, e.g. "Week 01". */
+  title: string;
+  /** Link target. */
+  href: string;
+  /** Optional caption shown under the title. */
+  caption?: string;
+}
+
+export interface ContactSheetGridProps {
+  frames: ContactSheetFrame[];
+}
+
+type Props = ContactSheetGridProps;
+
+const { frames } = Astro.props;
+---
+
+<ul class="photo-contact-sheet" role="list">
+  {
+    frames.map((frame) => (
+      <li>
+        <a class="photo-frame contact-sheet-frame" href={withBase(frame.href)}>
+          <span class="photo-frame-number">{frame.number}</span>
+          <span class="contact-sheet-frame-title">{frame.title}</span>
+          {frame.caption && <span class="contact-sheet-frame-caption">{frame.caption}</span>}
+        </a>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .photo-contact-sheet {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .contact-sheet-frame {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    aspect-ratio: 1;
+    justify-content: space-between;
+    color: var(--at-text);
+    background: var(--at-bg-alt);
+    text-decoration: none;
+    transition: background-color 0.15s ease;
+  }
+
+  .contact-sheet-frame:hover,
+  .contact-sheet-frame:focus-visible {
+    background: var(--at-accent-soft);
+  }
+
+  .contact-sheet-frame-title {
+    font-weight: 600;
+    font-size: var(--at-font-size-base);
+  }
+
+  .contact-sheet-frame-caption {
+    font-size: var(--at-font-size-xs);
+    color: var(--at-text-secondary);
+  }
+</style>

@@ -1,0 +1,59 @@
+---
+import { getPublishedCollection } from "astro-course-university/content";
+import { courseMeta } from "../course-config";
+import { formatCourseDate } from "../lib/dates";
+
+const people = await getPublishedCollection("people");
+const convenorEntry = people.find((person) => person.data.role === "convenor");
+---
+
+<dl class="course-info-list">
+  <div>
+    <dt>Course code</dt>
+    <dd>{courseMeta.code}</dd>
+  </div>
+  <div>
+    <dt>Level</dt>
+    <dd>{courseMeta.level}</dd>
+  </div>
+  <div>
+    <dt>Semester</dt>
+    <dd>{courseMeta.session}</dd>
+  </div>
+  <div>
+    <dt>Teaching period</dt>
+    <dd>
+      {formatCourseDate(courseMeta.startDate)} – {formatCourseDate(courseMeta.endDate)}
+    </dd>
+  </div>
+  <div>
+    <dt>Delivery mode</dt>
+    <dd>To be confirmed</dd>
+  </div>
+  <div>
+    <dt>Convenor</dt>
+    <dd>{convenorEntry ? convenorEntry.data.title : "To be confirmed"}</dd>
+  </div>
+</dl>
+
+<style>
+  .course-info-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    gap: var(--at-spacing-md);
+    margin: 0;
+  }
+
+  .course-info-list dt {
+    font-family: var(--photo-metadata-font, var(--at-font-mono));
+    font-size: var(--at-font-size-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--at-text-secondary);
+  }
+
+  .course-info-list dd {
+    margin: 0;
+    font-size: var(--at-font-size-base);
+  }
+</style>

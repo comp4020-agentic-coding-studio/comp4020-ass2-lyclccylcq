@@ -1,0 +1,111 @@
+---
+import { render } from "astro:content";
+import { getPublishedCollection } from "astro-course-university/content";
+import Callout from "astro-theme-university/components/Callout.astro";
+import ContentLayout from "astro-theme-university/layouts/ContentLayout.astro";
+import { withBase } from "astro-theme-university/url";
+import MetaLine from "../../components/MetaLine.astro";
+import { formatCourseDate } from "../../lib/dates";
+import { courseMeta } from "../../course-config";
+import { siteConfig } from "../../site-config";
+import "../../styles/photo.css";
+
+export async function getStaticPaths() {
+  return Array.from({ length: 12 }, (_, i) => ({
+    params: { week: String(i + 1).padStart(2, "0") },
+  }));
+}
+
+const weekNumber = Number(Astro.params.week);
+const padded = Astro.params.week as string;
+
+const sessions = await getPublishedCollection("sessions");
+const lectures = await getPublishedCollection("lectures");
+const session = sessions.find((entry) => entry.data.week === weekNumber);
+const lecture = lectures.find((entry) => entry.data.week === weekNumber);
+
+const sessionRender = session ? await render(session) : undefined;
+const lectureRender = lecture ? await render(lecture) : undefined;
+
+const title = lecture?.data.title ?? session?.data.title ?? `Week ${padded}`;
+const intro = lecture?.data.description ?? session?.data.description;
+const date = lecture?.data.date ?? session?.data.date;
+
+const prevWeek = weekNumber > 1 ? String(weekNumber - 1).padStart(2, "0") : undefined;
+const nextWeek = weekNumber < 12 ? String(weekNumber + 1).padStart(2, "0") : undefined;
+---
+
+<ContentLayout title={`Week ${padded}: ${title}`} description={intro} {...siteConfig}>
+  <MetaLine parts={[courseMeta.code, `WEEK ${padded}`, date ? formatCourseDate(date) : "DATE TBC"]} />
+
+  {intro && <p class="lead">{intro}</p>}
+  {
+    !intro && (
+      <Callout type="info">
+        <p>This page was out of focus. No premise written yet for week {padded}.</p>
+      </Callout>
+    )
+  }
+
+  <section aria-labelledby="week-lecture">
+    <h2 id="week-lecture">Lecture</h2>
+    {
+      lecture && lectureRender ? (
+        <>
+          <lectureRender.Content />
+          {lecture.data.slides && (
+            <p>
+              <a class="photo-cta" href={withBase(lecture.data.slides)}>
+                Open the slides
+              </a>
+            </p>
+          )}
+        </>
+      ) : (
+        <p>No shots selected. No lecture linked for this week yet.</p>
+      )
+    }
+  </section>
+
+  <section aria-labelledby="week-studio">
+    <h2 id="week-studio">Studio / Practical</h2>
+    {
+      session && sessionRender ? (
+        <sessionRender.Content />
+      ) : (
+        <p>No shots selected. No studio session linked for this week yet.</p>
+      )
+    }
+  </section>
+
+  <section aria-labelledby="week-before">
+    <h2 id="week-before">Before class</h2>
+    <p>What to bring or prepare beforehand — to be added.</p>
+  </section>
+
+  <section aria-labelledby="week-after">
+    <h2 id="week-after">After class</h2>
+    <p>What to do or hand in afterwards — to be added.</p>
+  </section>
+
+  <nav class="week-pager" aria-label="Week navigation">
+    {prevWeek ? <a href={withBase(`/weeks/${prevWeek}/`)}>&larr; Week {prevWeek}</a> : <span />}
+    <a href={withBase("/weeks/")}>All weeks</a>
+    {nextWeek ? <a href={withBase(`/weeks/${nextWeek}/`)}>Week {nextWeek} &rarr;</a> : <span />}
+  </nav>
+</ContentLayout>
+
+<style>
+  section + section {
+    margin-block-start: 2.5rem;
+  }
+
+  .week-pager {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-block-start: 3rem;
+    padding-block-start: 1rem;
+    border-top: 1px solid var(--at-border);
+  }
+</style>

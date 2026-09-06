@@ -1,0 +1,80 @@
+---
+import ContentLayout from "astro-theme-university/layouts/ContentLayout.astro";
+import { siteConfig } from "../../site-config";
+
+const sections = [
+  {
+    id: "attendance",
+    title: "Attendance",
+    body: "Policy to be confirmed.",
+  },
+  {
+    id: "academic-integrity",
+    title: "Academic integrity",
+    body: "Policy to be confirmed.",
+  },
+  {
+    id: "ai-use",
+    title: "AI use",
+    body: "Policy to be confirmed.",
+  },
+  {
+    id: "extensions",
+    title: "Extensions",
+    body: "Policy to be confirmed.",
+  },
+  {
+    id: "accessibility",
+    title: "Accessibility",
+    body: "Policy to be confirmed.",
+  },
+  {
+    id: "equipment",
+    title: "Equipment",
+    body: "Policy to be confirmed.",
+  },
+  {
+    id: "safety",
+    title: "Safety",
+    body: "Policy to be confirmed.",
+  },
+];
+---
+
+<ContentLayout
+  title="Policies and support"
+  description="Course-wide rules for attendance, integrity, extensions and support. Still being confirmed."
+  {...siteConfig}
+>
+  <div class="policies">
+    {
+      sections.map((section) => (
+        <section aria-labelledby={section.id}>
+          <h2 id={section.id}>{section.title}</h2>
+          <p>{section.body}</p>
+        </section>
+      ))
+    }
+  </div>
+</ContentLayout>
+
+<style>
+  .policies {
+    max-width: 42rem;
+  }
+
+  .policies section + section {
+    margin-block-start: 1.75rem;
+    padding-block-start: 1.75rem;
+    border-top: 1px solid var(--at-border);
+  }
+
+  .policies h2 {
+    font-size: var(--at-font-size-lg);
+    color: var(--at-text-secondary);
+  }
+
+  .policies p {
+    color: var(--at-text-secondary);
+  }
+</style>

@@ -1,0 +1,94 @@
+/* Photography visual language, layered on top of the theme's --at-* tokens.
+   Unlayered on purpose (matches how astro-theme-slop's brandCss works) so it
+   composes cleanly with the theme's own @layer rules without touching them. */
+
+:root {
+  --photo-metadata-font: var(--at-font-mono, ui-monospace, monospace);
+  --photo-frame-border: var(--at-border);
+  --photo-crop-size: 0.9rem;
+  --photo-crop-color: var(--at-text-secondary);
+}
+
+.photo-editorial-heading {
+  font-family: var(--at-font-body);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+.photo-meta-line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5em;
+  font-family: var(--photo-metadata-font);
+  font-size: var(--at-font-size-sm);
+  letter-spacing: 0.02em;
+  color: var(--at-text-secondary);
+  text-transform: uppercase;
+}
+
+.photo-meta-line > :not(:last-child)::after {
+  content: "·";
+  margin-inline-start: 0.5em;
+  color: var(--photo-crop-color);
+}
+
+/* A frame with photographer's crop marks at each corner. */
+.photo-frame {
+  position: relative;
+  padding: var(--at-spacing-sm);
+  border: 1px solid var(--photo-frame-border);
+}
+
+.photo-frame::before,
+.photo-frame::after,
+.photo-frame > .photo-frame-mark-tr,
+.photo-frame > .photo-frame-mark-bl {
+  content: "";
+  position: absolute;
+  width: var(--photo-crop-size);
+  height: var(--photo-crop-size);
+  pointer-events: none;
+}
+
+.photo-frame::before {
+  top: -1px;
+  left: -1px;
+  border-top: 2px solid var(--photo-crop-color);
+  border-left: 2px solid var(--photo-crop-color);
+}
+
+.photo-frame::after {
+  bottom: -1px;
+  right: -1px;
+  border-bottom: 2px solid var(--photo-crop-color);
+  border-right: 2px solid var(--photo-crop-color);
+}
+
+.photo-frame-number {
+  font-family: var(--photo-metadata-font);
+  font-size: var(--at-font-size-xs);
+  color: var(--photo-crop-color);
+}
+
+.photo-contact-sheet {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+  gap: var(--at-spacing-md);
+}
+
+.photo-cta {
+  display: inline-block;
+  padding: 0.6em 1.4em;
+  border-radius: var(--at-border-radius);
+  background: var(--at-primary);
+  color: var(--at-on-primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.photo-cta:hover,
+.photo-cta:focus-visible {
+  background: var(--at-primary-hover);
+}

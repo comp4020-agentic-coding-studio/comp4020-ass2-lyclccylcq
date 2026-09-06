@@ -40,23 +40,26 @@ export const slopCourseMetaSchema = z
 
 // The single source of truth for the course record. The generated homepage,
 // navigation label and /api/index.json all read this object.
-// Replace every placeholder value, but keep the shape: the catalogue ingests
-// this API contract when the course is published.
 //
 // The code's last three digits were assigned to this repo when it was
 // provisioned, and no other course in the cohort has them. Change the first
 // digit to your course's level (and `level` to match); keep the other three.
-// STARTER_CONTENT: replace this course record, then remove this comment.
+//
+// Title and tagline are settled; the description below is a structural
+// placeholder — it names the shape of the course without deciding the
+// philosophy, weekly topics or assessment detail, which come later.
 export const courseMeta = slopCourseMetaSchema.parse({
   code: "SLOP1810",
-  title: "Course Title Goes Here",
+  title: "Partner Photography",
   session: "Semester 1",
   year: 2027,
   level: 1,
   startDate: "2027-02-22",
   endDate: "2027-05-28",
   description:
-    "One concise paragraph explaining what this course is, who it is for, " +
-    "and why somebody would choose to spend a semester taking it.",
-  tags: ["replace me"],
+    "Partner Photography is a semester-long photography studio: twelve weeks " +
+    "moving from lecture to practical shoot to review, building toward a " +
+    "final body of work. Course philosophy, weekly topics and assessment " +
+    "detail are still being finalised.",
+  tags: ["photography", "studio"],
 }) satisfies CourseMetaInput;

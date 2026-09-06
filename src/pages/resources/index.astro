@@ -1,0 +1,68 @@
+---
+import ContentLayout from "astro-theme-university/layouts/ContentLayout.astro";
+import FieldKit from "../../components/FieldKit.astro";
+import { siteConfig } from "../../site-config";
+import "../../styles/photo.css";
+
+const sections = [
+  {
+    id: "camera-basics",
+    title: "Camera Basics",
+    body: "Coming soon — exposure, focus and the controls you'll actually use.",
+  },
+  {
+    id: "composition",
+    title: "Composition",
+    body: "Coming soon — framing a photo someone else will want to keep.",
+  },
+  {
+    id: "portrait-references",
+    title: "Portrait References",
+    body: "Coming soon — a gallery of reference work to shoot against.",
+  },
+  {
+    id: "editing",
+    title: "Editing",
+    body: "Coming soon — the editing workflow and tools used in this course.",
+  },
+  {
+    id: "equipment",
+    title: "Equipment",
+    body: "Coming soon — what's available to borrow, and what to bring yourself.",
+  },
+  {
+    id: "glossary",
+    title: "Glossary",
+    body: "Coming soon — terms used across lectures and studio sessions.",
+  },
+];
+
+const fieldKitItems = [
+  { label: "Camera, charged", note: "or a phone with manual controls" },
+  { label: "Spare storage" },
+  { label: "This week's shot list", note: "to be added" },
+];
+---
+
+<ContentLayout
+  title="Resources"
+  description="Reference material for camera basics, composition, editing and equipment. Still being developed."
+  {...siteConfig}
+>
+  {
+    sections.map((section) => (
+      <section aria-labelledby={section.id}>
+        <h2 id={section.id}>{section.title}</h2>
+        <p>{section.body}</p>
+      </section>
+    ))
+  }
+
+  <FieldKit items={fieldKitItems} />
+</ContentLayout>
+
+<style>
+  section + section {
+    margin-block-start: 2rem;
+  }
+</style>

@@ -1,0 +1,20 @@
+---
+import ContentLayout from "astro-theme-university/layouts/ContentLayout.astro";
+import ContactSheetGrid from "../../components/ContactSheetGrid.astro";
+import { siteConfig } from "../../site-config";
+import "../../styles/photo.css";
+
+const frames = Array.from({ length: 12 }, (_, i) => {
+  const n = i + 1;
+  const padded = String(n).padStart(2, "0");
+  return { number: padded, title: `Week ${padded}`, href: `/weeks/${padded}/` };
+});
+---
+
+<ContentLayout
+  title="Weeks"
+  description="Twelve weeks, one frame each. Topics are still being developed."
+  {...siteConfig}
+>
+  <ContactSheetGrid frames={frames} />
+</ContentLayout>

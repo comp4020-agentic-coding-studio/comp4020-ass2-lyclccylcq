@@ -1,0 +1,16 @@
+---
+export interface MetaLineProps {
+  /** Metadata fragments, e.g. ["SLOP1810", "WEEK 04", "12 SEP 2026"]. */
+  parts: string[];
+  /** HTML element to render the line as. */
+  as?: "p" | "div";
+}
+
+type Props = MetaLineProps;
+
+const { parts, as: Tag = "p" } = Astro.props;
+---
+
+<Tag class="photo-meta-line">
+  {parts.map((part: string) => <span>{part}</span>)}
+</Tag>
