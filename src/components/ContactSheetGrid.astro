@@ -51,12 +51,15 @@ const { frames } = Astro.props;
     color: var(--at-text);
     background: var(--at-bg-alt);
     text-decoration: none;
-    transition: background-color 0.15s ease;
+    transition:
+      border-color 0.15s ease,
+      transform 0.15s ease;
   }
 
   .contact-sheet-frame:hover,
   .contact-sheet-frame:focus-visible {
-    background: var(--at-accent-soft);
+    border-color: var(--at-accent);
+    transform: scale(1.02);
   }
 
   .contact-sheet-frame-title {

@@ -3,10 +3,27 @@
    composes cleanly with the theme's own @layer rules without touching them. */
 
 :root {
-  --photo-metadata-font: var(--at-font-mono, ui-monospace, monospace);
+  /* Metadata reads as a small-caps sans-serif editorial eyebrow (per the
+     brief), not code — tabular-nums keeps dates aligned without going full
+     monospace. */
+  --photo-metadata-font: var(--at-font-body);
   --photo-frame-border: var(--at-border);
   --photo-crop-size: 0.9rem;
   --photo-crop-color: var(--at-text-secondary);
+
+  /* Editorial display serif for major headings only — system/already-
+     available stack, no new font dependency. Body copy, nav, buttons and
+     metadata stay on the sans (--at-font-body) as the reading workhorse. */
+  --photo-font-display:
+    ui-serif, "Iowan Old Style", "Palatino Linotype", "URW Palladio L",
+    "Noto Serif", Georgia, serif;
+
+  /* Reserve the brand colour for links, active nav, buttons and small
+     highlights instead of every heading on every page. */
+  --at-heading: var(--at-text);
+  --at-font-size-h1: clamp(2rem, 1.4rem + 2vw, 3rem);
+  --at-font-size-h2: clamp(1.5rem, 1.2rem + 1vw, 2rem);
+  --at-content-width: 44rem;
 }
 
 .photo-editorial-heading {
@@ -16,6 +33,12 @@
   text-transform: uppercase;
 }
 
+.at-main h1,
+.at-main h2,
+.at-card-title {
+  font-family: var(--photo-font-display);
+}
+
 .photo-meta-line {
   display: flex;
   flex-wrap: wrap;
@@ -23,7 +46,8 @@
   gap: 0.5em;
   font-family: var(--photo-metadata-font);
   font-size: var(--at-font-size-sm);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.06em;
+  font-variant-numeric: tabular-nums;
   color: var(--at-text-secondary);
   text-transform: uppercase;
 }
@@ -86,9 +110,33 @@
   color: var(--at-on-primary);
   font-weight: 600;
   text-decoration: none;
+  transition:
+    background-color 0.15s ease,
+    transform 0.1s ease;
 }
 
 .photo-cta:hover,
 .photo-cta:focus-visible {
   background: var(--at-primary-hover);
+}
+
+.photo-cta:active {
+  transform: scale(0.98);
+}
+
+/* Quieter card hover: an editorial border/image emphasis rather than a
+   filled highlighter panel. */
+a.at-card:hover {
+  background-color: transparent;
+  border-color: var(--at-accent);
+  box-shadow: none;
+}
+
+.at-card-body {
+  padding: var(--at-spacing-lg);
+}
+
+/* Active nav state is colour-plus-underline, not colour alone. */
+.at-nav-links a[aria-current="page"] {
+  box-shadow: inset 0 -2px 0 var(--at-accent);
 }
