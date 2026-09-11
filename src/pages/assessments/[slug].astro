@@ -6,7 +6,9 @@ import SpecList from "astro-course-university/components/SpecList.astro";
 import Callout from "astro-theme-university/components/Callout.astro";
 import ContentLayout from "astro-theme-university/layouts/ContentLayout.astro";
 import MarkingModel from "../../components/MarkingModel.astro";
+import MetaLine from "../../components/MetaLine.astro";
 import { formatCourseDate } from "../../lib/dates";
+import { courseMeta } from "../../course-config";
 import { graphCollections, siteConfig } from "../../site-config";
 import "../../styles/photo.css";
 
@@ -20,13 +22,16 @@ export async function getStaticPaths() {
 
 const { assessment } = Astro.props;
 const { Content } = await render(assessment);
+const padded = String(assessment.data.week).padStart(2, "0");
 ---
 
 <ContentLayout
   title={assessment.data.title}
   description={assessment.data.description}
+  mainAttrs={{ "data-week-number": padded }}
   {...siteConfig}
 >
+  <MetaLine parts={[courseMeta.code, `WEEK ${padded}`, `Due ${formatCourseDate(assessment.data.due)}`, `Weight ${assessment.data.weight}%`]} />
   {
     assessment.data.draft && (
       <Callout type="warning">
@@ -36,7 +41,6 @@ const { Content } = await render(assessment);
       </Callout>
     )
   }
-  <p><strong>Due:</strong> {formatCourseDate(assessment.data.due)} · <strong>Weight:</strong> {assessment.data.weight}%</p>
   <Content />
   <SpecList spec={assessment.data.spec}>
     The brief poses the problem and leaves room for a response. The spec is the

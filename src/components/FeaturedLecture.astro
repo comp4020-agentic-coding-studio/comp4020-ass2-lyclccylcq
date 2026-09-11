@@ -26,3 +26,24 @@ const featured = lectures
     </Callout>
   )
 }
+
+<style>
+  .featured-lecture {
+    padding: var(--at-spacing-2xl);
+    border: none;
+    border-block-start: 1px solid var(--at-divider);
+    border-block-end: 1px solid var(--at-divider);
+  }
+
+  .featured-lecture::before,
+  .featured-lecture::after {
+    display: none;
+  }
+
+  .featured-lecture h3 {
+    font-family: var(--photo-font-display);
+    font-size: clamp(1.5rem, 1.2rem + 1.5vw, 2.5rem);
+    font-weight: 400;
+    margin-block: 0.4em 0.5em;
+  }
+</style>

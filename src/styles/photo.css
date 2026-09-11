@@ -1,11 +1,11 @@
 /* Photography visual language, layered on top of the theme's --at-* tokens.
    Unlayered on purpose (matches how astro-theme-slop's brandCss works) so it
-   composes cleanly with the theme's own @layer rules without touching them. */
+   always wins over the theme's own @layer rules without touching them or
+   needing !important. */
 
 :root {
-  /* Metadata reads as a small-caps sans-serif editorial eyebrow (per the
-     brief), not code — tabular-nums keeps dates aligned without going full
-     monospace. */
+  /* Metadata reads as a small-caps sans-serif editorial eyebrow, not code —
+     tabular-nums keeps dates aligned without going full monospace. */
   --photo-metadata-font: var(--at-font-body);
   --photo-frame-border: var(--at-border);
   --photo-crop-size: 0.9rem;
@@ -21,22 +21,30 @@
   /* Reserve the brand colour for links, active nav, buttons and small
      highlights instead of every heading on every page. */
   --at-heading: var(--at-text);
-  --at-font-size-h1: clamp(2rem, 1.4rem + 2vw, 3rem);
-  --at-font-size-h2: clamp(1.5rem, 1.2rem + 1vw, 2rem);
-  --at-content-width: 44rem;
-}
 
-.photo-editorial-heading {
-  font-family: var(--at-font-body);
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  text-transform: uppercase;
+  /* Wide tier gap on purpose: page titles and section headings sit much
+     further apart in scale so hierarchy reads from size/weight/spacing
+     alone, not just typeface. */
+  --at-font-size-h1: clamp(2.25rem, 1.6rem + 2.5vw, 4rem);
+  --at-font-size-h2: clamp(1.375rem, 1.2rem + 1vw, 1.875rem);
+  --at-content-width: 44rem;
+
+  /* Slimmer nav: a masthead strip, not a dashboard header. Kept in lockstep
+     with the --at-nav padding-block override below — this token also drives
+     the theme's own scroll-padding and .at-main min-height math. */
+  --at-nav-height: 4.5rem;
 }
 
 .at-main h1,
 .at-main h2,
 .at-card-title {
   font-family: var(--photo-font-display);
+}
+
+.at-hero-title {
+  font-family: var(--photo-font-display);
+  font-size: clamp(3rem, 2rem + 5vw, 6.5rem);
+  max-inline-size: 16ch;
 }
 
 .photo-meta-line {
@@ -66,9 +74,7 @@
 }
 
 .photo-frame::before,
-.photo-frame::after,
-.photo-frame > .photo-frame-mark-tr,
-.photo-frame > .photo-frame-mark-bl {
+.photo-frame::after {
   content: "";
   position: absolute;
   width: var(--photo-crop-size);
@@ -96,10 +102,29 @@
   color: var(--photo-crop-color);
 }
 
+/* A big, quiet numeral: the tool for scale-contrast hierarchy the brief asks
+   for (size/weight/tone instead of a box). Shared between the homepage's
+   own section markers and the week-page kicker generated below. */
+.photo-kicker-number,
+main[data-week-number]::before {
+  display: block;
+  font-family: var(--photo-font-display);
+  font-weight: 400;
+  font-size: clamp(3.5rem, 2.5rem + 6vw, 8rem);
+  line-height: 1;
+  color: var(--at-divider);
+}
+
+main[data-week-number]::before {
+  content: attr(data-week-number);
+  grid-column: content;
+  margin-block-end: var(--at-spacing-sm);
+}
+
 .photo-contact-sheet {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
-  gap: var(--at-spacing-md);
+  grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+  gap: var(--at-spacing-lg);
 }
 
 .photo-cta {
@@ -124,19 +149,112 @@
   transform: scale(0.98);
 }
 
-/* Quieter card hover: an editorial border/image emphasis rather than a
-   filled highlighter panel. */
-a.at-card:hover {
-  background-color: transparent;
-  border-color: var(--at-accent);
-  box-shadow: none;
+/* --- Card system: editorial index rows, not a boxed dashboard grid --- */
+
+.at-card-grid {
+  display: block;
+  margin-block: var(--at-spacing-xl);
+}
+
+.at-main > .at-card-grid {
+  grid-column: inset-start / content-end;
+}
+
+.at-card-grid > .at-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto;
+  grid-row: auto;
+  row-gap: 0;
+  column-gap: var(--at-spacing-lg);
+  align-items: center;
+  border: none;
+  border-block-end: 1px solid var(--at-divider);
+  padding-block: var(--at-spacing-lg);
+}
+
+.at-card-grid > .at-card:first-child {
+  border-block-start: 1px solid var(--at-divider);
+}
+
+.at-card-grid .at-card-image-frame {
+  width: 6rem;
+}
+
+.at-card-grid .at-card-image {
+  aspect-ratio: 1;
+  height: 100%;
+}
+
+.at-card-grid > .at-card:not(:has(.at-card-image-frame)) > .at-card-body {
+  grid-column: 1 / -1;
 }
 
 .at-card-body {
-  padding: var(--at-spacing-lg);
+  padding: 0;
+}
+
+.at-card-title {
+  font-size: 1.25rem;
+}
+
+a.at-card:hover {
+  background-color: transparent;
+  border-color: var(--at-divider);
+  box-shadow: none;
+}
+
+a.at-card:hover .at-card-title {
+  color: var(--at-accent);
+}
+
+@media (width < 640px) {
+  .at-card-grid > .at-card {
+    grid-template-columns: 1fr;
+  }
+
+  .at-card-grid .at-card-image-frame {
+    width: 100%;
+  }
+}
+
+/* --- Navigation: slim editorial masthead, same links/structure --- */
+
+.at-nav {
+  border-block-end: 1px solid var(--at-divider);
+}
+
+.at-nav-inner {
+  padding-block: var(--at-spacing-md);
+}
+
+.at-nav-links a {
+  border-radius: 0;
+  font-size: var(--at-font-size-sm);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.at-nav-links a:hover {
+  background: transparent;
+  color: var(--at-text);
+  box-shadow: inset 0 -2px 0 var(--at-divider);
 }
 
 /* Active nav state is colour-plus-underline, not colour alone. */
 .at-nav-links a[aria-current="page"] {
   box-shadow: inset 0 -2px 0 var(--at-accent);
+}
+
+@media (width >= 640px) {
+  .at-nav-links {
+    gap: var(--at-spacing-lg);
+  }
+}
+
+/* --- Shared section rhythm — pages without their own scoped override
+   inherit this; pages with one raise it in-file to match. --- */
+
+.at-main > section + section {
+  margin-block-start: clamp(3rem, 6vw, 6rem);
 }

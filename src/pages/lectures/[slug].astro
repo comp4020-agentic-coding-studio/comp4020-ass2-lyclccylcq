@@ -5,7 +5,9 @@ import RelatedContent from "astro-course-university/components/RelatedContent.as
 import ContentLayout from "astro-theme-university/layouts/ContentLayout.astro";
 import { withBase } from "astro-theme-university/url";
 import TeachingTeam from "../../components/TeachingTeam.astro";
+import MetaLine from "../../components/MetaLine.astro";
 import { formatCourseDate } from "../../lib/dates";
+import { courseMeta } from "../../course-config";
 import { graphCollections, siteConfig } from "../../site-config";
 import "../../styles/photo.css";
 
@@ -16,11 +18,17 @@ export async function getStaticPaths() {
 
 const { lecture } = Astro.props;
 const { Content } = await render(lecture);
+const padded = String(lecture.data.week).padStart(2, "0");
 const title = `Week ${lecture.data.week}: ${lecture.data.title}`;
 ---
 
-<ContentLayout title={title} description={lecture.data.description} {...siteConfig}>
-  <p><strong>{formatCourseDate(lecture.data.date)}</strong></p>
+<ContentLayout
+  title={title}
+  description={lecture.data.description}
+  mainAttrs={{ "data-week-number": padded }}
+  {...siteConfig}
+>
+  <MetaLine parts={[courseMeta.code, `WEEK ${padded}`, formatCourseDate(lecture.data.date)]} />
   {
     lecture.data.slides && (
       <p>

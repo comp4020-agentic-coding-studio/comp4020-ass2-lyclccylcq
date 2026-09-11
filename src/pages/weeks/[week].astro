@@ -35,10 +35,14 @@ const prevWeek = weekNumber > 1 ? String(weekNumber - 1).padStart(2, "0") : unde
 const nextWeek = weekNumber < 12 ? String(weekNumber + 1).padStart(2, "0") : undefined;
 ---
 
-<ContentLayout title={`Week ${padded}: ${title}`} description={intro} {...siteConfig}>
+<ContentLayout
+  title={`Week ${padded}: ${title}`}
+  description={intro}
+  mainAttrs={{ "data-week-number": padded }}
+  {...siteConfig}
+>
   <MetaLine parts={[courseMeta.code, `WEEK ${padded}`, date ? formatCourseDate(date) : "DATE TBC"]} />
 
-  {intro && <p class="lead">{intro}</p>}
   {
     !intro && (
       <Callout type="info">
@@ -97,15 +101,18 @@ const nextWeek = weekNumber < 12 ? String(weekNumber + 1).padStart(2, "0") : und
 
 <style>
   section + section {
-    margin-block-start: 2.5rem;
+    margin-block-start: clamp(3rem, 6vw, 6rem);
   }
 
   .week-pager {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-block-start: 3rem;
-    padding-block-start: 1rem;
-    border-top: 1px solid var(--at-border);
+    margin-block-start: clamp(3rem, 6vw, 6rem);
+    padding-block-start: 1.5rem;
+    border-top: 1px solid var(--at-divider);
+    font-size: var(--at-font-size-sm);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
   }
 </style>
