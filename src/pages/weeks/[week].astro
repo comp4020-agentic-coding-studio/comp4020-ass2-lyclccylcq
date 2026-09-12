@@ -38,7 +38,7 @@ const nextWeek = weekNumber < 12 ? String(weekNumber + 1).padStart(2, "0") : und
 <ContentLayout
   title={`Week ${padded}: ${title}`}
   description={intro}
-  mainAttrs={{ "data-week-number": padded }}
+  mainAttrs={{ "data-week-number": padded, "data-page": "teaching" }}
   {...siteConfig}
 >
   <MetaLine parts={[courseMeta.code, `WEEK ${padded}`, date ? formatCourseDate(date) : "DATE TBC"]} />

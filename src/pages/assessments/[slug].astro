@@ -28,7 +28,7 @@ const padded = String(assessment.data.week).padStart(2, "0");
 <ContentLayout
   title={assessment.data.title}
   description={assessment.data.description}
-  mainAttrs={{ "data-week-number": padded }}
+  mainAttrs={{ "data-week-number": padded, "data-page": "assessments" }}
   {...siteConfig}
 >
   <MetaLine parts={[courseMeta.code, `WEEK ${padded}`, `Due ${formatCourseDate(assessment.data.due)}`, `Weight ${assessment.data.weight}%`]} />

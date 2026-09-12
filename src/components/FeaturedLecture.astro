@@ -31,8 +31,12 @@ const featured = lectures
   .featured-lecture {
     padding: var(--at-spacing-2xl);
     border: none;
-    border-block-start: 1px solid var(--at-divider);
-    border-block-end: 1px solid var(--at-divider);
+    background: var(--at-bg-elevated);
+    backdrop-filter: blur(12px);
+    border-radius: var(--at-border-radius);
+    box-shadow: var(--at-shadow-md);
+    position: relative;
+    overflow: hidden;
   }
 
   .featured-lecture::before,

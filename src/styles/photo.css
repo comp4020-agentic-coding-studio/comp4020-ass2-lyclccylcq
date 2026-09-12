@@ -1,7 +1,13 @@
 /* Photography visual language, layered on top of the theme's --at-* tokens.
    Unlayered on purpose (matches how astro-theme-slop's brandCss works) so it
    always wins over the theme's own @layer rules without touching them or
-   needing !important. */
+   needing !important.
+
+   Pass 3: high-key "糖水片" pastel art direction — bright ivory ground,
+   sky/peach/mint/lavender accents, floating translucent cards, pill
+   buttons. --at-primary/secondary/tertiary (the SlopU brand gold) are never
+   touched here; the only place gold still appears is .at-hero-title::after
+   in the theme itself, which reads var(--at-primary) directly. */
 
 :root {
   /* Metadata reads as a small-caps sans-serif editorial eyebrow, not code —
@@ -9,7 +15,6 @@
   --photo-metadata-font: var(--at-font-body);
   --photo-frame-border: var(--at-border);
   --photo-crop-size: 0.9rem;
-  --photo-crop-color: var(--at-text-secondary);
 
   /* Editorial display serif for major headings only — system/already-
      available stack, no new font dependency. Body copy, nav, buttons and
@@ -18,8 +23,9 @@
     ui-serif, "Iowan Old Style", "Palatino Linotype", "URW Palladio L",
     "Noto Serif", Georgia, serif;
 
-  /* Reserve the brand colour for links, active nav, buttons and small
-     highlights instead of every heading on every page. */
+  /* Reserve the brand colour for the hero underline only — headings read as
+     ink, and colour differentiation happens through the accent system
+     below instead of every heading on every page. */
   --at-heading: var(--at-text);
 
   /* Wide tier gap on purpose: page titles and section headings sit much
@@ -28,11 +34,93 @@
   --at-font-size-h1: clamp(2.25rem, 1.6rem + 2.5vw, 4rem);
   --at-font-size-h2: clamp(1.375rem, 1.2rem + 1vw, 1.875rem);
   --at-content-width: 44rem;
-
-  /* Slimmer nav: a masthead strip, not a dashboard header. Kept in lockstep
-     with the --at-nav padding-block override below — this token also drives
-     the theme's own scroll-padding and .at-main min-height math. */
   --at-nav-height: 4.5rem;
+
+  /* --- Base palette: warm ivory ground, soft-charcoal ink --- */
+  --photo-ink: oklch(29% 0.02 55);
+  --photo-cream: oklch(98% 0.012 80);
+  --photo-cream-alt: oklch(96% 0.016 75);
+  --photo-surface: rgb(255 253 248 / 86%);
+
+  /* --- Controlled accent set: sky / peach / mint / lavender, each with a
+     pale wash (tint), a light candy-pastel fill (base), and a darker
+     text/link-safe tone (deep). Sparing pink/yellow for small highlights
+     only — never a whole section. --- */
+  --photo-sky-tint: oklch(94% 0.025 232);
+  --photo-sky: oklch(72% 0.09 232);
+  --photo-sky-deep: oklch(48% 0.12 232);
+  --photo-sky-soft: oklch(72% 0.09 232 / 16%);
+
+  --photo-peach-tint: oklch(94% 0.03 45);
+  --photo-peach: oklch(78% 0.1 45);
+  --photo-peach-deep: oklch(50% 0.13 40);
+  --photo-peach-soft: oklch(78% 0.1 45 / 16%);
+
+  --photo-mint-tint: oklch(94% 0.025 155);
+  --photo-mint: oklch(80% 0.09 155);
+  --photo-mint-deep: oklch(45% 0.1 155);
+  --photo-mint-soft: oklch(80% 0.09 155 / 16%);
+
+  --photo-lavender-tint: oklch(94% 0.02 285);
+  --photo-lavender: oklch(76% 0.07 285);
+  --photo-lavender-deep: oklch(50% 0.1 285);
+  --photo-lavender-soft: oklch(76% 0.07 285 / 16%);
+
+  --photo-pink-soft: oklch(84% 0.06 15 / 22%);
+  --photo-yellow-soft: oklch(88% 0.07 95 / 26%);
+
+  /* Baked-in low alpha — used only for the ambient body-background glow. */
+  --photo-glow-peach: oklch(84% 0.09 45 / 26%);
+  --photo-glow-sky: oklch(80% 0.08 232 / 26%);
+  --photo-glow-mint: oklch(85% 0.08 155 / 22%);
+
+  /* --- Active accent (site default = sky). Pages/sections override just
+     these four so every derived --at-* token and every component below
+     follows without being redeclared per scope. --- */
+  --photo-accent-tint: var(--photo-sky-tint);
+  --photo-accent: var(--photo-sky);
+  --photo-accent-deep: var(--photo-sky-deep);
+  --photo-accent-soft: var(--photo-sky-soft);
+
+  /* Self-adjusting ink for text sitting on the light --photo-accent fill
+     (buttons), same switch the theme uses for --at-on-primary. */
+  --photo-accent-ink: oklch(from var(--photo-accent) clamp(0.16, (0.58 - l) * 1000, 1) 0 h);
+
+  /* --- Token remap: only the theme's *derived* tokens, never
+     --at-primary/secondary/tertiary. --- */
+  --at-bg: var(--photo-cream);
+  --at-bg-alt: var(--photo-cream-alt);
+  --at-bg-elevated: var(--photo-surface);
+  --at-text: var(--photo-ink);
+  --at-text-secondary: oklch(from var(--photo-ink) l c h / 78%);
+  --at-text-muted: oklch(from var(--photo-ink) l c h / 58%);
+  --at-link: var(--photo-accent-deep);
+  --at-link-hover: oklch(from var(--photo-accent-deep) calc(l + 0.08) c h);
+  --at-accent: var(--photo-accent-deep);
+  --at-accent-hover: oklch(from var(--photo-accent-deep) calc(l + 0.06) c h);
+  --at-accent-soft: var(--photo-accent-soft);
+  --at-border: oklch(from var(--photo-ink) l c h / 12%);
+  --at-divider: oklch(from var(--photo-ink) l c h / 8%);
+  --at-code-bg: oklch(from var(--photo-ink) l c h / 5%);
+  --at-border-radius: 1rem;
+  --at-shadow-sm: 0 1px 3px rgb(120 90 60 / 8%);
+  --at-shadow-md: 0 8px 24px rgb(120 90 60 / 12%);
+  --at-shadow-lg: 0 20px 50px rgb(120 90 60 / 18%);
+  --at-table-header-bg: var(--photo-accent-soft);
+  --at-table-header-text: var(--photo-ink);
+  --at-table-stripe: oklch(from var(--photo-ink) l c h / 5%);
+}
+
+/* --- Ambient daylight: soft, huge, low-opacity light fields behind the
+   whole site instead of a flat colour. Decorative only. --- */
+body {
+  background-color: var(--photo-cream);
+  background-image:
+    radial-gradient(circle at 14% 6%, var(--photo-glow-peach) 0%, transparent 46%),
+    radial-gradient(circle at 88% 16%, var(--photo-glow-sky) 0%, transparent 42%),
+    radial-gradient(circle at 46% 96%, var(--photo-glow-mint) 0%, transparent 50%);
+  background-attachment: fixed;
+  background-repeat: no-repeat;
 }
 
 .at-main h1,
@@ -45,6 +133,12 @@
   font-family: var(--photo-font-display);
   font-size: clamp(3rem, 2rem + 5vw, 6.5rem);
   max-inline-size: 16ch;
+}
+
+/* Bigger, more obvious hero on the homepage only — the scrim/contrast
+   mechanism inside .at-hero is untouched. */
+[data-page="home"] .at-hero {
+  min-height: min(80vh, 42rem);
 }
 
 .photo-meta-line {
@@ -63,14 +157,16 @@
 .photo-meta-line > :not(:last-child)::after {
   content: "·";
   margin-inline-start: 0.5em;
-  color: var(--photo-crop-color);
+  color: var(--photo-accent-deep);
 }
 
-/* A frame with photographer's crop marks at each corner. */
+/* A frame with photographer's crop marks at each corner, tinted with the
+   page's active accent instead of flat grey. */
 .photo-frame {
   position: relative;
   padding: var(--at-spacing-sm);
   border: 1px solid var(--photo-frame-border);
+  border-radius: var(--at-border-radius);
 }
 
 .photo-frame::before,
@@ -85,26 +181,32 @@
 .photo-frame::before {
   top: -1px;
   left: -1px;
-  border-top: 2px solid var(--photo-crop-color);
-  border-left: 2px solid var(--photo-crop-color);
+  border-top: 2px solid var(--photo-accent-deep);
+  border-left: 2px solid var(--photo-accent-deep);
+  border-start-start-radius: calc(var(--at-border-radius) / 2);
+  opacity: 0.55;
 }
 
 .photo-frame::after {
   bottom: -1px;
   right: -1px;
-  border-bottom: 2px solid var(--photo-crop-color);
-  border-right: 2px solid var(--photo-crop-color);
+  border-bottom: 2px solid var(--photo-accent-deep);
+  border-right: 2px solid var(--photo-accent-deep);
+  border-end-end-radius: calc(var(--at-border-radius) / 2);
+  opacity: 0.55;
 }
 
 .photo-frame-number {
   font-family: var(--photo-metadata-font);
   font-size: var(--at-font-size-xs);
-  color: var(--photo-crop-color);
+  color: var(--photo-accent-deep);
 }
 
-/* A big, quiet numeral: the tool for scale-contrast hierarchy the brief asks
-   for (size/weight/tone instead of a box). Shared between the homepage's
-   own section markers and the week-page kicker generated below. */
+/* A big, quiet numeral, softly tinted with the page's accent: the tool for
+   scale-contrast hierarchy the brief asks for (size/weight/tone instead of
+   a box), and the thing that reads the section-colour-coding motif. Shared
+   between the homepage's own section markers and the week-page kicker
+   generated below. */
 .photo-kicker-number,
 main[data-week-number]::before {
   display: block;
@@ -112,7 +214,7 @@ main[data-week-number]::before {
   font-weight: 400;
   font-size: clamp(3.5rem, 2.5rem + 6vw, 8rem);
   line-height: 1;
-  color: var(--at-divider);
+  color: color-mix(in oklch, var(--photo-accent-deep) 42%, var(--photo-cream-alt) 58%);
 }
 
 main[data-week-number]::before {
@@ -127,101 +229,70 @@ main[data-week-number]::before {
   gap: var(--at-spacing-lg);
 }
 
+/* --- Buttons: cheerful pill, not a flat rectangle --- */
+
 .photo-cta {
   display: inline-block;
-  padding: 0.6em 1.4em;
-  border-radius: var(--at-border-radius);
-  background: var(--at-primary);
-  color: var(--at-on-primary);
+  padding: 0.7em 1.6em;
+  border-radius: 999px;
+  background: var(--photo-accent);
+  color: var(--photo-accent-ink);
   font-weight: 600;
   text-decoration: none;
+  box-shadow: 0 10px 24px color-mix(in oklch, var(--photo-accent) 45%, transparent);
   transition:
     background-color 0.15s ease,
-    transform 0.1s ease;
+    box-shadow 0.2s ease,
+    transform 0.15s ease;
 }
 
 .photo-cta:hover,
 .photo-cta:focus-visible {
-  background: var(--at-primary-hover);
+  background: oklch(from var(--photo-accent) calc(l - 0.05) c h);
+  box-shadow: 0 14px 30px color-mix(in oklch, var(--photo-accent) 55%, transparent);
+  transform: translateY(-2px);
 }
 
 .photo-cta:active {
-  transform: scale(0.98);
+  transform: translateY(-2px) scale(0.98);
 }
 
-/* --- Card system: editorial index rows, not a boxed dashboard grid --- */
-
-.at-card-grid {
-  display: block;
-  margin-block: var(--at-spacing-xl);
-}
+/* --- Card system: floating, rounded, translucent — the theme's own
+   image-top/body-bottom grid, just decorated. --- */
 
 .at-main > .at-card-grid {
   grid-column: inset-start / content-end;
 }
 
-.at-card-grid > .at-card {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  grid-template-rows: auto;
-  grid-row: auto;
-  row-gap: 0;
-  column-gap: var(--at-spacing-lg);
-  align-items: center;
-  border: none;
-  border-block-end: 1px solid var(--at-divider);
-  padding-block: var(--at-spacing-lg);
+.at-card {
+  border-color: transparent;
+  background: var(--at-bg-elevated);
+  backdrop-filter: blur(12px);
+  box-shadow: var(--at-shadow-md);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease,
+    background-color 0.15s ease;
 }
 
-.at-card-grid > .at-card:first-child {
-  border-block-start: 1px solid var(--at-divider);
-}
-
-.at-card-grid .at-card-image-frame {
-  width: 6rem;
-}
-
-.at-card-grid .at-card-image {
-  aspect-ratio: 1;
-  height: 100%;
-}
-
-.at-card-grid > .at-card:not(:has(.at-card-image-frame)) > .at-card-body {
-  grid-column: 1 / -1;
-}
-
-.at-card-body {
-  padding: 0;
+a.at-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--photo-accent-deep);
+  box-shadow: var(--at-shadow-lg);
 }
 
 .at-card-title {
   font-size: 1.25rem;
 }
 
-a.at-card:hover {
-  background-color: transparent;
-  border-color: var(--at-divider);
-  box-shadow: none;
-}
-
-a.at-card:hover .at-card-title {
-  color: var(--at-accent);
-}
-
-@media (width < 640px) {
-  .at-card-grid > .at-card {
-    grid-template-columns: 1fr;
-  }
-
-  .at-card-grid .at-card-image-frame {
-    width: 100%;
-  }
-}
-
-/* --- Navigation: slim editorial masthead, same links/structure --- */
+/* --- Navigation: translucent, softly blurred masthead with pill links --- */
 
 .at-nav {
-  border-block-end: 1px solid var(--at-divider);
+  border-block-end: none;
+  background: rgb(255 253 248 / 72%);
+  backdrop-filter: blur(16px) saturate(140%);
+  box-shadow: var(--at-shadow-sm);
 }
 
 .at-nav-inner {
@@ -229,27 +300,95 @@ a.at-card:hover .at-card-title {
 }
 
 .at-nav-links a {
-  border-radius: 0;
-  font-size: var(--at-font-size-sm);
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  border-radius: 999px;
 }
 
 .at-nav-links a:hover {
-  background: transparent;
-  color: var(--at-text);
-  box-shadow: inset 0 -2px 0 var(--at-divider);
+  background: var(--photo-accent-soft);
+  color: var(--photo-accent-deep);
+  box-shadow: none;
 }
 
-/* Active nav state is colour-plus-underline, not colour alone. */
 .at-nav-links a[aria-current="page"] {
-  box-shadow: inset 0 -2px 0 var(--at-accent);
+  background: var(--photo-accent-soft);
+  color: var(--photo-accent-deep);
+  box-shadow: none;
+  font-weight: 600;
 }
 
 @media (width >= 640px) {
   .at-nav-links {
     gap: var(--at-spacing-lg);
   }
+}
+
+/* --- Per-page accent theming: four controlled hues, reused everywhere —
+   no page invents a new colour. --- */
+
+main[data-page="teaching"] {
+  --photo-accent-tint: var(--photo-peach-tint);
+  --photo-accent: var(--photo-peach);
+  --photo-accent-deep: var(--photo-peach-deep);
+  --photo-accent-soft: var(--photo-peach-soft);
+}
+
+main[data-page="studio"] {
+  --photo-accent-tint: var(--photo-sky-tint);
+  --photo-accent: var(--photo-sky);
+  --photo-accent-deep: var(--photo-sky-deep);
+  --photo-accent-soft: var(--photo-sky-soft);
+}
+
+main[data-page="assessments"] {
+  --photo-accent-tint: var(--photo-lavender-tint);
+  --photo-accent: var(--photo-lavender);
+  --photo-accent-deep: var(--photo-lavender-deep);
+  --photo-accent-soft: var(--photo-lavender-soft);
+}
+
+main[data-page="resources"] {
+  --photo-accent-tint: var(--photo-mint-tint);
+  --photo-accent: var(--photo-mint);
+  --photo-accent-deep: var(--photo-mint-deep);
+  --photo-accent-soft: var(--photo-mint-soft);
+}
+
+main[data-page="people"] {
+  --photo-accent-tint: var(--photo-peach-tint);
+  --photo-accent: var(--photo-peach);
+  --photo-accent-deep: var(--photo-peach-deep);
+  --photo-accent-soft: var(--photo-peach-soft);
+}
+
+/* Homepage: five hand-placed sections, each pinned to one of the same four
+   accents (internal variety, still the same controlled system). */
+
+.accent-peach {
+  --photo-accent-tint: var(--photo-peach-tint);
+  --photo-accent: var(--photo-peach);
+  --photo-accent-deep: var(--photo-peach-deep);
+  --photo-accent-soft: var(--photo-peach-soft);
+}
+
+.accent-sky {
+  --photo-accent-tint: var(--photo-sky-tint);
+  --photo-accent: var(--photo-sky);
+  --photo-accent-deep: var(--photo-sky-deep);
+  --photo-accent-soft: var(--photo-sky-soft);
+}
+
+.accent-mint {
+  --photo-accent-tint: var(--photo-mint-tint);
+  --photo-accent: var(--photo-mint);
+  --photo-accent-deep: var(--photo-mint-deep);
+  --photo-accent-soft: var(--photo-mint-soft);
+}
+
+.accent-lavender {
+  --photo-accent-tint: var(--photo-lavender-tint);
+  --photo-accent: var(--photo-lavender);
+  --photo-accent-deep: var(--photo-lavender-deep);
+  --photo-accent-soft: var(--photo-lavender-soft);
 }
 
 /* --- Shared section rhythm — pages without their own scoped override

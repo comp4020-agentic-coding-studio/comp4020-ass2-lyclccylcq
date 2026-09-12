@@ -25,7 +25,7 @@ const title = `Week ${lecture.data.week}: ${lecture.data.title}`;
 <ContentLayout
   title={title}
   description={lecture.data.description}
-  mainAttrs={{ "data-week-number": padded }}
+  mainAttrs={{ "data-week-number": padded, "data-page": "teaching" }}
   {...siteConfig}
 >
   <MetaLine parts={[courseMeta.code, `WEEK ${padded}`, formatCourseDate(lecture.data.date)]} />

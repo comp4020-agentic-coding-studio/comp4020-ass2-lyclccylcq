@@ -49,17 +49,34 @@ const { frames } = Astro.props;
     aspect-ratio: 1;
     justify-content: space-between;
     color: var(--at-text);
-    background: var(--at-bg-alt);
+    background: var(--at-bg-elevated);
+    backdrop-filter: blur(10px);
+    border-color: transparent;
+    box-shadow: var(--at-shadow-sm);
     text-decoration: none;
     transition:
-      border-color 0.15s ease,
-      transform 0.15s ease;
+      border-color 0.2s ease,
+      box-shadow 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  li:nth-child(3n + 1) .contact-sheet-frame {
+    background: color-mix(in oklch, var(--photo-peach-tint) 55%, var(--at-bg-elevated));
+  }
+
+  li:nth-child(3n + 2) .contact-sheet-frame {
+    background: color-mix(in oklch, var(--photo-sky-tint) 55%, var(--at-bg-elevated));
+  }
+
+  li:nth-child(3n) .contact-sheet-frame {
+    background: color-mix(in oklch, var(--photo-mint-tint) 55%, var(--at-bg-elevated));
   }
 
   .contact-sheet-frame:hover,
   .contact-sheet-frame:focus-visible {
-    border-color: var(--at-accent);
-    transform: scale(1.02);
+    border-color: var(--photo-accent-deep);
+    box-shadow: var(--at-shadow-md);
+    transform: translateY(-3px) scale(1.02);
   }
 
   .contact-sheet-frame-title {
