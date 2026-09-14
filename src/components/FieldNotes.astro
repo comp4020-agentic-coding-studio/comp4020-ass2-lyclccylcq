@@ -1,0 +1,80 @@
+---
+// Compact, rule-driven notes list — small-caps labels over short values,
+// separated by hairlines rather than card backgrounds. Deliberately the
+// most restrained section on the page.
+export interface FieldNote {
+  label: string;
+  body: string;
+}
+
+export interface Props {
+  heading: string;
+  intro?: string;
+  notes: FieldNote[];
+}
+
+const { heading, intro, notes } = Astro.props;
+---
+
+<section class="field-notes" aria-labelledby="field-notes-heading">
+  <h2 id="field-notes-heading">{heading}</h2>
+  {intro && <p class="field-notes-intro">{intro}</p>}
+  <dl class="field-notes-list">
+    {
+      notes.map((note) => (
+        <div class="field-notes-row">
+          <dt>{note.label}</dt>
+          <dd>{note.body}</dd>
+        </div>
+      ))
+    }
+  </dl>
+</section>
+
+<style>
+  .field-notes {
+    grid-column: content;
+    max-width: 34rem;
+  }
+
+  .field-notes-intro {
+    color: var(--at-text-secondary);
+  }
+
+  .field-notes-list {
+    margin: var(--at-spacing-md) 0 0;
+    padding: 0;
+  }
+
+  .field-notes-row {
+    display: grid;
+    grid-template-columns: minmax(7rem, 9rem) 1fr;
+    gap: var(--at-spacing-md);
+    padding-block: var(--at-spacing-sm);
+    border-block-start: 1px solid var(--at-divider);
+  }
+
+  .field-notes-row:last-child {
+    border-block-end: 1px solid var(--at-divider);
+  }
+
+  .field-notes-row dt {
+    font-family: var(--photo-metadata-font);
+    font-size: var(--at-font-size-xs);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--photo-accent-deep);
+  }
+
+  .field-notes-row dd {
+    margin: 0;
+    color: var(--at-text);
+  }
+
+  @media (width < 560px) {
+    .field-notes-row {
+      grid-template-columns: 1fr;
+      gap: 0.25rem;
+    }
+  }
+</style>

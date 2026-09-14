@@ -1,0 +1,44 @@
+---
+// Sparse, typography-only section: a single large statement plus a short
+// supporting line. Deliberately not a card — no border, no background,
+// no grid of items — the opposite anatomy of everything around it.
+export interface Props {
+  statement: string;
+  support: string;
+}
+
+const { statement, support } = Astro.props;
+---
+
+<section class="statement-section" aria-label="Course statement">
+  <p class="statement-text">{statement}</p>
+  <p class="statement-support">{support}</p>
+</section>
+
+<style>
+  .statement-section {
+    grid-column: content;
+    max-width: 30ch;
+    margin-inline: auto;
+    text-align: center;
+    padding-block: clamp(2rem, 6vw, 4rem);
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .statement-text {
+    margin: 0;
+    font-family: var(--photo-font-display);
+    font-weight: 400;
+    font-size: clamp(1.75rem, 1.3rem + 2vw, 2.75rem);
+    line-height: 1.15;
+    color: var(--at-text);
+  }
+
+  .statement-support {
+    margin: 0;
+    font-size: var(--at-font-size-base);
+    color: var(--at-text-secondary);
+  }
+</style>

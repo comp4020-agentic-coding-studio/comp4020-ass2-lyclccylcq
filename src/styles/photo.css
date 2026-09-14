@@ -67,6 +67,8 @@
   --photo-lavender-soft: oklch(76% 0.07 285 / 16%);
 
   --photo-pink-soft: oklch(84% 0.06 15 / 22%);
+  --photo-pink: oklch(72% 0.14 15);
+  --photo-pink-deep: oklch(46% 0.16 15);
   --photo-yellow-soft: oklch(88% 0.07 95 / 26%);
 
   /* Baked-in low alpha — used only for the ambient body-background glow. */
@@ -396,4 +398,48 @@ main[data-page="people"] {
 
 .at-main > section + section {
   margin-block-start: clamp(3rem, 6vw, 6rem);
+}
+
+/* --- Homepage-only asymmetric composition: shift the whole page left and
+   reserve a genuine right-hand grid region for future case-study
+   photography, instead of centring main content between two equal 1fr
+   margins. Left margin stays fixed at the gutter minimum (no fr growth);
+   all freed space lands on the right, split between a capped rail track
+   and a growing outer margin beyond it. Main content keeps its existing
+   width formula untouched. Large desktop only — below this, both the rail
+   and the override fall away entirely and the theme's default centred
+   grid takes over. --- */
+@media (width >= 1200px) {
+  body:has(.at-main[data-page="home"]) {
+    grid-template-columns:
+      [full-start]
+      var(--at-gutter)
+      [inset-start]
+      var(--at-content-inset)
+      [content-start]
+      min(
+        var(--at-content-width),
+        100% - 2 * var(--at-gutter) - var(--at-content-inset) - var(--at-spacing-2xl) -
+          clamp(16rem, 24vw, 26rem)
+      )
+      [content-end]
+      var(--at-spacing-2xl)
+      [rail-start]
+      minmax(0, clamp(16rem, 24vw, 26rem))
+      [rail-end]
+      minmax(var(--at-gutter), 1fr)
+      [full-end];
+  }
+
+  body:has(.at-main[data-page="home"]) .at-main[data-page="home"] {
+    grid-column: inset-start / rail-end;
+  }
+
+  /* The theme's vertical accent rule assumes the old centred-margin math
+     ((100% - content-inset - content-width) / 2) to find content-start; it
+     has no way to know about the new asymmetric margins, so it would land
+     in the wrong place here. Hide it on the homepage only. */
+  body:has(.at-main[data-page="home"])::after {
+    display: none;
+  }
 }

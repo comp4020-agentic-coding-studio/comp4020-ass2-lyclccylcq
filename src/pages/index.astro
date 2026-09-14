@@ -2,19 +2,24 @@
 import { getPublishedCollection } from "astro-course-university/content";
 import ContentLayout from "astro-theme-university/layouts/ContentLayout.astro";
 import AssessmentsGrid from "../components/AssessmentsGrid.astro";
-import ContactSheetGrid from "../components/ContactSheetGrid.astro";
+import CaseStudyRail from "../components/CaseStudyRail.astro";
+import ContactSheet from "../components/ContactSheet.astro";
 import CourseInfoList from "../components/CourseInfoList.astro";
-import FeaturedLecture from "../components/FeaturedLecture.astro";
-import MetaLine from "../components/MetaLine.astro";
+import EditorialHero from "../components/EditorialHero.astro";
+import FieldNotes from "../components/FieldNotes.astro";
+import PhotoFeature from "../components/PhotoFeature.astro";
+import StatementSection from "../components/StatementSection.astro";
+import VisualComparison from "../components/VisualComparison.astro";
+import WeekTimeline from "../components/WeekTimeline.astro";
 import heroImage from "../assets/images/hero-home.avif";
 import { courseMeta } from "../course-config";
 import { siteConfig } from "../site-config";
-import { withBase } from "astro-theme-university/url";
 import "../styles/photo.css";
 
 const lectures = await getPublishedCollection("lectures");
+const people = await getPublishedCollection("people");
 
-const frames = Array.from({ length: 12 }, (_, i) => {
+const weeks = Array.from({ length: 12 }, (_, i) => {
   const n = i + 1;
   const padded = String(n).padStart(2, "0");
   const lecture = lectures.find((entry) => entry.data.week === n);
@@ -25,111 +30,137 @@ const frames = Array.from({ length: 12 }, (_, i) => {
     caption: lecture?.data.title,
   };
 });
+
+const idrisFenn = people.find((person) => person.id === "idris-fenn");
+const marisolQuaye = people.find((person) => person.id === "marisol-quaye");
 ---
 
 <ContentLayout
   title={courseMeta.title}
   description="Take photos they'll actually like."
-  heroImage={heroImage}
-  heroImageAlt="A lecture theatre reduced to flat gold and black shapes, rows of seats sweeping past the frame, in a two-ink risograph print"
   mainAttrs={{ "data-page": "home" }}
   {...siteConfig}
 >
-  <div class="hero-extra">
-    <MetaLine parts={[courseMeta.code, courseMeta.session, "12 Weeks"]} />
-    <a class="photo-cta" href={withBase("/course/")}>Explore the course</a>
-  </div>
+  <EditorialHero
+    kicker={`${courseMeta.code} · ${courseMeta.session}`}
+    title={courseMeta.title}
+    intro="Take photos they'll actually like. A studio course in making photographs someone else will actually want to keep."
+    ctaHref="/course/"
+    ctaLabel="Explore the course"
+    image={heroImage}
+    imageAlt="A lecture theatre reduced to flat gold and black shapes, rows of seats sweeping past the frame, in a two-ink risograph print"
+    caption="12 weeks, one semester"
+  />
 
-  <section aria-labelledby="section-01" class="section-lede accent-peach">
-    <span class="photo-kicker-number" aria-hidden="true">01</span>
-    <div>
-      <h2 id="section-01">The Course</h2>
-      <p>
-        A studio course in making photographs someone else will actually want
-        to keep. The full shape of the semester — philosophy, weekly topics,
-        assessment detail — is still being developed.
-      </p>
+  <StatementSection
+    statement="Good photos are useless if you ruin the date."
+    support="A partner photographer manages four systems at once — Image, Person, Moment and Relationship — not just exposure and composition."
+  />
+
+  <WeekTimeline weeks={weeks} />
+
+  <PhotoFeature
+    kicker="Reading the light"
+    title="Two Clocks, One Frame"
+    body="Partner photography runs on two clocks at once. The clock of the light moves toward its best moment on a schedule the sun sets. The clock of the person moves toward tiredness, hunger and impatience on a schedule the day sets. The best time to shoot is not simply when the light is best — it's when good light and a willing person overlap."
+    image={heroImage}
+    imageAlt="A lecture theatre reduced to flat gold and black shapes, rows of seats sweeping past the frame, in a two-ink risograph print"
+  />
+
+  <VisualComparison
+    heading="Two Kinds of Good Light"
+    left={{
+      label: "Harsh Noon",
+      body: "Around midday, light falling almost straight down catches the forehead and nose while eye sockets fall into shadow. The subject is harder to work with too — squinting, sweating, impatient to get back into the shade.",
+      placeholderCaption:
+        "Comparison 1 of 5 (Week 2) — the same subject in direct midday sun versus open shade a few metres away.",
+    }}
+    right={{
+      label: "Golden Hour",
+      body: "Lower sun brings softer facial shadows, easy side light and backlight, and warm colour. It earns its reputation honestly — but a gorgeous ten-minute window is only useful if the person in front of the camera still wants to be in it.",
+      placeholderCaption:
+        "Comparison 4 of 5 (Week 2) — gorgeous golden-hour light next to a subject who is visibly tired or impatient.",
+    }}
+  />
+
+  <FieldNotes
+    heading="Field Notes: The Four Systems"
+    intro="One framework, used for the rest of the semester (Week 1)."
+    notes={[
+      { label: "Image", body: "light, framing, perspective, timing" },
+      { label: "Person", body: "comfort, preferences, confidence, appearance" },
+      { label: "Moment", body: "location, timing, activity, pace" },
+      { label: "Relationship", body: "communication, patience, trust, mood" },
+    ]}
+  />
+
+  <ContactSheet
+    heading="Contact Sheet"
+    frames={[
+      {
+        image: marisolQuaye?.data.photo,
+        alt: marisolQuaye?.data.photoAlt,
+        caption: "Marisol Quaye — convenor",
+        span: "tall",
+      },
+      {
+        caption: "Studio session, week 3",
+        span: "normal",
+      },
+      {
+        caption: "Editing review",
+        span: "wide",
+      },
+      {
+        image: idrisFenn?.data.photo,
+        alt: idrisFenn?.data.photoAlt,
+        caption: "Idris Fenn — tutor",
+        span: "normal",
+      },
+      {
+        caption: "Final crit, week 12",
+        span: "normal",
+      },
+    ]}
+  />
+
+  <section class="course-assessment" aria-labelledby="course-assessment-heading">
+    <h2 id="course-assessment-heading">Course &amp; Assessment</h2>
+    <div class="course-assessment-grid">
+      <div>
+        <h3>Course Information</h3>
+        <CourseInfoList />
+      </div>
+      <div>
+        <h3>Assessment</h3>
+        <AssessmentsGrid />
+      </div>
     </div>
   </section>
 
-  <section aria-labelledby="section-02" class="section-wide accent-peach">
-    <h2 id="section-02"><span class="photo-frame-number">02</span> The Semester</h2>
-    <ContactSheetGrid frames={frames} />
-  </section>
-
-  <section aria-labelledby="section-03" class="section-split accent-lavender">
-    <h2 id="section-03"><span class="photo-frame-number">03</span> Assessment</h2>
-    <AssessmentsGrid />
-  </section>
-
-  <section aria-labelledby="section-04" class="section-wide accent-sky">
-    <h2 id="section-04"><span class="photo-frame-number">04</span> Featured Lecture</h2>
-    <FeaturedLecture />
-  </section>
-
-  <section aria-labelledby="section-05" class="accent-mint">
-    <h2 id="section-05"><span class="photo-frame-number">05</span> Course Information</h2>
-    <CourseInfoList />
-  </section>
+  <CaseStudyRail />
 </ContentLayout>
 
 <style>
-  .hero-extra {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.5rem;
-    padding-block: var(--at-spacing-lg);
-    margin-block-end: 1rem;
-    border-block-end: 1px solid var(--at-divider);
+  /* EditorialHero owns the page's <h1>; ContentLayout still renders its own
+     fallback h1/lead into main when no heroImage is passed (it has no prop
+     to suppress that), so hide the redundant pair on this page only. */
+  :global(.at-main[data-page="home"] > h1:first-child),
+  :global(.at-main[data-page="home"] > p.lead) {
+    display: none;
   }
 
-  section + section {
-    margin-block-start: clamp(3rem, 6vw, 6rem);
-  }
-
-  h2 {
-    display: flex;
-    align-items: baseline;
-    gap: 0.6rem;
-  }
-
-  .section-lede {
-    display: grid;
-    grid-template-columns: auto 1fr;
-    align-items: start;
-    gap: var(--at-spacing-lg);
-  }
-
-  .section-lede h2 {
-    margin-block-start: 0;
-  }
-
-  .section-wide {
+  .course-assessment {
     grid-column: inset-start / content-end;
   }
 
-  @media (width >= 640px) {
-    .section-split {
-      display: grid;
-      grid-template-columns: minmax(0, 14rem) 1fr;
-      gap: var(--at-spacing-xl);
-      align-items: start;
-    }
-
-    .section-split h2 {
-      margin-block-start: 0;
-    }
+  .course-assessment-grid {
+    display: grid;
+    gap: clamp(2rem, 4vw, 3rem);
   }
 
-  @media (width < 640px) {
-    .section-lede {
-      grid-template-columns: 1fr;
-    }
-
-    .photo-kicker-number {
-      font-size: clamp(2.5rem, 2rem + 4vw, 4rem);
-    }
+  .course-assessment-grid h3 {
+    font-size: var(--at-font-size-h4);
+    margin-block-end: var(--at-spacing-md);
   }
 </style>
