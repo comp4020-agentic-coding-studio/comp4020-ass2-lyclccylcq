@@ -1,0 +1,185 @@
+---
+import StickyCameraStage from "./StickyCameraStage.astro";
+import type { GalleryWeek } from "./FullscreenLectureGallery.astro";
+
+// The homepage's signature opening. A giant, original SVG line drawing of a
+// rear-view camera (CameraIllustration) fills the sticky stage; as the
+// visitor scrolls, the exact same SVG geometry gains gradient fills,
+// shading and highlights in place — same position and silhouette
+// throughout, never a different camera, never assets swapped in. Its rear
+// monitor (MonitorFrame) then wakes up, its
+// two shutters open from the centre to reveal FullscreenLectureGallery —
+// mounted once, always present behind them — and the monitor expands to
+// fill the viewport as the camera's body fades and grows past the edges,
+// leaving the gallery (the site's real week navigation) as a full-screen,
+// continuously moving photo wall. One rAF loop (gated by
+// IntersectionObserver) reads native scrollTop every frame and writes a
+// single --progress plus derived, clamped-linear "band" custom properties;
+// every visual change is a pure calc() of those, so scrolling backwards is
+// exactly the reverse of forwards and no wheel/scroll event is ever
+// intercepted. The CSS custom-property *defaults* below already describe
+// the finished, non-scrolling state (line art gone, monitor lit and open,
+// gallery visible, monitor still docked/small rather than full-viewport),
+// so prefers-reduced-motion and no-JS share that one static fallback: the
+// script simply never overwrites them and the wrapper never grows past
+// 100svh, so there is no dead scroll runway.
+//
+// Containing-block note: `.monitor-frame` becomes `position: fixed` during
+// the expand stage. That only tracks the viewport if none of its ancestors
+// use transform/perspective/filter/will-change — StickyCameraStage keeps
+// `.camera-frame` (which *does* get scaled/faded out below) as a sibling of
+// `.monitor-frame`, never an ancestor, specifically to protect this.
+export interface Props {
+  title: string;
+  kicker: string;
+  metaLine: string;
+  weeks: GalleryWeek[];
+}
+
+const { title, kicker, metaLine, weeks } = Astro.props;
+---
+
+<div class="camera-reveal-sequence" id="camera-reveal-sequence">
+  <StickyCameraStage title={title} kicker={kicker} metaLine={metaLine} weeks={weeks} />
+</div>
+
+<script>
+  const wrapper = document.getElementById("camera-reveal-sequence");
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+  if (wrapper && !reduceMotion.matches && "IntersectionObserver" in window) {
+    const sticky = wrapper.querySelector<HTMLElement>(".sticky-camera-stage");
+    const monitorSlot = wrapper.querySelector<HTMLElement>(".monitor-slot");
+    let active = false;
+    let ticking = false;
+
+    // Measured relative to the sticky stage box, not the tall wrapper: the
+    // sticky box's *internal* layout never changes with scroll, so this
+    // offset is valid no matter when it's taken. Once the stage is stuck
+    // (top: 0, full-bleed), that offset equals the monitor's true
+    // viewport-fixed coordinates — exactly what the expand calc() below needs.
+    function measure() {
+      if (!sticky || !monitorSlot) return;
+      const stageRect = sticky.getBoundingClientRect();
+      const slotRect = monitorSlot.getBoundingClientRect();
+      wrapper?.style.setProperty("--mon-left", `${slotRect.left - stageRect.left}px`);
+      wrapper?.style.setProperty("--mon-top", `${slotRect.top - stageRect.top}px`);
+      wrapper?.style.setProperty("--mon-width", `${slotRect.width}px`);
+      wrapper?.style.setProperty("--mon-height", `${slotRect.height}px`);
+    }
+
+    function update() {
+      ticking = false;
+      if (!wrapper || !active) return;
+      const rect = wrapper.getBoundingClientRect();
+      const runway = rect.height - window.innerHeight;
+      const progress = runway > 0 ? Math.min(1, Math.max(0, -rect.top / runway)) : 0;
+
+      const band = (start: number, end: number) => Math.min(1, Math.max(0, (progress - start) / (end - start)));
+
+      wrapper.style.setProperty("--progress", String(progress));
+      wrapper.style.setProperty("--b-identity", String(band(0.4, 0.55)));
+      wrapper.style.setProperty("--b-materialize", String(band(0.15, 0.38)));
+      wrapper.style.setProperty("--b-poweron", String(band(0.5, 0.6)));
+      wrapper.style.setProperty("--b-shutter", String(band(0.6, 0.78)));
+      wrapper.style.setProperty("--b-expand", String(band(0.78, 0.92)));
+    }
+
+    function schedule() {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    }
+
+    function onResize() {
+      measure();
+      schedule();
+    }
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        active = entry?.isIntersecting ?? false;
+        if (active) schedule();
+      },
+      { rootMargin: "200px 0px" },
+    );
+    io.observe(wrapper);
+
+    wrapper.classList.add("is-animated");
+    measure();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", onResize);
+    schedule();
+  }
+</script>
+
+<style>
+  .camera-reveal-sequence {
+    --progress: 1;
+    --mon-left: 0px;
+    --mon-top: 0px;
+    --mon-width: 100px;
+    --mon-height: 60px;
+    --b-identity: 0;
+    --b-materialize: 1;
+    --b-poweron: 1;
+    --b-shutter: 1;
+    --b-expand: 0;
+    position: relative;
+    grid-column: full-start / full-end;
+    min-height: 100svh;
+  }
+
+  .camera-reveal-sequence.is-animated {
+    min-height: 400vh;
+  }
+
+  @media (width < 640px) {
+    .camera-reveal-sequence.is-animated {
+      min-height: 260vh;
+    }
+  }
+
+  /* --- Dynamic, band-variable-driven rules reaching into child components'
+     markup (Astro scoped CSS only auto-scopes this file's own elements, so
+     descending into StickyCameraStage/IdentityLayer/MonitorFrame/etc.
+     needs :global()). --- */
+
+  :global(.camera-reveal-sequence .identity-layer) {
+    opacity: calc(1 - var(--b-identity, 0));
+    transform: translateY(calc(var(--b-identity, 0) * -1rem));
+  }
+
+  :global(.camera-reveal-sequence .camera-frame) {
+    opacity: calc(1 - var(--b-expand, 0));
+    transform: scale(calc(1 + 0.12 * var(--b-expand, 0)));
+  }
+
+  :global(.camera-reveal-sequence .monitor-hint) {
+    opacity: calc(min(1, var(--b-materialize, 0) * 3) * (1 - min(1, var(--b-poweron, 0) * 2.2)));
+  }
+
+  :global(.camera-reveal-sequence .monitor-shutter--left) {
+    transform: translateX(calc(var(--b-shutter, 0) * -105%));
+  }
+
+  :global(.camera-reveal-sequence .monitor-shutter--right) {
+    transform: translateX(calc(var(--b-shutter, 0) * 105%));
+  }
+
+  :global(.camera-reveal-sequence .monitor-shutter--left::before),
+  :global(.camera-reveal-sequence .monitor-shutter--right::before) {
+    opacity: calc(var(--b-poweron, 0) * (1 - var(--b-shutter, 0)));
+  }
+
+  :global(.camera-reveal-sequence.is-animated .monitor-frame) {
+    position: fixed;
+    left: calc(var(--mon-left, 0px) * (1 - var(--b-expand, 0)));
+    top: calc(var(--mon-top, 0px) * (1 - var(--b-expand, 0)));
+    width: calc(var(--mon-width, 100px) + (100vw - var(--mon-width, 100px)) * var(--b-expand, 0));
+    height: calc(var(--mon-height, 60px) + (100svh - var(--mon-height, 60px)) * var(--b-expand, 0));
+    border-radius: calc(6px * (1 - var(--b-expand, 0)));
+    z-index: 30;
+  }
+</style>

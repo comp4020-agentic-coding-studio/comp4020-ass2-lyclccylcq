@@ -2,11 +2,11 @@
 import { getPublishedCollection } from "astro-course-university/content";
 import ContentLayout from "astro-theme-university/layouts/ContentLayout.astro";
 import AssessmentsGrid from "../components/AssessmentsGrid.astro";
+import CameraRevealSequence from "../components/camera-intro/CameraRevealSequence.astro";
+import type { GalleryWeek } from "../components/camera-intro/FullscreenLectureGallery.astro";
 import ClosingCTA from "../components/ClosingCTA.astro";
 import CourseInfoList from "../components/CourseInfoList.astro";
 import CourseManifesto from "../components/CourseManifesto.astro";
-import HeroStage from "../components/HeroStage.astro";
-import LectureWall, { type WallEntry } from "../components/LectureWall.astro";
 import MovingStatement from "../components/MovingStatement.astro";
 import PhotoGallery, { type GalleryFrame } from "../components/PhotoGallery.astro";
 import ProcessIndex from "../components/ProcessIndex.astro";
@@ -19,99 +19,64 @@ import "../styles/photo.css";
 const lectures = await getPublishedCollection("lectures");
 const people = await getPublishedCollection("people");
 
-// Presentation data only (kind/pairSize/tone/label/placeholder) — title,
-// description and href all come from the real `lectures` collection below.
-// `kind`/`pairSize` control the sequence's rhythm: "full" weeks break out
-// as full-bleed landscape moments, "pair" weeks sit two-up as uneven
-// portrait pairs — deliberately not a regular 3x4 grid.
-const wallLayout: Record<
-  number,
-  Pick<WallEntry, "shortLabel" | "tone" | "placeholderCaption" | "kind" | "pairSize">
-> = {
+// Presentation data only (tone/placeholder) — title, description and href
+// all come from the real `lectures` collection below. Feeds
+// FullscreenLectureGallery inside the homepage's CameraRevealSequence: the
+// gallery itself decides span/row/drift per tile, so only content is
+// needed here.
+const wallLayout: Record<number, Pick<GalleryWeek, "tone" | "placeholderCaption">> = {
   1: {
-    shortLabel: "Not a Photoshoot",
     tone: "warm",
-    kind: "full",
     placeholderCaption:
       "A portrait moment that reads as real life, not a posed shoot — the opening example of what partner photography isn't.",
   },
   2: {
-    shortLabel: "Finding the Moment",
     tone: "cool",
-    kind: "pair",
-    pairSize: "lg",
     placeholderCaption: "A date-planning scene where light, weather and a partner's energy visibly line up — or don't.",
   },
   3: {
-    shortLabel: "The Tourist Photo Problem",
     tone: "neutral",
-    kind: "pair",
-    pairSize: "sm",
     placeholderCaption: "A familiar travel-photo pose, framed to ask whether it's a memory or evidence.",
   },
   4: {
-    shortLabel: "You Like It. They Don't.",
     tone: "warm",
-    kind: "full",
     placeholderCaption: "Two portraits of the same moment — one the photographer loves, one the subject does.",
   },
   5: {
-    shortLabel: "Seeing the Person",
     tone: "cool",
-    kind: "pair",
-    pairSize: "sm",
     placeholderCaption: "A quiet, unposed portrait taken before any camera setting has been chosen.",
   },
   6: {
-    shortLabel: "You Made Me Look Short",
     tone: "neutral",
-    kind: "pair",
-    pairSize: "lg",
     placeholderCaption: "A low-angle portrait next to a matching high-angle one, showing the same person look different.",
   },
   7: {
-    shortLabel: "What Do I Do With My Hands?",
     tone: "warm",
-    kind: "full",
     placeholderCaption: "Hands and posture caught mid-adjustment — the awkward moment before direction helps.",
   },
   8: {
-    shortLabel: 'Stop Saying "Act Natural"',
     tone: "cool",
-    kind: "pair",
-    pairSize: "lg",
     placeholderCaption: "A candid moment caught mid-conversation, not a held smile.",
   },
   9: {
-    shortLabel: "The Camera Changes the Face",
     tone: "neutral",
-    kind: "pair",
-    pairSize: "sm",
     placeholderCaption: "The same face at two focal lengths — a close wide shot next to a longer zoom.",
   },
   10: {
-    shortLabel: "Good Light Is Not Enough",
     tone: "warm",
-    kind: "full",
     placeholderCaption: "A beautiful sunset portrait undercut by hard shadows or a distracting background.",
   },
   11: {
-    shortLabel: "Which One Should I Post?",
     tone: "cool",
-    kind: "pair",
-    pairSize: "sm",
     placeholderCaption: "A contact sheet with one frame circled — the photographer's pick next to the subject's.",
   },
   12: {
-    shortLabel: "The Partner Shoot",
     tone: "neutral",
-    kind: "pair",
-    pairSize: "lg",
     placeholderCaption: "A finished portrait from the semester's full shoot, from preferences through to delivery.",
   },
 };
 
-const lectureWallWeeks: WallEntry[] = Array.from({ length: 12 }, (_, i) => {
+const galleryWeeks: GalleryWeek[] = Array.from({ length: 12 }, (_, i) => {
   const n = i + 1;
   const padded = String(n).padStart(2, "0");
   const lecture = lectures.find((entry) => entry.data.week === n);
@@ -203,21 +168,17 @@ const galleryFrames: GalleryFrame[] = [
   mainAttrs={{ "data-page": "home" }}
   {...siteConfig}
 >
-  <HeroStage
+  <CameraRevealSequence
     kicker={`${courseMeta.code} · ${courseMeta.session}`}
     title={courseMeta.title}
-    descriptor="Take photos they'll actually like. A studio course in making photographs someone else will actually want to keep."
-    image={heroImage}
-    imageAlt="A lecture theatre reduced to flat gold and black shapes, rows of seats sweeping past the frame, in a two-ink risograph print"
-    scrollTargetId="lecture-wall-heading"
+    metaLine="Twelve weeks, one photograph each — scroll to begin."
+    weeks={galleryWeeks}
   />
 
   <MovingStatement
     statement="Good photos are useless if you ruin the date."
     support="A partner photographer manages four systems at once — Image, Person, Moment and Relationship — not just exposure and composition."
   />
-
-  <LectureWall weeks={lectureWallWeeks} />
 
   <CourseManifesto
     heading="The Four Systems"
@@ -279,9 +240,9 @@ const galleryFrames: GalleryFrame[] = [
 </ContentLayout>
 
 <style>
-  /* HeroStage owns the page's <h1>; ContentLayout still renders its own
-     fallback h1/lead into main when no heroImage is passed (it has no prop
-     to suppress that), so hide the redundant pair on this page only. */
+  /* CameraRevealSequence owns the page's <h1>; ContentLayout still renders its
+     own fallback h1/lead into main when no heroImage is passed (it has no
+     prop to suppress that), so hide the redundant pair on this page only. */
   :global(.at-main[data-page="home"] > h1:first-child),
   :global(.at-main[data-page="home"] > p.lead) {
     display: none;

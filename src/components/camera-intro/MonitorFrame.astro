@@ -1,0 +1,87 @@
+---
+import FullscreenLectureGallery, { type GalleryWeek } from "./FullscreenLectureGallery.astro";
+import MonitorShutterLeft from "./MonitorShutterLeft.astro";
+import MonitorShutterRight from "./MonitorShutterRight.astro";
+
+// The camera's rear LCD, docked at the exact screen-cutout coordinates of
+// CameraIllustration's SVG (170,390,660,400 of its 1360x1000 viewBox —
+// 12.5%/39%/48.53%/40% — deliberately unpainted there so this element is
+// the only thing ever drawn in that rect). `.monitor-slot` is an invisible,
+// never-animated twin at the same coordinates that CameraRevealSequence's
+// script measures on load/resize to learn this box's true viewport
+// position — `.monitor-frame` itself later switches to position: fixed and
+// interpolates from that measured box to full-viewport via CSS custom
+// properties, so the expansion has no layout jump and no duplicated
+// element. FullscreenLectureGallery is mounted exactly once, in here,
+// permanently — it is never a second gallery swapped in after expansion.
+export interface Props {
+  weeks: GalleryWeek[];
+}
+
+const { weeks } = Astro.props;
+---
+
+<div class="monitor-slot" aria-hidden="true"></div>
+<div class="monitor-frame">
+  <div class="monitor-screen">
+    <FullscreenLectureGallery weeks={weeks} />
+    <p class="monitor-hint" aria-hidden="true">Scroll to view</p>
+    <MonitorShutterLeft />
+    <MonitorShutterRight />
+  </div>
+</div>
+
+<style>
+  .monitor-slot,
+  .monitor-frame {
+    position: absolute;
+    left: 12.5%;
+    top: 39%;
+    width: 48.53%;
+    height: 40%;
+  }
+
+  .monitor-slot {
+    pointer-events: none;
+    visibility: hidden;
+  }
+
+  .monitor-frame {
+    overflow: hidden;
+    background: #030302;
+    border-radius: clamp(1px, 0.5vw, 6px);
+    box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--photo-cream) 12%, transparent);
+    z-index: 10;
+    animation: monitor-frame-fallback-fade 0.7s ease both;
+    animation-delay: 0.15s;
+  }
+
+  .monitor-screen {
+    position: absolute;
+    inset: 0;
+  }
+
+  .monitor-hint {
+    position: absolute;
+    inset-inline: 0;
+    inset-block-end: 8%;
+    margin: 0;
+    text-align: center;
+    font-family: var(--photo-metadata-font);
+    font-size: clamp(0.5rem, 0.3rem + 0.6vw, 0.8rem);
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: color-mix(in oklch, var(--photo-cream) 80%, transparent);
+    z-index: 4;
+    pointer-events: none;
+  }
+
+  @keyframes monitor-frame-fallback-fade {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+</style>

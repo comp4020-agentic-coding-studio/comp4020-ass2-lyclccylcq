@@ -3,10 +3,12 @@
    always wins over the theme's own @layer rules without touching them or
    needing !important.
 
-   Pass 3: high-key "糖水片" pastel art direction — bright ivory ground,
-   sky/peach/mint/lavender accents, floating translucent cards, pill
-   buttons. --at-primary/secondary/tertiary (the SlopU brand gold) are never
-   touched here; the only place gold still appears is .at-hero-title::after
+   Pass 4: cinematic dark theme — near-black ground, soft-white ink, cool-grey
+   secondary text, restrained pastel accents used only where useful. Replaces
+   the earlier high-key pastel direction site-wide (this file is imported by
+   every page via PageLayout.astro, so the change is course-level, not just
+   the homepage). --at-primary/secondary/tertiary (the SlopU brand gold) are
+   never touched here; the only place gold still appears is .at-hero-title::after
    in the theme itself, which reads var(--at-primary) directly. */
 
 :root {
@@ -36,45 +38,50 @@
   --at-content-width: 44rem;
   --at-nav-height: 4.5rem;
 
-  /* --- Base palette: warm ivory ground, soft-charcoal ink --- */
-  --photo-ink: oklch(29% 0.02 55);
-  --photo-cream: oklch(98% 0.012 80);
-  --photo-cream-alt: oklch(96% 0.016 75);
-  --photo-surface: rgb(255 253 248 / 86%);
+  /* --- Base palette: near-black graphite ground, soft-white ink --- */
+  --photo-ink: oklch(15% 0.006 250);
+  --photo-charcoal: oklch(22% 0.008 250);
+  --photo-cream: oklch(97% 0.004 90);
+  --photo-cream-alt: oklch(72% 0.012 250);
+  --photo-surface: oklch(26% 0.008 250 / 74%);
 
   /* --- Controlled accent set: sky / peach / mint / lavender, each with a
-     pale wash (tint), a light candy-pastel fill (base), and a darker
-     text/link-safe tone (deep). Sparing pink/yellow for small highlights
-     only — never a whole section. --- */
-  --photo-sky-tint: oklch(94% 0.025 232);
+     dark tinted wash (tint — a low-lightness surface tint, not a pale one,
+     since the whole ground is dark now), a light pastel "base" tone (the
+     one restrained accent colour actually shown against the dark ground),
+     and a "deep", more saturated tone kept for large-area fills like the
+     CTA button. Sparing use only — never a whole section. --- */
+  --photo-sky-tint: oklch(24% 0.05 232);
   --photo-sky: oklch(72% 0.09 232);
   --photo-sky-deep: oklch(48% 0.12 232);
   --photo-sky-soft: oklch(72% 0.09 232 / 16%);
 
-  --photo-peach-tint: oklch(94% 0.03 45);
+  --photo-peach-tint: oklch(24% 0.055 45);
   --photo-peach: oklch(78% 0.1 45);
   --photo-peach-deep: oklch(50% 0.13 40);
   --photo-peach-soft: oklch(78% 0.1 45 / 16%);
 
-  --photo-mint-tint: oklch(94% 0.025 155);
+  --photo-mint-tint: oklch(24% 0.05 155);
   --photo-mint: oklch(80% 0.09 155);
   --photo-mint-deep: oklch(45% 0.1 155);
   --photo-mint-soft: oklch(80% 0.09 155 / 16%);
 
-  --photo-lavender-tint: oklch(94% 0.02 285);
+  --photo-lavender-tint: oklch(24% 0.045 285);
   --photo-lavender: oklch(76% 0.07 285);
   --photo-lavender-deep: oklch(50% 0.1 285);
   --photo-lavender-soft: oklch(76% 0.07 285 / 16%);
 
-  --photo-pink-soft: oklch(84% 0.06 15 / 22%);
+  --photo-pink-soft: oklch(30% 0.08 15 / 30%);
   --photo-pink: oklch(72% 0.14 15);
   --photo-pink-deep: oklch(46% 0.16 15);
-  --photo-yellow-soft: oklch(88% 0.07 95 / 26%);
+  --photo-yellow-soft: oklch(32% 0.06 95 / 30%);
 
-  /* Baked-in low alpha — used only for the ambient body-background glow. */
-  --photo-glow-peach: oklch(84% 0.09 45 / 26%);
-  --photo-glow-sky: oklch(80% 0.08 232 / 26%);
-  --photo-glow-mint: oklch(85% 0.08 155 / 22%);
+  /* Baked-in low alpha — used only for the ambient body-background glow.
+     Dark, saturated and low-opacity: a moody cinematic halo rather than a
+     daylight wash. */
+  --photo-glow-peach: oklch(30% 0.07 45 / 30%);
+  --photo-glow-sky: oklch(28% 0.06 232 / 30%);
+  --photo-glow-mint: oklch(30% 0.06 155 / 24%);
 
   /* --- Active accent (site default = sky). Pages/sections override just
      these four so every derived --at-* token and every component below
@@ -90,33 +97,34 @@
 
   /* --- Token remap: only the theme's *derived* tokens, never
      --at-primary/secondary/tertiary. --- */
-  --at-bg: var(--photo-cream);
-  --at-bg-alt: var(--photo-cream-alt);
+  --at-bg: var(--photo-ink);
+  --at-bg-alt: var(--photo-charcoal);
   --at-bg-elevated: var(--photo-surface);
-  --at-text: var(--photo-ink);
-  --at-text-secondary: oklch(from var(--photo-ink) l c h / 78%);
-  --at-text-muted: oklch(from var(--photo-ink) l c h / 58%);
-  --at-link: var(--photo-accent-deep);
-  --at-link-hover: oklch(from var(--photo-accent-deep) calc(l + 0.08) c h);
-  --at-accent: var(--photo-accent-deep);
-  --at-accent-hover: oklch(from var(--photo-accent-deep) calc(l + 0.06) c h);
+  --at-text: var(--photo-cream);
+  --at-text-secondary: var(--photo-cream-alt);
+  --at-text-muted: oklch(from var(--photo-cream-alt) l c h / 70%);
+  --at-link: var(--photo-accent);
+  --at-link-hover: oklch(from var(--photo-accent) calc(l + 0.08) c h);
+  --at-accent: var(--photo-accent);
+  --at-accent-hover: oklch(from var(--photo-accent) calc(l + 0.06) c h);
   --at-accent-soft: var(--photo-accent-soft);
-  --at-border: oklch(from var(--photo-ink) l c h / 12%);
-  --at-divider: oklch(from var(--photo-ink) l c h / 8%);
-  --at-code-bg: oklch(from var(--photo-ink) l c h / 5%);
+  --at-border: oklch(from var(--photo-cream) l c h / 14%);
+  --at-divider: oklch(from var(--photo-cream) l c h / 10%);
+  --at-code-bg: oklch(from var(--photo-cream) l c h / 6%);
   --at-border-radius: 1rem;
-  --at-shadow-sm: 0 1px 3px rgb(120 90 60 / 8%);
-  --at-shadow-md: 0 8px 24px rgb(120 90 60 / 12%);
-  --at-shadow-lg: 0 20px 50px rgb(120 90 60 / 18%);
+  --at-shadow-sm: 0 1px 3px rgb(0 0 0 / 40%);
+  --at-shadow-md: 0 10px 28px rgb(0 0 0 / 50%);
+  --at-shadow-lg: 0 24px 60px rgb(0 0 0 / 60%);
   --at-table-header-bg: var(--photo-accent-soft);
-  --at-table-header-text: var(--photo-ink);
-  --at-table-stripe: oklch(from var(--photo-ink) l c h / 5%);
+  --at-table-header-text: var(--photo-cream);
+  --at-table-stripe: oklch(from var(--photo-cream) l c h / 5%);
 }
 
-/* --- Ambient daylight: soft, huge, low-opacity light fields behind the
-   whole site instead of a flat colour. Decorative only. --- */
+/* --- Ambient dark: soft, huge, low-opacity colour fields behind the whole
+   site instead of a flat colour — restrained, moody, immersive rather than
+   the daylight glow this replaced. Decorative only. --- */
 body {
-  background-color: var(--photo-cream);
+  background-color: var(--photo-ink);
   background-image:
     radial-gradient(circle at 14% 6%, var(--photo-glow-peach) 0%, transparent 46%),
     radial-gradient(circle at 88% 16%, var(--photo-glow-sky) 0%, transparent 42%),
@@ -159,7 +167,7 @@ body {
 .photo-meta-line > :not(:last-child)::after {
   content: "·";
   margin-inline-start: 0.5em;
-  color: var(--photo-accent-deep);
+  color: var(--photo-accent);
 }
 
 /* A frame with photographer's crop marks at each corner, tinted with the
@@ -183,8 +191,8 @@ body {
 .photo-frame::before {
   top: -1px;
   left: -1px;
-  border-top: 2px solid var(--photo-accent-deep);
-  border-left: 2px solid var(--photo-accent-deep);
+  border-top: 2px solid var(--photo-accent);
+  border-left: 2px solid var(--photo-accent);
   border-start-start-radius: calc(var(--at-border-radius) / 2);
   opacity: 0.55;
 }
@@ -192,8 +200,8 @@ body {
 .photo-frame::after {
   bottom: -1px;
   right: -1px;
-  border-bottom: 2px solid var(--photo-accent-deep);
-  border-right: 2px solid var(--photo-accent-deep);
+  border-bottom: 2px solid var(--photo-accent);
+  border-right: 2px solid var(--photo-accent);
   border-end-end-radius: calc(var(--at-border-radius) / 2);
   opacity: 0.55;
 }
@@ -201,7 +209,7 @@ body {
 .photo-frame-number {
   font-family: var(--photo-metadata-font);
   font-size: var(--at-font-size-xs);
-  color: var(--photo-accent-deep);
+  color: var(--photo-accent);
 }
 
 /* A big, quiet numeral, softly tinted with the page's accent: the tool for
@@ -216,7 +224,7 @@ main[data-week-number]::before {
   font-weight: 400;
   font-size: clamp(3.5rem, 2.5rem + 6vw, 8rem);
   line-height: 1;
-  color: color-mix(in oklch, var(--photo-accent-deep) 42%, var(--photo-cream-alt) 58%);
+  color: color-mix(in oklch, var(--photo-accent) 55%, var(--photo-cream-alt) 45%);
 }
 
 main[data-week-number]::before {
@@ -280,7 +288,7 @@ main[data-week-number]::before {
 
 a.at-card:hover {
   transform: translateY(-4px);
-  border-color: var(--photo-accent-deep);
+  border-color: var(--photo-accent);
   box-shadow: var(--at-shadow-lg);
 }
 
@@ -292,7 +300,7 @@ a.at-card:hover {
 
 .at-nav {
   border-block-end: none;
-  background: rgb(255 253 248 / 72%);
+  background: oklch(from var(--photo-ink) l c h / 72%);
   backdrop-filter: blur(16px) saturate(140%);
   box-shadow: var(--at-shadow-sm);
 }
@@ -307,13 +315,13 @@ a.at-card:hover {
 
 .at-nav-links a:hover {
   background: var(--photo-accent-soft);
-  color: var(--photo-accent-deep);
+  color: var(--photo-accent);
   box-shadow: none;
 }
 
 .at-nav-links a[aria-current="page"] {
   background: var(--photo-accent-soft);
-  color: var(--photo-accent-deep);
+  color: var(--photo-accent);
   box-shadow: none;
   font-weight: 600;
 }

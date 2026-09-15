@@ -1,0 +1,30 @@
+---
+// Mirror of MonitorShutterLeft — see that file for the shared rationale.
+---
+
+<div class="monitor-shutter monitor-shutter--right" aria-hidden="true"></div>
+
+<style>
+  .monitor-shutter {
+    position: absolute;
+    inset-block: 0;
+    width: 50%;
+    background: #050403;
+    z-index: 3;
+    will-change: transform;
+  }
+
+  .monitor-shutter--right {
+    inset-inline-end: 0;
+  }
+
+  .monitor-shutter--right::before {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    inset-inline-start: 0;
+    width: 45%;
+    background: radial-gradient(circle at center, color-mix(in oklch, var(--photo-cream) 90%, white 10%) 0%, transparent 72%);
+    filter: blur(1px);
+  }
+</style>

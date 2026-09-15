@@ -1,0 +1,77 @@
+---
+import { slopBranding } from "astro-theme-slop";
+
+// The opening moment's only text/mark content: the official SlopU logo,
+// the page's real <h1>, a one-line metadata kicker and a short line of
+// course identity. Uses slopBranding.logoDark — the theme's own official
+// light-on-dark lockup, not a recoloured/redrawn mark — since this sits on
+// the new dark hero. Restrained and small relative to the giant camera —
+// never LAYR's logo/menu/labels or any of its copy. Fades out as the
+// monitor begins to open (CameraRevealSequence drives --b-identity off the
+// same --b-poweron timing) so it never competes with the shutter/gallery
+// sequence.
+export interface Props {
+  title: string;
+  kicker: string;
+  metaLine: string;
+}
+
+const { title, kicker, metaLine } = Astro.props;
+---
+
+<div class="identity-layer">
+  <img
+    class="identity-layer-logo"
+    src={slopBranding.logoDark.src}
+    width={slopBranding.logoDark.width}
+    height={slopBranding.logoDark.height}
+    alt="Slop University"
+  />
+  <p class="identity-layer-kicker">{kicker}</p>
+  <h1 class="identity-layer-title">{title}</h1>
+  <p class="identity-layer-meta">{metaLine}</p>
+</div>
+
+<style>
+  .identity-layer {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    text-align: center;
+    color: var(--at-text);
+    pointer-events: none;
+  }
+
+  .identity-layer-logo {
+    width: clamp(5.5rem, 3.5rem + 6vw, 8rem);
+    height: auto;
+  }
+
+  .identity-layer-kicker {
+    margin: 0;
+    font-family: var(--photo-metadata-font);
+    font-size: var(--at-font-size-sm);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    opacity: 0.75;
+  }
+
+  .identity-layer-title {
+    margin: 0;
+    font-family: var(--photo-font-display);
+    font-weight: 400;
+    font-size: clamp(1.5rem, 1rem + 2.5vw, 2.75rem);
+    line-height: 1;
+  }
+
+  .identity-layer-meta {
+    margin: 0;
+    font-family: var(--photo-metadata-font);
+    font-size: var(--at-font-size-xs);
+    letter-spacing: 0.06em;
+    opacity: 0.6;
+  }
+</style>

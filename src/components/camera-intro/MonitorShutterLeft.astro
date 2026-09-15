@@ -1,0 +1,35 @@
+---
+// Half of the monitor's opaque covering. Doubles as the dark "screen off"
+// look (its resting background) and the bright opening flash (the ::before
+// glow, intensity driven by --b-poweron), then slides left off-screen as
+// --b-shutter advances — one element for both jobs instead of a redundant
+// separate dark overlay. CameraRevealSequence's stylesheet drives the
+// transform and glow opacity via :global() rules.
+---
+
+<div class="monitor-shutter monitor-shutter--left" aria-hidden="true"></div>
+
+<style>
+  .monitor-shutter {
+    position: absolute;
+    inset-block: 0;
+    width: 50%;
+    background: #050403;
+    z-index: 3;
+    will-change: transform;
+  }
+
+  .monitor-shutter--left {
+    inset-inline-start: 0;
+  }
+
+  .monitor-shutter--left::before {
+    content: "";
+    position: absolute;
+    inset-block: 0;
+    inset-inline-end: 0;
+    width: 45%;
+    background: radial-gradient(circle at center, color-mix(in oklch, var(--photo-cream) 90%, white 10%) 0%, transparent 72%);
+    filter: blur(1px);
+  }
+</style>

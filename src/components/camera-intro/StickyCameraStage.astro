@@ -1,0 +1,65 @@
+---
+import CameraIllustration from "./CameraIllustration.astro";
+import type { GalleryWeek } from "./FullscreenLectureGallery.astro";
+import IdentityLayer from "./IdentityLayer.astro";
+import MonitorFrame from "./MonitorFrame.astro";
+
+// The single sticky box that stays pinned for the whole scroll sequence.
+// `.camera-frame` (line art + photoreal) and `.monitor-slot`/`.monitor-frame`
+// are siblings, not nested — CameraRevealSequence fades/scales
+// `.camera-frame` out during the expand stage, and that must never apply a
+// transform to an ancestor of `.monitor-frame`, or the monitor's later
+// `position: fixed` would be re-parented to that ancestor instead of the
+// viewport (see the containing-block note in CameraRevealSequence).
+export interface Props {
+  title: string;
+  kicker: string;
+  metaLine: string;
+  weeks: GalleryWeek[];
+}
+
+const { title, kicker, metaLine, weeks } = Astro.props;
+---
+
+<div class="sticky-camera-stage">
+  <IdentityLayer title={title} kicker={kicker} metaLine={metaLine} />
+  <div class="camera-visual">
+    <div class="camera-frame">
+      <CameraIllustration />
+    </div>
+    <MonitorFrame weeks={weeks} />
+  </div>
+</div>
+
+<style>
+  .sticky-camera-stage {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(0.5rem, 2vh, 1.25rem);
+    overflow: hidden;
+  }
+
+  .camera-visual {
+    position: relative;
+    width: min(92vw, 122svh);
+    aspect-ratio: 1360 / 1000;
+    flex-shrink: 0;
+  }
+
+  .camera-frame {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  @media (width < 640px) {
+    .camera-visual {
+      width: min(94vw, 150svh);
+    }
+  }
+</style>
