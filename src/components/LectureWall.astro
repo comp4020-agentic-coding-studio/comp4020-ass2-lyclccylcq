@@ -1,0 +1,347 @@
+---
+import type { ImageMetadata } from "astro";
+import { Image } from "astro:assets";
+import { withBase } from "astro-theme-university/url";
+import MediaSlot from "./MediaSlot.astro";
+
+// The homepage's primary lecture-navigation surface, and its "Twelve-Week
+// Media Sequence": one photograph per week, the photograph itself the
+// clickable entry point (not a card containing one). Deliberately NOT a
+// regular 3x4 grid — weeks alternate between full-bleed landscape "moments"
+// (breaking the sequence's rhythm) and two-up portrait pairs of uneven
+// size, so the sequence reads as a continuous editorial flow rather than a
+// tiled grid. Real week photography can replace a placeholder later by
+// adding `image`/`imageAlt` to that entry — no markup changes required.
+export interface WallEntry {
+  week: number;
+  number: string;
+  title: string;
+  shortLabel: string;
+  href: string;
+  placeholderCaption: string;
+  tone: "warm" | "cool" | "neutral";
+  kind: "full" | "pair";
+  pairSize?: "lg" | "sm";
+  image?: ImageMetadata;
+  imageAlt?: string;
+}
+
+export interface Props {
+  weeks: WallEntry[];
+}
+
+const { weeks } = Astro.props;
+
+type Row = { type: "full"; entry: WallEntry } | { type: "pair"; entries: WallEntry[] };
+
+const rows: Row[] = [];
+for (let i = 0; i < weeks.length; i++) {
+  const week = weeks[i];
+  if (week.kind === "full") {
+    rows.push({ type: "full", entry: week });
+    continue;
+  }
+  const next = weeks[i + 1];
+  if (next && next.kind === "pair") {
+    rows.push({ type: "pair", entries: [week, next] });
+    i++;
+  } else {
+    rows.push({ type: "pair", entries: [week] });
+  }
+}
+
+const ratioFor = (entry: WallEntry) => (entry.kind === "full" ? "21 / 9" : entry.pairSize === "lg" ? "3 / 4" : "4 / 5");
+// Decorative scroll-parallax rate per entry, keyed to the week number so it
+// stays stable regardless of row grouping.
+const parallaxFor = (entry: WallEntry) => [0.94, 1, 1.06][(entry.week - 1) % 3];
+---
+
+<section class="lecture-wall" aria-labelledby="lecture-wall-heading">
+  <div class="lecture-wall-intro">
+    <p class="lecture-wall-kicker">Twelve weeks, one photograph each</p>
+    <h2 id="lecture-wall-heading">The Semester, in Sequence</h2>
+  </div>
+  <div class="lecture-wall-sequence">
+    {
+      rows.map((row) =>
+        row.type === "full" ? (
+          <a
+            class="lecture-wall-entry lecture-wall-entry--full"
+            href={withBase(row.entry.href)}
+            aria-label={`Week ${row.entry.number} — ${row.entry.title}`}
+          >
+            {row.entry.image ? (
+              <Image
+                class="lecture-wall-image"
+                src={row.entry.image}
+                alt={row.entry.imageAlt ?? ""}
+                style={`aspect-ratio: ${ratioFor(row.entry)}`}
+                loading={row.entry.week === 1 ? "eager" : "lazy"}
+                widths={[640, 960, 1440]}
+                sizes="100vw"
+              />
+            ) : (
+              <MediaSlot
+                caption={row.entry.placeholderCaption}
+                tone={row.entry.tone}
+                ratio={ratioFor(row.entry)}
+                numeral={row.entry.number}
+              />
+            )}
+            <span class="lecture-wall-tag" aria-hidden="true">
+              <span class="lecture-wall-tag-number">{row.entry.number}</span>
+              <span class="lecture-wall-tag-label">/ {row.entry.shortLabel}</span>
+            </span>
+          </a>
+        ) : (
+          <div class="lecture-wall-row">
+            {row.entries.map((entry) => (
+              <a
+                class="lecture-wall-entry"
+                data-size={entry.pairSize}
+                href={withBase(entry.href)}
+                aria-label={`Week ${entry.number} — ${entry.title}`}
+                style={`--lw-parallax: ${parallaxFor(entry)};`}
+              >
+                {entry.image ? (
+                  <Image
+                    class="lecture-wall-image"
+                    src={entry.image}
+                    alt={entry.imageAlt ?? ""}
+                    style={`aspect-ratio: ${ratioFor(entry)}`}
+                    loading="lazy"
+                    widths={[320, 480, 640]}
+                    sizes="(width >= 1000px) 32vw, 90vw"
+                  />
+                ) : (
+                  <MediaSlot
+                    caption={entry.placeholderCaption}
+                    tone={entry.tone}
+                    ratio={ratioFor(entry)}
+                    numeral={entry.number}
+                  />
+                )}
+                <span class="lecture-wall-tag" aria-hidden="true">
+                  <span class="lecture-wall-tag-number">{entry.number}</span>
+                  <span class="lecture-wall-tag-label">/ {entry.shortLabel}</span>
+                </span>
+              </a>
+            ))}
+          </div>
+        ),
+      )
+    }
+  </div>
+</section>
+
+<script>
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const wideEnough = window.matchMedia("(width >= 1000px)");
+  const entries = Array.from(document.querySelectorAll<HTMLElement>(".lecture-wall-row .lecture-wall-entry"));
+  const wall = document.querySelector<HTMLElement>(".lecture-wall");
+
+  if (wall && entries.length && !reduceMotion.matches && wideEnough.matches) {
+    let active = false;
+    let ticking = false;
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        active = entry?.isIntersecting ?? false;
+        if (active) schedule();
+      },
+      { rootMargin: "200px 0px" },
+    );
+    io.observe(wall);
+
+    function update() {
+      ticking = false;
+      if (!active) return;
+      const viewportMid = window.innerHeight / 2;
+      for (const el of entries) {
+        const factor = Number(el.style.getPropertyValue("--lw-parallax")) || 1;
+        const rect = el.getBoundingClientRect();
+        const elMid = rect.top + rect.height / 2;
+        const drift = (viewportMid - elMid) * (factor - 1);
+        el.style.transform = `translateY(${Math.max(-24, Math.min(24, drift))}px)`;
+      }
+    }
+
+    function schedule() {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(update);
+      }
+    }
+
+    window.addEventListener("scroll", schedule, { passive: true });
+    schedule();
+  }
+</script>
+
+<style>
+  .lecture-wall {
+    grid-column: full-start / full-end;
+  }
+
+  .lecture-wall-intro {
+    padding-inline: clamp(1.25rem, 6vw, 6rem);
+    max-width: 40ch;
+    margin-block-end: clamp(2rem, 5vw, 3.5rem);
+  }
+
+  .lecture-wall-kicker {
+    font-family: var(--photo-metadata-font);
+    font-size: var(--at-font-size-sm);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--photo-accent-deep);
+    margin: 0 0 0.35rem;
+  }
+
+  .lecture-wall-intro h2 {
+    margin: 0;
+  }
+
+  .lecture-wall-sequence {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(1.5rem, 4vw, 3rem);
+  }
+
+  .lecture-wall-entry {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    will-change: transform;
+    transition: transform 0.2s ease;
+  }
+
+  .lecture-wall-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: clamp(1rem, 3vw, 2rem);
+    padding-inline: clamp(1.25rem, 6vw, 6rem);
+  }
+
+  .lecture-wall-row .lecture-wall-entry {
+    flex: 1 1 45%;
+    min-width: 220px;
+  }
+
+  .lecture-wall-row .lecture-wall-entry[data-size="lg"] {
+    flex: 1.4 1 55%;
+  }
+
+  @media (width >= 1000px) {
+    .lecture-wall-row:nth-of-type(even) {
+      margin-inline-start: clamp(0rem, 6vw, 4rem);
+    }
+  }
+
+  @media (width < 1000px) {
+    .lecture-wall-row .lecture-wall-entry {
+      transform: none !important;
+    }
+  }
+
+  /* Single-column mobile tier: alternate width/alignment per entry for
+     editorial rhythm instead of one uniform full-width stack. Full-bleed
+     "moment" entries stay untouched — they're already full width. */
+  @media (width < 640px) {
+    .lecture-wall-row {
+      flex-direction: column;
+      padding-inline: var(--at-spacing-md);
+    }
+
+    .lecture-wall-row .lecture-wall-entry {
+      flex: none;
+      max-inline-size: 92%;
+      margin-inline-start: 0;
+      margin-inline-end: auto;
+    }
+
+    .lecture-wall-row .lecture-wall-entry:nth-child(even) {
+      max-inline-size: 78%;
+      margin-inline-start: auto;
+      margin-inline-end: 0;
+    }
+  }
+
+  .lecture-wall-image {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+    transition: transform 0.35s ease;
+  }
+
+  .lecture-wall-entry :global(.media-slot) {
+    transition: transform 0.35s ease;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .lecture-wall-entry:hover :global(.media-slot),
+    .lecture-wall-entry:hover .lecture-wall-image,
+    .lecture-wall-entry:focus-visible :global(.media-slot),
+    .lecture-wall-entry:focus-visible .lecture-wall-image {
+      transform: scale(1.03);
+    }
+  }
+
+  .lecture-wall-tag {
+    position: absolute;
+    inset-block-start: 0.75rem;
+    inset-inline-start: 0.75rem;
+    max-inline-size: calc(100% - 1.5rem);
+    display: flex;
+    align-items: baseline;
+    gap: 0.35em;
+    padding: 0.3em 0.65em;
+    border-radius: 999px;
+    background: color-mix(in oklch, var(--photo-ink) 62%, transparent);
+    color: var(--photo-cream);
+    font-family: var(--photo-metadata-font);
+    font-size: var(--at-font-size-xs);
+    letter-spacing: 0.06em;
+  }
+
+  .lecture-wall-tag-number {
+    font-weight: 600;
+  }
+
+  .lecture-wall-tag-label {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .lecture-wall-tag-label {
+      display: inline-block;
+      max-width: 0;
+      opacity: 0;
+      transition:
+        max-width 0.25s ease,
+        opacity 0.2s ease;
+    }
+
+    .lecture-wall-entry:hover .lecture-wall-tag-label,
+    .lecture-wall-entry:focus-visible .lecture-wall-tag-label {
+      max-width: 16rem;
+      opacity: 1;
+    }
+  }
+
+  @media not all and (hover: hover) and (pointer: fine) {
+    .lecture-wall-tag-label {
+      opacity: 1;
+    }
+  }
+
+  .lecture-wall-entry:focus-visible {
+    outline: 2px solid var(--photo-accent-deep);
+    outline-offset: 2px;
+  }
+</style>

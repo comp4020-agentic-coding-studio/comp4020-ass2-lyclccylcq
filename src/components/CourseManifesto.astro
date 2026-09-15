@@ -1,0 +1,103 @@
+---
+// Large-type manifesto list — the site's "Four Systems" framework restated
+// as numbered statements rather than a compact definition table.
+export interface ManifestoPoint {
+  label: string;
+  body: string;
+}
+
+export interface Props {
+  heading: string;
+  intro?: string;
+  points: ManifestoPoint[];
+}
+
+const { heading, intro, points } = Astro.props;
+---
+
+<section class="course-manifesto" aria-labelledby="course-manifesto-heading">
+  <div class="course-manifesto-head">
+    <h2 id="course-manifesto-heading">{heading}</h2>
+    {intro && <p class="course-manifesto-intro">{intro}</p>}
+  </div>
+  <ol class="course-manifesto-list">
+    {
+      points.map((point, i) => (
+        <li>
+          <span class="course-manifesto-index" aria-hidden="true">
+            {String(i + 1).padStart(2, "0")}
+          </span>
+          <span class="course-manifesto-label">{point.label}</span>
+          <span class="course-manifesto-body">{point.body}</span>
+        </li>
+      ))
+    }
+  </ol>
+</section>
+
+<style>
+  .course-manifesto {
+    grid-column: content;
+    padding-block: clamp(3rem, 8vw, 6rem);
+  }
+
+  .course-manifesto-head {
+    max-width: 34rem;
+    margin-block-end: clamp(2rem, 5vw, 3rem);
+  }
+
+  .course-manifesto-head h2 {
+    font-size: clamp(1.75rem, 1.3rem + 2vw, 2.75rem);
+    margin: 0 0 0.75rem;
+  }
+
+  .course-manifesto-intro {
+    margin: 0;
+    color: var(--at-text-secondary);
+  }
+
+  .course-manifesto-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .course-manifesto-list li {
+    display: grid;
+    grid-template-columns: 3rem 11rem 1fr;
+    gap: clamp(1rem, 3vw, 2rem);
+    align-items: baseline;
+    padding-block: clamp(1rem, 2.5vw, 1.5rem);
+    border-block-start: 1px solid var(--at-divider);
+  }
+
+  .course-manifesto-list li:last-child {
+    border-block-end: 1px solid var(--at-divider);
+  }
+
+  .course-manifesto-index {
+    font-family: var(--photo-font-display);
+    font-size: clamp(1.25rem, 1rem + 1vw, 1.75rem);
+    color: var(--photo-accent-deep);
+  }
+
+  .course-manifesto-label {
+    font-family: var(--photo-font-display);
+    font-size: clamp(1.1rem, 1rem + 0.6vw, 1.4rem);
+  }
+
+  .course-manifesto-body {
+    color: var(--at-text-secondary);
+  }
+
+  @media (width < 640px) {
+    .course-manifesto-list li {
+      grid-template-columns: 2.5rem 1fr;
+    }
+
+    .course-manifesto-label,
+    .course-manifesto-body {
+      grid-column: 2;
+    }
+  }
+</style>

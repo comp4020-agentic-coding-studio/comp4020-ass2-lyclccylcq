@@ -1,0 +1,66 @@
+---
+// Editorial stand-in for photography that hasn't been shot yet: a toned
+// panel with a large ghost numeral and a small caption describing the frame
+// that belongs there. Deliberately NOT the site's old dashed-pastel-box
+// "Visual placeholder" convention (see VisualPlaceholder.astro, now
+// unused) — no border, no literal "Visual placeholder" label, no pastel
+// tint. Swapping in a real photograph later means passing an image to the
+// caller instead of this component; no markup changes required.
+export interface Props {
+  caption: string;
+  ratio?: string;
+  numeral?: string;
+  tone?: "warm" | "cool" | "neutral";
+}
+
+const { caption, ratio = "4 / 5", numeral, tone = "neutral" } = Astro.props;
+---
+
+<figure class="media-slot" data-tone={tone} style={`--ms-ratio: ${ratio}`}>
+  {numeral && (
+    <span class="media-slot-numeral" aria-hidden="true">
+      {numeral}
+    </span>
+  )}
+  <figcaption class="media-slot-caption">{caption}</figcaption>
+</figure>
+
+<style>
+  .media-slot {
+    position: relative;
+    margin: 0;
+    aspect-ratio: var(--ms-ratio);
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    background: linear-gradient(160deg, color-mix(in oklch, var(--photo-accent) 24%, var(--photo-ink) 76%), var(--photo-ink));
+  }
+
+  .media-slot[data-tone="warm"] {
+    background: linear-gradient(160deg, color-mix(in oklch, var(--photo-peach) 28%, var(--photo-ink) 72%), var(--photo-ink));
+  }
+
+  .media-slot[data-tone="cool"] {
+    background: linear-gradient(160deg, color-mix(in oklch, var(--photo-sky) 28%, var(--photo-ink) 72%), var(--photo-ink));
+  }
+
+  .media-slot-numeral {
+    position: absolute;
+    inset-block-start: 0.3em;
+    inset-inline-end: 0.25em;
+    font-family: var(--photo-font-display);
+    font-size: clamp(2.5rem, 2rem + 4vw, 5.5rem);
+    line-height: 1;
+    color: color-mix(in oklch, var(--photo-cream) 20%, transparent);
+  }
+
+  .media-slot-caption {
+    position: relative;
+    margin: 0;
+    padding: 0.85em 1em;
+    font-family: var(--photo-metadata-font);
+    font-size: var(--at-font-size-xs);
+    letter-spacing: 0.02em;
+    color: color-mix(in oklch, var(--photo-cream) 88%, transparent);
+  }
+</style>

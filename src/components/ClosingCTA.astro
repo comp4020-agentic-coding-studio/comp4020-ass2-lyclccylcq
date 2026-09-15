@@ -1,0 +1,53 @@
+---
+import { withBase } from "astro-theme-university/url";
+
+// Large closing call-to-action: full-viewport-scale statement, single pill
+// link, generous negative space either side.
+export interface Props {
+  heading: string;
+  body?: string;
+  ctaHref: string;
+  ctaLabel: string;
+}
+
+const { heading, body, ctaHref, ctaLabel } = Astro.props;
+---
+
+<section class="closing-cta" aria-labelledby="closing-cta-heading">
+  <h2 id="closing-cta-heading">{heading}</h2>
+  {body && <p class="closing-cta-body">{body}</p>}
+  <a class="photo-cta closing-cta-link" href={withBase(ctaHref)}>{ctaLabel}</a>
+</section>
+
+<style>
+  .closing-cta {
+    grid-column: full-start / full-end;
+    min-height: 60svh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 1.5rem;
+    padding: clamp(3rem, 10vw, 6rem) clamp(1.5rem, 6vw, 4rem);
+  }
+
+  .closing-cta h2 {
+    margin: 0;
+    font-family: var(--photo-font-display);
+    font-weight: 400;
+    font-size: clamp(2.25rem, 1.4rem + 5vw, 5.5rem);
+    line-height: 1.02;
+    max-width: 22ch;
+  }
+
+  .closing-cta-body {
+    margin: 0;
+    max-width: 40ch;
+    color: var(--at-text-secondary);
+  }
+
+  .closing-cta-link {
+    margin-block-start: 0.5rem;
+  }
+</style>

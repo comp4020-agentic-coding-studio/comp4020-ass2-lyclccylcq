@@ -1,0 +1,92 @@
+---
+// Numbered, text-only process list — the semester's weekly rhythm as a
+// short numbered sequence, editorial rather than a card grid.
+export interface ProcessStep {
+  label: string;
+  body: string;
+}
+
+export interface Props {
+  heading: string;
+  steps: ProcessStep[];
+}
+
+const { heading, steps } = Astro.props;
+---
+
+<section class="process-index" aria-labelledby="process-index-heading">
+  <h2 id="process-index-heading">{heading}</h2>
+  <ol class="process-index-list">
+    {
+      steps.map((step, i) => (
+        <li>
+          <span class="process-index-number" aria-hidden="true">
+            {String(i + 1).padStart(2, "0")}
+          </span>
+          <div>
+            <p class="process-index-label">{step.label}</p>
+            <p class="process-index-body">{step.body}</p>
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+</section>
+
+<style>
+  .process-index {
+    grid-column: inset-start / content-end;
+    padding-block: clamp(3rem, 8vw, 6rem);
+  }
+
+  .process-index h2 {
+    max-width: 30ch;
+    font-size: clamp(1.75rem, 1.3rem + 2vw, 2.75rem);
+    margin: 0 0 clamp(2rem, 5vw, 3rem);
+  }
+
+  .process-index-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .process-index-list li {
+    display: flex;
+    align-items: baseline;
+    gap: clamp(1.5rem, 4vw, 3rem);
+    padding-block: clamp(1.25rem, 3vw, 2rem);
+    border-block-start: 1px solid var(--at-divider);
+  }
+
+  .process-index-list li:last-child {
+    border-block-end: 1px solid var(--at-divider);
+  }
+
+  .process-index-number {
+    font-family: var(--photo-font-display);
+    font-size: clamp(2rem, 1.5rem + 2vw, 3.5rem);
+    color: color-mix(in oklch, var(--photo-accent-deep) 55%, var(--at-text-muted) 45%);
+    flex: none;
+    min-width: 3ch;
+  }
+
+  .process-index-label {
+    margin: 0 0 0.25rem;
+    font-family: var(--photo-font-display);
+    font-size: clamp(1.1rem, 1rem + 0.6vw, 1.4rem);
+  }
+
+  .process-index-body {
+    margin: 0;
+    color: var(--at-text-secondary);
+    max-width: 48ch;
+  }
+
+  @media (width < 640px) {
+    .process-index-list li {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+  }
+</style>

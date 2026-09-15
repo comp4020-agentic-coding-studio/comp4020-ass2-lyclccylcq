@@ -400,46 +400,13 @@ main[data-page="people"] {
   margin-block-start: clamp(3rem, 6vw, 6rem);
 }
 
-/* --- Homepage-only asymmetric composition: shift the whole page left and
-   reserve a genuine right-hand grid region for future case-study
-   photography, instead of centring main content between two equal 1fr
-   margins. Left margin stays fixed at the gutter minimum (no fr growth);
-   all freed space lands on the right, split between a capped rail track
-   and a growing outer margin beyond it. Main content keeps its existing
-   width formula untouched. Large desktop only — below this, both the rail
-   and the override fall away entirely and the theme's default centred
-   grid takes over. --- */
-@media (width >= 1200px) {
-  body:has(.at-main[data-page="home"]) {
-    grid-template-columns:
-      [full-start]
-      var(--at-gutter)
-      [inset-start]
-      var(--at-content-inset)
-      [content-start]
-      min(
-        var(--at-content-width),
-        100% - 2 * var(--at-gutter) - var(--at-content-inset) - var(--at-spacing-2xl) -
-          clamp(16rem, 24vw, 26rem)
-      )
-      [content-end]
-      var(--at-spacing-2xl)
-      [rail-start]
-      minmax(0, clamp(16rem, 24vw, 26rem))
-      [rail-end]
-      minmax(var(--at-gutter), 1fr)
-      [full-end];
-  }
-
-  body:has(.at-main[data-page="home"]) .at-main[data-page="home"] {
-    grid-column: inset-start / rail-end;
-  }
-
-  /* The theme's vertical accent rule assumes the old centred-margin math
-     ((100% - content-inset - content-width) / 2) to find content-start; it
-     has no way to know about the new asymmetric margins, so it would land
-     in the wrong place here. Hide it on the homepage only. */
-  body:has(.at-main[data-page="home"])::after {
-    display: none;
-  }
+/* --- Homepage-only: widen .at-main's own subgrid span to reach the body
+   grid's true edge lines. Body's own grid-template-columns (and every other
+   page's .at-main span) stay completely untouched — this only changes what
+   named lines the homepage's subgrid children can reach. Individual
+   sections then opt into `content` (narrow, centred), `inset-start /
+   content-end` (wide inset) or `full-start / full-end` (true edge-to-edge)
+   as each one needs. --- */
+main.at-main[data-page="home"] {
+  grid-column: full-start / full-end;
 }
