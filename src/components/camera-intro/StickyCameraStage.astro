@@ -47,8 +47,8 @@ const { title, kicker, metaLine, weeks } = Astro.props;
   .camera-visual {
     position: absolute;
     left: 50%;
-    top: 53%;
-    width: min(96vw, 158svh);
+    top: 80%;
+    width: min(94vw, 92svh);
     aspect-ratio: 1600 / 1000;
     transform: translate(-50%, -50%);
   }
@@ -69,10 +69,10 @@ const { title, kicker, metaLine, weeks } = Astro.props;
     visibility: hidden;
   }
 
-  @media (width < 640px) {
+  @media (max-aspect-ratio: 4 / 3) {
     .camera-visual {
-      top: 60%;
-      width: min(156vw, 146svh);
+      top: 70%;
+      width: 94vw;
     }
   }
 </style>
