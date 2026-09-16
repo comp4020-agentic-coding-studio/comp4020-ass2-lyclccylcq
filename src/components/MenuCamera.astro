@@ -1,0 +1,208 @@
+---
+// An original front-view line-art camera for the homepage menu. It borrows
+// only the interaction idea from the visual reference: the camera occupies
+// the menu's second column and responds gently to pointer position. The
+// artwork, geometry and branding are purpose-built for this course site.
+export interface Props {
+  courseCode: string;
+  courseTitle: string;
+}
+
+const { courseCode, courseTitle } = Astro.props;
+---
+
+<div class="menu-camera" data-menu-camera aria-hidden="true">
+  <div class="menu-camera-scene">
+    <svg class="menu-camera-model" viewBox="0 0 1000 720" role="presentation">
+      <defs>
+        <radialGradient id="menu-lens-glass" cx="38%" cy="32%" r="72%">
+          <stop offset="0" stop-color="#dfe8ef" stop-opacity="0.28" />
+          <stop offset="0.28" stop-color="#536576" stop-opacity="0.22" />
+          <stop offset="0.64" stop-color="#12161c" stop-opacity="0.76" />
+          <stop offset="1" stop-color="#020304" stop-opacity="0.94" />
+        </radialGradient>
+        <linearGradient id="menu-camera-edge" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#fff" stop-opacity="0.92" />
+          <stop offset="0.52" stop-color="#aeb5bc" stop-opacity="0.62" />
+          <stop offset="1" stop-color="#fff" stop-opacity="0.86" />
+        </linearGradient>
+        <filter id="menu-camera-glow" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="4" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+      </defs>
+
+      <g class="menu-camera-ghost" fill="none" stroke="#f7f5ef" stroke-width="1.25" opacity="0.16">
+        <path d="M75 266 116 184l156-37 65-68h319l68 70 160 39 42 78-21 342-131 33H207L76 603Z" />
+        <path d="M103 247 91 618m806-368 16 365M263 153l-23 475m521-477 18 476" />
+        <circle cx="515" cy="397" r="247" />
+        <circle cx="515" cy="397" r="221" />
+      </g>
+
+      <g class="menu-camera-body" fill="rgb(7 8 10 / 36%)" stroke="url(#menu-camera-edge)" stroke-width="3">
+        <path d="M101 242c0-30 21-55 51-61l149-31 55-72h306l57 72 151 31c30 6 51 31 51 61v322c0 39-31 70-70 70H171c-39 0-70-31-70-70Z" />
+        <path d="M101 278h798M123 568h754" fill="none" opacity="0.52" />
+        <path d="M362 151V87c0-18 15-33 33-33h238c18 0 33 15 33 33v64" />
+        <path d="M393 151V99h242v52" fill="none" opacity="0.62" />
+        <rect x="157" y="205" width="146" height="58" rx="20" />
+        <path d="M174 220h112m-112 13h112m-112 13h112" fill="none" opacity="0.44" />
+        <rect x="736" y="206" width="104" height="56" rx="18" />
+        <circle cx="791" cy="234" r="12" fill="#b97d1c" stroke="none" />
+        <rect x="128" y="327" width="46" height="130" rx="18" />
+        <rect x="826" y="327" width="46" height="130" rx="18" />
+        <circle cx="206" cy="534" r="28" />
+        <circle cx="794" cy="534" r="28" />
+        <path d="M238 612 198 670m564-58 42 58M171 670h658" fill="none" />
+        <text x="150" y="311">{courseCode}</text>
+        <text x="820" y="311" text-anchor="end">{courseTitle.toUpperCase()}</text>
+      </g>
+
+      <g class="menu-camera-lens" filter="url(#menu-camera-glow)">
+        <circle cx="515" cy="397" r="224" fill="rgb(4 5 7 / 84%)" stroke="#f7f5ef" stroke-width="3" />
+        <circle cx="515" cy="397" r="191" fill="none" stroke="#aeb5bc" stroke-width="2.5" />
+        <circle cx="515" cy="397" r="158" fill="url(#menu-lens-glass)" stroke="#f7f5ef" stroke-width="3" />
+        <circle cx="515" cy="397" r="118" fill="#050608" stroke="#8f979f" stroke-width="2.5" />
+        <circle cx="515" cy="397" r="78" fill="url(#menu-lens-glass)" stroke="#f7f5ef" stroke-width="2" />
+        <circle cx="493" cy="373" r="28" fill="#fff" opacity="0.08" stroke="none" />
+        <path d="M401 260c42-43 93-66 154-70M383 523c35 42 78 69 129 80" fill="none" stroke="#fff" stroke-width="2" opacity="0.34" />
+      </g>
+
+      <g class="menu-camera-focus" fill="none" stroke="#b97d1c" stroke-width="3" opacity="0.88">
+        <path d="M52 155v-34h34M948 155v-34h-34M52 573v34h34M948 573v34h-34" />
+      </g>
+    </svg>
+  </div>
+</div>
+
+<script>
+  function setupMenuCamera() {
+    const camera = document.querySelector<HTMLElement>("[data-menu-camera]");
+    const nav = document.querySelector<HTMLElement>(".at-nav");
+    const wrapper = nav?.querySelector<HTMLElement>(".at-nav-links-wrapper");
+    const toggle = nav?.querySelector<HTMLElement>(".at-nav-toggle");
+    if (!camera || !wrapper || !toggle) return;
+
+    if (camera.parentElement !== wrapper) wrapper.append(camera);
+    if (camera.dataset.initialized === "true") return;
+    camera.dataset.initialized = "true";
+
+    const current = { rx: 0, ry: 0, lx: 0, ly: 0 };
+    const target = { rx: 0, ry: 0, lx: 0, ly: 0 };
+    let frame = 0;
+
+    function render() {
+      frame = 0;
+      const ease = 0.11;
+      current.rx += (target.rx - current.rx) * ease;
+      current.ry += (target.ry - current.ry) * ease;
+      current.lx += (target.lx - current.lx) * ease;
+      current.ly += (target.ly - current.ly) * ease;
+
+      camera?.style.setProperty("--menu-camera-rx", `${current.rx.toFixed(3)}deg`);
+      camera?.style.setProperty("--menu-camera-ry", `${current.ry.toFixed(3)}deg`);
+      camera?.style.setProperty("--menu-lens-x", `${current.lx.toFixed(2)}px`);
+      camera?.style.setProperty("--menu-lens-y", `${current.ly.toFixed(2)}px`);
+
+      const moving = Math.abs(target.rx - current.rx) + Math.abs(target.ry - current.ry)
+        + Math.abs(target.lx - current.lx) + Math.abs(target.ly - current.ly) > 0.03;
+      if (moving) frame = requestAnimationFrame(render);
+    }
+
+    function requestRender() {
+      if (!frame) frame = requestAnimationFrame(render);
+    }
+
+    function resetCamera() {
+      target.rx = 0;
+      target.ry = 0;
+      target.lx = 0;
+      target.ly = 0;
+      requestRender();
+    }
+
+    wrapper.addEventListener("pointermove", (event) => {
+      if (toggle.getAttribute("aria-expanded") !== "true") return;
+      const rect = wrapper.getBoundingClientRect();
+      const x = Math.max(-1, Math.min(1, ((event.clientX - rect.left) / rect.width - 0.5) * 2));
+      const y = Math.max(-1, Math.min(1, ((event.clientY - rect.top) / rect.height - 0.5) * 2));
+      target.rx = y * -5.5;
+      target.ry = x * 8;
+      target.lx = x * 13;
+      target.ly = y * 9;
+      requestRender();
+    });
+    wrapper.addEventListener("pointerleave", resetCamera);
+    toggle.addEventListener("click", () => requestAnimationFrame(() => {
+      if (toggle.getAttribute("aria-expanded") !== "true") resetCamera();
+    }));
+  }
+
+  setupMenuCamera();
+  document.addEventListener("astro:page-load", setupMenuCamera);
+</script>
+
+<style>
+  .menu-camera {
+    --menu-camera-rx: 0deg;
+    --menu-camera-ry: 0deg;
+    --menu-lens-x: 0px;
+    --menu-lens-y: 0px;
+    display: none;
+    width: min(58vw, 52rem);
+    perspective: 1100px;
+    pointer-events: none;
+  }
+
+  :global(body:has(main[data-page="home"]) .at-nav-links-wrapper) .menu-camera {
+    display: block;
+  }
+
+  .menu-camera-scene {
+    transform-style: preserve-3d;
+  }
+
+  .menu-camera-model {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    transform: rotateX(var(--menu-camera-rx)) rotateY(var(--menu-camera-ry));
+    transform-origin: 50% 52%;
+    transform-style: preserve-3d;
+    filter: drop-shadow(0 2rem 3rem rgb(0 0 0 / 58%));
+    will-change: transform;
+  }
+
+  .menu-camera-lens {
+    transform: translate(var(--menu-lens-x), var(--menu-lens-y));
+    transform-box: fill-box;
+    transform-origin: center;
+    will-change: transform;
+  }
+
+  .menu-camera-body text {
+    fill: #f7f5ef;
+    stroke: none;
+    font-family: var(--photo-metadata-font);
+    font-size: 17px;
+    letter-spacing: 0.15em;
+    opacity: 0.58;
+  }
+
+  @media (width < 760px) {
+    .menu-camera {
+      width: min(94vw, 39rem);
+      opacity: 0.2;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .menu-camera-model,
+    .menu-camera-lens {
+      transform: none;
+    }
+  }
+</style>

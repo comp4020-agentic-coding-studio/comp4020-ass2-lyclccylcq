@@ -3,80 +3,22 @@ import { getPublishedCollection } from "astro-course-university/content";
 import ContentLayout from "astro-theme-university/layouts/ContentLayout.astro";
 import CameraRevealSequence from "../components/camera-intro/CameraRevealSequence.astro";
 import type { GalleryWeek } from "../components/camera-intro/FullscreenLectureGallery.astro";
+import MenuCamera from "../components/MenuCamera.astro";
 import { courseMeta } from "../course-config";
 import { siteConfig } from "../site-config";
 import "../styles/photo.css";
 
 const lectures = await getPublishedCollection("lectures");
 
-// Presentation data only (tone/placeholder) — title, description and href
-// all come from the real `lectures` collection below. Feeds
-// FullscreenLectureGallery inside the homepage's CameraRevealSequence: the
-// gallery itself decides span/row/drift per tile, so only content is
-// needed here.
-const wallLayout: Record<number, Pick<GalleryWeek, "tone" | "placeholderCaption">> = {
-  1: {
-    tone: "warm",
-    placeholderCaption:
-      "A portrait moment that reads as real life, not a posed shoot — the opening example of what partner photography isn't.",
-  },
-  2: {
-    tone: "cool",
-    placeholderCaption: "A date-planning scene where light, weather and a partner's energy visibly line up — or don't.",
-  },
-  3: {
-    tone: "neutral",
-    placeholderCaption: "A familiar travel-photo pose, framed to ask whether it's a memory or evidence.",
-  },
-  4: {
-    tone: "warm",
-    placeholderCaption: "Two portraits of the same moment — one the photographer loves, one the subject does.",
-  },
-  5: {
-    tone: "cool",
-    placeholderCaption: "A quiet, unposed portrait taken before any camera setting has been chosen.",
-  },
-  6: {
-    tone: "neutral",
-    placeholderCaption: "A low-angle portrait next to a matching high-angle one, showing the same person look different.",
-  },
-  7: {
-    tone: "warm",
-    placeholderCaption: "Hands and posture caught mid-adjustment — the awkward moment before direction helps.",
-  },
-  8: {
-    tone: "cool",
-    placeholderCaption: "A candid moment caught mid-conversation, not a held smile.",
-  },
-  9: {
-    tone: "neutral",
-    placeholderCaption: "The same face at two focal lengths — a close wide shot next to a longer zoom.",
-  },
-  10: {
-    tone: "warm",
-    placeholderCaption: "A beautiful sunset portrait undercut by hard shadows or a distracting background.",
-  },
-  11: {
-    tone: "cool",
-    placeholderCaption: "A contact sheet with one frame circled — the photographer's pick next to the subject's.",
-  },
-  12: {
-    tone: "neutral",
-    placeholderCaption: "A finished portrait from the semester's full shoot, from preferences through to delivery.",
-  },
-};
-
 const galleryWeeks: GalleryWeek[] = Array.from({ length: 12 }, (_, i) => {
   const n = i + 1;
   const padded = String(n).padStart(2, "0");
   const lecture = lectures.find((entry) => entry.data.week === n);
-  const layout = wallLayout[n];
   return {
     week: n,
     number: padded,
     title: lecture?.data.title ?? `Week ${padded}`,
     href: `/weeks/${padded}/`,
-    ...layout,
   };
 });
 ---
@@ -90,9 +32,10 @@ const galleryWeeks: GalleryWeek[] = Array.from({ length: 12 }, (_, i) => {
   <CameraRevealSequence
     kicker={`${courseMeta.code} · ${courseMeta.session}`}
     title={courseMeta.title}
-    metaLine="Twelve weeks, one photograph each — scroll to begin."
+    metaLine="Good portraits begin before the shutter."
     weeks={galleryWeeks}
   />
+  <MenuCamera courseCode={courseMeta.code} courseTitle={courseMeta.title} />
 </ContentLayout>
 
 <style>

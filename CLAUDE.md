@@ -92,7 +92,9 @@ starter homepage sections or replace it with a generic card grid.
 - The opening frame keeps the official light-on-dark SlopU logo and the real
   course title. The complete white rear-camera drawing sits below the text; it
   must not cross through the title, metadata or scroll instruction at common
-  desktop and mobile aspect ratios.
+  desktop and mobile aspect ratios. During the early materialisation band the
+  whole camera moves upward into the viewport centre; the real monitor must
+  travel with the same offset so it never detaches from the camera drawing.
 - `CameraIllustration.astro` contains one registered SVG camera. Its complete
   line-art and rendered-colour layers share the same geometry. Scroll only
   crossfades material, shading and highlights onto that camera: do not animate
@@ -110,6 +112,11 @@ starter homepage sections or replace it with a generic card grid.
 - The twelve original gallery images live in
   `src/assets/images/gallery/week-01.png` through `week-12.png`. Preserve the
   one-image-per-week mapping when changing layout or motion.
+- The homepage's expanded menu is a two-column composition: navigation on the
+  left and an original front-view line-art camera on the right. The camera and
+  its lens respond subtly to pointer position, return to neutral when the menu
+  closes or the pointer leaves, never intercept link clicks, and remain static
+  under `prefers-reduced-motion`.
 - Motion remains native-scroll-driven and reversible. Do not intercept wheel
   input or add a second scroll system. `prefers-reduced-motion` must retain a
   useful static state, and all twelve unique week links must remain reachable

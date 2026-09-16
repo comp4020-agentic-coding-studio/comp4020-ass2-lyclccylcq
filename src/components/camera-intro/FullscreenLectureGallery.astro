@@ -19,8 +19,6 @@ export interface GalleryWeek {
   number: string;
   title: string;
   href: string;
-  placeholderCaption: string;
-  tone: "warm" | "cool" | "neutral";
 }
 
 export interface Props {
@@ -35,8 +33,8 @@ const firstTile = tiles[0];
 ---
 
 <section class="fullscreen-gallery" data-gallery aria-labelledby="fullscreen-gallery-heading">
-  <h2 id="fullscreen-gallery-heading" class="sr-only">Explore twelve weeks through twelve photographs</h2>
-  <p class="gallery-counter" aria-hidden="true">12 frames / 12 weeks</p>
+  <h2 id="fullscreen-gallery-heading" class="sr-only">Twelve weeks of photographing people with care</h2>
+  <p class="gallery-counter" aria-hidden="true">12 weeks / 12 shared frames</p>
 
   <div class="gallery-streams">
     {
@@ -108,7 +106,7 @@ const firstTile = tiles[0];
 
   {
     firstTile && (
-      <a class="gallery-preview" href={withBase(firstTile.href)} data-gallery-preview aria-label={`Open Week ${firstTile.number}`}>
+      <a class="gallery-preview" href={withBase(firstTile.href)} data-gallery-preview aria-label={`Enter Week ${firstTile.number}`}>
         <span class="gallery-preview-image-wrap">
           <Image
             src={firstTile.image}
@@ -122,7 +120,7 @@ const firstTile = tiles[0];
         <span class="gallery-preview-copy" aria-live="polite">
           <span class="gallery-preview-week">Week <span data-preview-week>{firstTile.number}</span></span>
           <span class="gallery-preview-title" data-preview-title>{firstTile.title}</span>
-          <span class="gallery-preview-action">Open lecture ↗</span>
+          <span class="gallery-preview-action">Enter week ↗</span>
         </span>
       </a>
     )
@@ -142,7 +140,7 @@ const firstTile = tiles[0];
       if (!preview || !previewImage || !previewWeek || !previewTitle || !image) return;
 
       preview.href = item.href;
-      preview.setAttribute("aria-label", `Open Week ${item.dataset.week ?? ""} — ${item.dataset.title ?? ""}`);
+      preview.setAttribute("aria-label", `Enter Week ${item.dataset.week ?? ""} — ${item.dataset.title ?? ""}`);
       previewImage.removeAttribute("srcset");
       previewImage.removeAttribute("sizes");
       previewImage.src = image.currentSrc || image.src;
