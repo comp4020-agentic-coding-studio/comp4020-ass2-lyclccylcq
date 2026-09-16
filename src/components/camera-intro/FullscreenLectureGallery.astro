@@ -1,12 +1,19 @@
 ---
+import { Image } from "astro:assets";
 import { withBase } from "astro-theme-university/url";
-import MediaSlot from "../MediaSlot.astro";
+import week01 from "../../assets/images/gallery/week-01.png";
+import week02 from "../../assets/images/gallery/week-02.png";
+import week03 from "../../assets/images/gallery/week-03.png";
+import week04 from "../../assets/images/gallery/week-04.png";
+import week05 from "../../assets/images/gallery/week-05.png";
+import week06 from "../../assets/images/gallery/week-06.png";
+import week07 from "../../assets/images/gallery/week-07.png";
+import week08 from "../../assets/images/gallery/week-08.png";
+import week09 from "../../assets/images/gallery/week-09.png";
+import week10 from "../../assets/images/gallery/week-10.png";
+import week11 from "../../assets/images/gallery/week-11.png";
+import week12 from "../../assets/images/gallery/week-12.png";
 
-// The sequence's destination and payoff: a dense, irregular photo wall
-// mounted exactly once, always present behind MonitorFrame's shutters —
-// never a second/placeholder gallery swapped in after the animation. Every
-// tile is a real <a href="/weeks/NN/"> link, so it is the site's actual
-// navigation to all twelve lecture weeks, not a decorative mockup of one.
 export interface GalleryWeek {
   week: number;
   number: string;
@@ -21,51 +28,171 @@ export interface Props {
 }
 
 const { weeks } = Astro.props;
-
-// Deliberately irregular column/row spans (a 12-column track) so the wall
-// reads as a staggered photo mosaic rather than a uniform card grid — no
-// two adjacent tiles share the same shape, and grid-auto-flow: dense lets
-// the browser interleave them rather than settling into clean rows.
-const colSpans = [5, 4, 3, 6, 4, 3, 5, 3, 4, 6, 3, 5];
-const rowSpans = [2, 1, 2, 1, 1, 2, 1, 2, 1, 1, 2, 1];
-const driftDurations = [16, 21, 18, 24, 15, 22, 19, 26, 17, 23, 20, 25];
-
-const tiles = weeks.map((entry, i) => ({
-  ...entry,
-  colSpan: colSpans[i % colSpans.length],
-  rowSpan: rowSpans[i % rowSpans.length],
-  driftDuration: driftDurations[i % driftDurations.length],
-  driftDirection: i % 2 === 0 ? 1 : -1,
-  driftDistance: 8 + (i % 4) * 5,
-}));
+const images = [week01, week02, week03, week04, week05, week06, week07, week08, week09, week10, week11, week12];
+const tiles = weeks.map((entry, index) => ({ ...entry, image: images[index] }));
+const rows = [tiles.slice(0, 4), tiles.slice(4, 8), tiles.slice(8, 12)];
+const firstTile = tiles[0];
 ---
 
-<section class="fullscreen-gallery" aria-labelledby="fullscreen-gallery-heading">
-  <h2 id="fullscreen-gallery-heading" class="fullscreen-gallery-heading">Twelve weeks, one photograph each</h2>
-  <ul class="fullscreen-gallery-grid" role="list">
+<section class="fullscreen-gallery" data-gallery aria-labelledby="fullscreen-gallery-heading">
+  <h2 id="fullscreen-gallery-heading" class="sr-only">Explore twelve weeks through twelve photographs</h2>
+  <p class="gallery-counter" aria-hidden="true">12 frames / 12 weeks</p>
+
+  <div class="gallery-streams">
     {
-      tiles.map((tile) => (
-        <li
-          class="gallery-tile"
-          style={`grid-column: span ${tile.colSpan}; grid-row: span ${tile.rowSpan}; --drift-duration: ${tile.driftDuration}s; --drift-direction: ${tile.driftDirection}; --drift-distance: ${tile.driftDistance}px;`}
-        >
-          <a class="gallery-tile-link" href={withBase(tile.href)} aria-label={`Week ${tile.number} — ${tile.title}`}>
-            <MediaSlot tone={tile.tone} numeral={tile.number} caption={tile.placeholderCaption} ratio="auto" />
-          </a>
-        </li>
+      rows.map((row, rowIndex) => (
+        <div class={`gallery-row gallery-row--${rowIndex + 1}`}>
+          <div class="gallery-track">
+            <ul class="gallery-run" role="list">
+              {row.map((tile, index) => (
+                <li class={`gallery-tile gallery-tile--${index + 1}`}>
+                  <a
+                    class="gallery-tile-link"
+                    href={withBase(tile.href)}
+                    aria-label={`Week ${tile.number} — ${tile.title}`}
+                    data-gallery-item
+                    data-week={tile.number}
+                    data-title={tile.title}
+                  >
+                    <Image
+                      src={tile.image}
+                      alt=""
+                      widths={[320, 560, 800]}
+                      sizes="(max-width: 640px) 44vw, 25vw"
+                      loading={rowIndex < 2 ? "eager" : "lazy"}
+                      class="gallery-tile-image"
+                    />
+                    <span class="gallery-tile-shade" aria-hidden="true"></span>
+                    <span class="gallery-tile-caption">
+                      <span class="gallery-tile-number">{tile.number}</span>
+                      <span class="gallery-tile-title">{tile.title}</span>
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+
+            <ul class="gallery-run gallery-run--clone" role="list" aria-hidden="true">
+              {row.map((tile, index) => (
+                <li class={`gallery-tile gallery-tile--${index + 1}`}>
+                  <a
+                    class="gallery-tile-link"
+                    href={withBase(tile.href)}
+                    tabindex="-1"
+                    data-gallery-item
+                    data-week={tile.number}
+                    data-title={tile.title}
+                  >
+                    <Image
+                      src={tile.image}
+                      alt=""
+                      widths={[320, 560, 800]}
+                      sizes="(max-width: 640px) 44vw, 25vw"
+                      loading="lazy"
+                      class="gallery-tile-image"
+                    />
+                    <span class="gallery-tile-shade" aria-hidden="true"></span>
+                    <span class="gallery-tile-caption">
+                      <span class="gallery-tile-number">{tile.number}</span>
+                      <span class="gallery-tile-title">{tile.title}</span>
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
       ))
     }
-  </ul>
+  </div>
+
+  {
+    firstTile && (
+      <a class="gallery-preview" href={withBase(firstTile.href)} data-gallery-preview aria-label={`Open Week ${firstTile.number}`}>
+        <span class="gallery-preview-image-wrap">
+          <Image
+            src={firstTile.image}
+            alt=""
+            widths={[560, 800, 1200]}
+            sizes="(max-width: 640px) 72vw, 36vw"
+            loading="eager"
+            class="gallery-preview-image"
+          />
+        </span>
+        <span class="gallery-preview-copy" aria-live="polite">
+          <span class="gallery-preview-week">Week <span data-preview-week>{firstTile.number}</span></span>
+          <span class="gallery-preview-title" data-preview-title>{firstTile.title}</span>
+          <span class="gallery-preview-action">Open lecture ↗</span>
+        </span>
+      </a>
+    )
+  }
 </section>
+
+<script>
+  document.querySelectorAll<HTMLElement>("[data-gallery]").forEach((gallery) => {
+    const preview = gallery.querySelector<HTMLAnchorElement>("[data-gallery-preview]");
+    const previewImage = preview?.querySelector<HTMLImageElement>(".gallery-preview-image");
+    const previewWeek = preview?.querySelector<HTMLElement>("[data-preview-week]");
+    const previewTitle = preview?.querySelector<HTMLElement>("[data-preview-title]");
+    const items = gallery.querySelectorAll<HTMLAnchorElement>("[data-gallery-item]");
+
+    const showPreview = (item: HTMLAnchorElement) => {
+      const image = item.querySelector<HTMLImageElement>(".gallery-tile-image");
+      if (!preview || !previewImage || !previewWeek || !previewTitle || !image) return;
+
+      preview.href = item.href;
+      preview.setAttribute("aria-label", `Open Week ${item.dataset.week ?? ""} — ${item.dataset.title ?? ""}`);
+      previewImage.removeAttribute("srcset");
+      previewImage.removeAttribute("sizes");
+      previewImage.src = image.currentSrc || image.src;
+      previewWeek.textContent = item.dataset.week ?? "";
+      previewTitle.textContent = item.dataset.title ?? "";
+      gallery.dataset.previewOpen = "true";
+    };
+
+    items.forEach((item) => {
+      item.addEventListener("pointerenter", () => showPreview(item));
+      item.addEventListener("focus", () => showPreview(item));
+    });
+
+    gallery.addEventListener("pointerleave", () => {
+      delete gallery.dataset.previewOpen;
+    });
+
+    gallery.addEventListener("focusout", (event) => {
+      if (!gallery.contains(event.relatedTarget as Node | null)) delete gallery.dataset.previewOpen;
+    });
+  });
+</script>
 
 <style>
   .fullscreen-gallery {
     position: absolute;
     inset: 0;
-    background: var(--photo-ink);
+    z-index: 1;
+    isolation: isolate;
+    overflow: hidden;
+    container-type: inline-size;
+    background:
+      radial-gradient(circle at 50% 48%, rgb(255 255 255 / 5%), transparent 24%),
+      #030304;
   }
 
-  .fullscreen-gallery-heading {
+  .fullscreen-gallery::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 9;
+    pointer-events: none;
+    background:
+      linear-gradient(to bottom, rgb(0 0 0 / 34%), transparent 20%, transparent 80%, rgb(0 0 0 / 42%)),
+      repeating-linear-gradient(90deg, rgb(255 255 255 / 1.2%) 0 1px, transparent 1px 5px);
+    mix-blend-mode: screen;
+    opacity: 0.28;
+  }
+
+  .sr-only {
     position: absolute;
     width: 1px;
     height: 1px;
@@ -74,68 +201,267 @@ const tiles = weeks.map((entry, i) => ({
     white-space: nowrap;
   }
 
-  .fullscreen-gallery-grid {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+  .gallery-counter {
     position: absolute;
-    inset: 0;
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    grid-auto-rows: 1fr;
-    grid-auto-flow: dense;
-    gap: clamp(1px, 0.3vw, 4px);
+    inset-block-start: calc(1rem + var(--b-expand, 0) * 4.75rem);
+    inset-inline-start: clamp(0.8rem, 2vw, 1.5rem);
+    z-index: 10;
+    margin: 0;
+    color: rgb(255 255 255 / 64%);
+    font-family: var(--photo-metadata-font);
+    font-size: clamp(0.54rem, 0.42rem + 0.38vw, 0.78rem);
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
   }
 
-  .gallery-tile {
-    position: relative;
+  .gallery-streams {
+    position: absolute;
+    inset: -1%;
+    transform: scale(calc(0.94 + var(--b-expand, 0) * 0.06));
+    transform-origin: 50% 50%;
+    transition: filter 0.25s ease;
+  }
+
+  .gallery-row {
+    position: absolute;
+    inset-inline: 0;
+    height: 30%;
     overflow: hidden;
   }
 
-  .gallery-tile-link {
-    position: absolute;
-    inset: 0;
-    display: block;
+  .gallery-row--1 { top: 1%; }
+  .gallery-row--2 { top: 35%; }
+  .gallery-row--3 { top: 69%; }
+
+  .gallery-track {
+    display: flex;
+    width: max-content;
+    height: 100%;
+    will-change: transform;
   }
 
-  .gallery-tile-link :global(.media-slot) {
-    position: absolute;
-    inset: 0;
+  .gallery-run {
+    display: flex;
+    flex: none;
+    gap: 1.25cqw;
+    height: 100%;
+    list-style: none;
+    margin: 0;
+    padding: 0 1.25cqw 0 0;
+  }
+
+  .gallery-tile {
+    flex: none;
+    width: 23cqw;
+    height: 100%;
+    overflow: hidden;
+    background: #111;
+    box-shadow: 0 16px 42px rgb(0 0 0 / 58%);
+  }
+
+  .gallery-tile--2 { width: 26cqw; }
+  .gallery-tile--3 { width: 20cqw; }
+  .gallery-tile--4 { width: 25cqw; }
+
+  .gallery-tile-link {
+    position: relative;
+    display: block;
     width: 100%;
     height: 100%;
-    aspect-ratio: auto;
+    overflow: hidden;
+    color: #fff;
+    text-decoration: none;
   }
 
-  @media (prefers-reduced-motion: no-preference) {
-    .gallery-tile-link {
-      animation: gallery-tile-drift var(--drift-duration, 18s) ease-in-out infinite;
-    }
+  .gallery-tile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.82) contrast(1.06) brightness(0.7);
+    transform: scale(1.03);
+    transition:
+      transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1),
+      filter 0.4s ease;
   }
 
-  @keyframes gallery-tile-drift {
-    0%,
-    100% {
-      transform: translateY(0);
-    }
-    50% {
-      transform: translateY(calc(var(--drift-distance, 10px) * var(--drift-direction, 1)));
-    }
+  .gallery-tile-shade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgb(0 0 0 / 78%), transparent 52%);
+    opacity: 0.48;
+  }
+
+  .gallery-tile-caption {
+    position: absolute;
+    inset-inline: 7%;
+    inset-block-end: 7%;
+    display: flex;
+    align-items: flex-end;
+    gap: 0.55rem;
+    opacity: 0.7;
+    transition: opacity 0.25s ease;
+  }
+
+  .gallery-tile-number,
+  .gallery-tile-title,
+  .gallery-preview-week,
+  .gallery-preview-action {
+    font-family: var(--photo-metadata-font);
+    font-size: clamp(0.55rem, 0.45rem + 0.3vw, 0.76rem);
+    letter-spacing: 0.1em;
+  }
+
+  .gallery-tile-title {
+    max-width: 24ch;
+    line-height: 1.2;
+  }
+
+  .gallery-tile-link:hover .gallery-tile-image,
+  .gallery-tile-link:focus-visible .gallery-tile-image {
+    filter: saturate(1) contrast(1.02) brightness(1);
+    transform: scale(1.08);
+  }
+
+  .gallery-tile-link:hover .gallery-tile-caption,
+  .gallery-tile-link:focus-visible .gallery-tile-caption {
+    opacity: 1;
   }
 
   .gallery-tile-link:focus-visible {
-    outline: 2px solid var(--photo-cream);
-    outline-offset: -2px;
-    z-index: 1;
+    outline: 2px solid #fff;
+    outline-offset: -3px;
+  }
+
+  .gallery-preview {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 8;
+    display: grid;
+    width: clamp(14rem, 36cqw, 30rem);
+    color: #fff;
+    text-decoration: none;
+    background: #09090a;
+    border: 1px solid rgb(255 255 255 / 72%);
+    box-shadow:
+      0 0 0 0.35rem rgb(4 4 5 / 84%),
+      0 2rem 7rem rgb(0 0 0 / 88%);
+    opacity: 0;
+    transform: translate(-50%, -47%) scale(0.94);
+    pointer-events: none;
+    transition:
+      opacity 0.22s ease,
+      transform 0.35s cubic-bezier(0.2, 0.75, 0.2, 1);
+  }
+
+  .fullscreen-gallery[data-preview-open="true"] .gallery-preview {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: auto;
+  }
+
+  .gallery-preview-image-wrap {
+    display: block;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: #111;
+  }
+
+  .gallery-preview-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .gallery-preview-copy {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: baseline;
+    gap: 0.3rem 0.8rem;
+    padding: 0.75rem 0.85rem;
+  }
+
+  .gallery-preview-week,
+  .gallery-preview-action {
+    text-transform: uppercase;
+    color: rgb(255 255 255 / 62%);
+  }
+
+  .gallery-preview-title {
+    grid-column: 1 / -1;
+    grid-row: 2;
+    font-family: var(--photo-font-display);
+    font-size: clamp(0.9rem, 0.75rem + 0.7cqw, 1.25rem);
+    line-height: 1.12;
+  }
+
+  .gallery-preview-action {
+    grid-column: 2;
+    grid-row: 1;
+    white-space: nowrap;
+  }
+
+  .fullscreen-gallery[data-preview-open="true"] .gallery-track,
+  .fullscreen-gallery:has(.gallery-tile-link:hover) .gallery-track {
+    animation-play-state: paused;
+  }
+
+  .fullscreen-gallery[data-preview-open="true"] .gallery-streams {
+    filter: brightness(0.55);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .gallery-row--1 .gallery-track {
+      animation: gallery-stream-left 34s linear infinite;
+    }
+
+    .gallery-row--2 .gallery-track {
+      animation: gallery-stream-right 42s linear infinite;
+    }
+
+    .gallery-row--3 .gallery-track {
+      animation: gallery-stream-left 38s linear infinite;
+    }
+  }
+
+  @keyframes gallery-stream-left {
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(-50%, 0, 0); }
+  }
+
+  @keyframes gallery-stream-right {
+    from { transform: translate3d(-50%, 0, 0); }
+    to { transform: translate3d(0, 0, 0); }
   }
 
   @media (width < 640px) {
-    .fullscreen-gallery-grid {
-      grid-template-columns: repeat(6, 1fr);
+    .gallery-tile { width: 42cqw; }
+    .gallery-tile--2 { width: 48cqw; }
+    .gallery-tile--3 { width: 36cqw; }
+    .gallery-tile--4 { width: 45cqw; }
+
+    .gallery-preview {
+      width: min(72cqw, 22rem);
     }
 
-    .gallery-tile {
-      grid-column: span 3 !important;
-      grid-row: span 1 !important;
+    .gallery-preview-copy {
+      grid-template-columns: auto 1fr;
+      gap: 0.35rem 0.65rem;
+      padding: 0.6rem 0.7rem;
+    }
+
+    .gallery-preview-action {
+      grid-column: 2;
+    }
+
+    .gallery-tile-title {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gallery-track {
+      animation: none;
     }
   }
 </style>

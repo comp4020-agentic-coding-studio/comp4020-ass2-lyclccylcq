@@ -27,4 +27,13 @@
     background: radial-gradient(circle at center, color-mix(in oklch, var(--photo-cream) 90%, white 10%) 0%, transparent 72%);
     filter: blur(1px);
   }
+
+  .monitor-shutter--right::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: #efeee9;
+    opacity: var(--b-poweron, 0);
+    box-shadow: inset 1px 0 rgb(20 20 22 / 22%);
+  }
 </style>

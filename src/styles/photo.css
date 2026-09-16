@@ -417,4 +417,145 @@ main[data-page="people"] {
    as each one needs. --- */
 main.at-main[data-page="home"] {
   grid-column: full-start / full-end;
+  padding-block-start: 0;
+}
+
+/* Homepage masthead: the theme's official white-on-dark SlopU lockup and
+   navigation behaviour are preserved, but the large two-row starter bar is
+   compressed into a reference-like overlay. */
+body:has(main[data-page="home"]) .at-nav {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 120;
+  min-height: 0;
+  border: 0;
+  background: linear-gradient(to bottom, rgb(3 3 4 / 86%), rgb(3 3 4 / 42%) 64%, transparent);
+  box-shadow: none;
+  backdrop-filter: none;
+  display: block;
+}
+
+body:has(main[data-page="home"])::after {
+  display: none;
+}
+
+body:has(main[data-page="home"]) .at-nav-inner {
+  width: 100%;
+  max-width: none;
+  min-height: 4.8rem;
+  padding: 1rem clamp(1.1rem, 3.5vw, 3.4rem);
+  gap: 1rem;
+  margin: 0;
+  transform: none;
+}
+
+body:has(main[data-page="home"]) .at-nav-brand {
+  position: relative;
+  z-index: 3;
+  margin-inline-end: auto;
+  transform: none;
+}
+
+body:has(main[data-page="home"]) .at-nav-logo-full {
+  display: block;
+}
+
+body:has(main[data-page="home"]) .at-nav-logo-compact {
+  display: none;
+}
+
+body:has(main[data-page="home"]) .at-nav-logo-full .at-nav-logo--has-dark {
+  display: none;
+}
+
+body:has(main[data-page="home"]) .at-nav-logo-full .at-nav-logo--dark {
+  display: block;
+  width: clamp(8.8rem, 13vw, 11rem);
+  height: auto;
+}
+
+body:has(main[data-page="home"]) .at-nav-toggle {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  margin-inline-start: auto;
+  color: #fff;
+  border-color: rgb(255 255 255 / 28%);
+  background: rgb(5 5 6 / 62%);
+}
+
+body:has(main[data-page="home"]) .at-search-trigger {
+  position: relative;
+  z-index: 3;
+  color: #fff;
+  border-color: rgb(255 255 255 / 28%);
+  background: rgb(5 5 6 / 62%);
+}
+
+body:has(main[data-page="home"]) .at-nav-links-wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  background: rgb(4 4 5 / 97%);
+  opacity: 0;
+  transform: translateY(-102%);
+  pointer-events: none;
+  transition:
+    opacity 0.35s ease,
+    transform 0.5s cubic-bezier(0.2, 0.75, 0.2, 1);
+}
+
+body:has(main[data-page="home"]) .at-nav-toggle[aria-expanded="true"] + .at-nav-links-wrapper {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+body:has(main[data-page="home"]) .at-nav-links {
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+body:has(main[data-page="home"]) .at-nav-links a {
+  padding: 0.08em 0.25em;
+  border-radius: 0;
+  background: none;
+  color: #fff;
+  font-family: var(--photo-font-display);
+  font-size: clamp(2.4rem, 6vw, 6rem);
+  font-weight: 400;
+  line-height: 0.96;
+}
+
+body:has(main[data-page="home"]) .at-nav-links a:hover,
+body:has(main[data-page="home"]) .at-nav-links a:focus-visible,
+body:has(main[data-page="home"]) .at-nav-links a[aria-current="page"] {
+  background: none;
+  color: var(--photo-pink);
+}
+
+@media (width < 640px) {
+  body:has(main[data-page="home"]) .at-nav-logo-full .at-nav-logo--dark {
+    width: 8.5rem;
+  }
+
+  body:has(main[data-page="home"]) .at-search-trigger {
+    display: none;
+  }
+
+  body:has(main[data-page="home"]) .at-nav-toggle {
+    position: fixed !important;
+    inset-block-start: 1rem;
+    inset-inline-end: 1rem;
+    z-index: 140;
+    display: grid !important;
+    width: 2.8rem;
+    height: 2.8rem;
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+  }
 }

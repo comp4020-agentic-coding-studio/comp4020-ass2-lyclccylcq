@@ -1,23 +1,13 @@
 ---
 import { getPublishedCollection } from "astro-course-university/content";
 import ContentLayout from "astro-theme-university/layouts/ContentLayout.astro";
-import AssessmentsGrid from "../components/AssessmentsGrid.astro";
 import CameraRevealSequence from "../components/camera-intro/CameraRevealSequence.astro";
 import type { GalleryWeek } from "../components/camera-intro/FullscreenLectureGallery.astro";
-import ClosingCTA from "../components/ClosingCTA.astro";
-import CourseInfoList from "../components/CourseInfoList.astro";
-import CourseManifesto from "../components/CourseManifesto.astro";
-import MovingStatement from "../components/MovingStatement.astro";
-import PhotoGallery, { type GalleryFrame } from "../components/PhotoGallery.astro";
-import ProcessIndex from "../components/ProcessIndex.astro";
-import TeachingFeatures, { type TeachingFeature } from "../components/TeachingFeatures.astro";
-import heroImage from "../assets/images/hero-home.avif";
 import { courseMeta } from "../course-config";
 import { siteConfig } from "../site-config";
 import "../styles/photo.css";
 
 const lectures = await getPublishedCollection("lectures");
-const people = await getPublishedCollection("people");
 
 // Presentation data only (tone/placeholder) — title, description and href
 // all come from the real `lectures` collection below. Feeds
@@ -89,77 +79,6 @@ const galleryWeeks: GalleryWeek[] = Array.from({ length: 12 }, (_, i) => {
     ...layout,
   };
 });
-
-const teachingFeatures: TeachingFeature[] = [
-  {
-    number: "01",
-    title: "Two Clocks, One Frame",
-    body: "Partner photography runs on two clocks at once. The clock of the light moves toward its best moment on a schedule the sun sets. The clock of the person moves toward tiredness, hunger and impatience on a schedule the day sets. The best time to shoot is not simply when the light is best — it's when good light and a willing person overlap.",
-    image: heroImage,
-    imageAlt: "A lecture theatre reduced to flat gold and black shapes, rows of seats sweeping past the frame, in a two-ink risograph print",
-    placeholderCaption: "The light clock and the person clock, shown as two overlapping timelines.",
-    tone: "warm",
-  },
-  {
-    number: "02",
-    title: "Harsh Noon",
-    body: "Around midday, light falling almost straight down catches the forehead and nose while eye sockets fall into shadow. The subject is harder to work with too — squinting, sweating, impatient to get back into the shade.",
-    placeholderCaption: "Comparison 1 of 5 (Week 2) — the same subject in direct midday sun versus open shade a few metres away.",
-    tone: "warm",
-  },
-  {
-    number: "03",
-    title: "Golden Hour",
-    body: "Lower sun brings softer facial shadows, easy side light and backlight, and warm colour. It earns its reputation honestly — but a gorgeous ten-minute window is only useful if the person in front of the camera still wants to be in it.",
-    placeholderCaption: "Comparison 4 of 5 (Week 2) — gorgeous golden-hour light next to a subject who is visibly tired or impatient.",
-    tone: "cool",
-  },
-];
-
-const idrisFenn = people.find((person) => person.id === "idris-fenn");
-const marisolQuaye = people.find((person) => person.id === "marisol-quaye");
-
-const galleryFrames: GalleryFrame[] = [
-  {
-    image: marisolQuaye?.data.photo,
-    alt: marisolQuaye?.data.photoAlt,
-    caption: "Marisol Quaye — convenor",
-    placeholderCaption: "Marisol Quaye — convenor",
-    tone: "neutral",
-    span: "lg",
-    offset: "none",
-  },
-  {
-    caption: "Studio session, week 3",
-    placeholderCaption: "Studio session, week 3",
-    tone: "cool",
-    span: "sm",
-    offset: "down",
-  },
-  {
-    caption: "Editing review",
-    placeholderCaption: "Editing review",
-    tone: "neutral",
-    span: "md",
-    offset: "up",
-  },
-  {
-    image: idrisFenn?.data.photo,
-    alt: idrisFenn?.data.photoAlt,
-    caption: "Idris Fenn — tutor",
-    placeholderCaption: "Idris Fenn — tutor",
-    tone: "neutral",
-    span: "sm",
-    offset: "down",
-  },
-  {
-    caption: "Final crit, week 12",
-    placeholderCaption: "Final crit, week 12",
-    tone: "warm",
-    span: "md",
-    offset: "none",
-  },
-];
 ---
 
 <ContentLayout
@@ -174,69 +93,6 @@ const galleryFrames: GalleryFrame[] = [
     metaLine="Twelve weeks, one photograph each — scroll to begin."
     weeks={galleryWeeks}
   />
-
-  <MovingStatement
-    statement="Good photos are useless if you ruin the date."
-    support="A partner photographer manages four systems at once — Image, Person, Moment and Relationship — not just exposure and composition."
-  />
-
-  <CourseManifesto
-    heading="The Four Systems"
-    intro="One framework, used for the rest of the semester (Week 1)."
-    points={[
-      { label: "Image", body: "light, framing, perspective, timing" },
-      { label: "Person", body: "comfort, preferences, confidence, appearance" },
-      { label: "Moment", body: "location, timing, activity, pace" },
-      { label: "Relationship", body: "communication, patience, trust, mood" },
-    ]}
-  />
-
-  <ProcessIndex
-    heading="How the Semester Runs"
-    steps={[
-      {
-        label: "Lecture",
-        body: "A weekly concept is introduced and unpacked — one idea, from tourist photos to golden hour, per week.",
-      },
-      {
-        label: "Shoot",
-        body: "The idea is tested with a real partner, in real conditions, not a studio simulation of one.",
-      },
-      {
-        label: "Review",
-        body: "The results are looked at honestly — kept, reshot, or used to sharpen the next week's shoot.",
-      },
-      {
-        label: "Repeat",
-        body: "Twelve times, building toward one semester-long body of work rather than twelve disconnected shoots.",
-      },
-    ]}
-  />
-
-  <TeachingFeatures heading="Two Kinds of Good Light" features={teachingFeatures} />
-
-  <PhotoGallery heading="Contact Sheet" frames={galleryFrames} />
-
-  <section class="course-assessment" aria-labelledby="course-assessment-heading">
-    <h2 id="course-assessment-heading">Course &amp; Assessment</h2>
-    <div class="course-assessment-grid">
-      <div>
-        <h3>Course Information</h3>
-        <CourseInfoList />
-      </div>
-      <div>
-        <h3>Assessment</h3>
-        <AssessmentsGrid />
-      </div>
-    </div>
-  </section>
-
-  <ClosingCTA
-    heading="See the Whole Semester"
-    body="Twelve weeks, one page. Every lecture, every shoot, every review."
-    ctaHref="/weeks/"
-    ctaLabel="View all twelve weeks"
-  />
 </ContentLayout>
 
 <style>
@@ -248,49 +104,4 @@ const galleryFrames: GalleryFrame[] = [
     display: none;
   }
 
-  .course-assessment {
-    grid-column: inset-start / content-end;
-    padding-block: clamp(3rem, 8vw, 6rem);
-  }
-
-  .course-assessment-grid {
-    display: grid;
-    gap: clamp(2.5rem, 6vw, 4rem);
-  }
-
-  @media (width >= 800px) {
-    .course-assessment-grid {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  .course-assessment-grid h3 {
-    font-size: var(--at-font-size-h4);
-    margin-block-end: var(--at-spacing-md);
-  }
-
-  /* Flatten the shared Card/CardGrid chrome on the homepage only — Card
-     itself is untouched and keeps its normal appearance on /assessments/. */
-  .course-assessment :global(.at-card-grid) {
-    grid-template-columns: 1fr;
-    gap: 0;
-  }
-
-  .course-assessment :global(.at-card) {
-    background: none;
-    backdrop-filter: none;
-    box-shadow: none;
-    border: none;
-    border-radius: 0;
-    border-block-start: 1px solid var(--at-divider);
-    padding-block: var(--at-spacing-md);
-  }
-
-  .course-assessment :global(.at-card:last-child) {
-    border-block-end: 1px solid var(--at-divider);
-  }
-
-  .course-assessment :global(a.at-card:hover) {
-    transform: none;
-  }
 </style>

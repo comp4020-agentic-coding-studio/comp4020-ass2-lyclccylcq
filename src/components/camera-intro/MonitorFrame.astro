@@ -4,8 +4,8 @@ import MonitorShutterLeft from "./MonitorShutterLeft.astro";
 import MonitorShutterRight from "./MonitorShutterRight.astro";
 
 // The camera's rear LCD, docked at the exact screen-cutout coordinates of
-// CameraIllustration's SVG (170,390,660,400 of its 1360x1000 viewBox —
-// 12.5%/39%/48.53%/40% — deliberately unpainted there so this element is
+// CameraIllustration's SVG (420,385,760,420 of its 1600x1000 viewBox —
+// 26.25%/38.5%/47.5%/42% — deliberately unpainted there so this element is
 // the only thing ever drawn in that rect). `.monitor-slot` is an invisible,
 // never-animated twin at the same coordinates that CameraRevealSequence's
 // script measures on load/resize to learn this box's true viewport
@@ -21,39 +21,37 @@ export interface Props {
 const { weeks } = Astro.props;
 ---
 
-<div class="monitor-slot" aria-hidden="true"></div>
 <div class="monitor-frame">
   <div class="monitor-screen">
     <FullscreenLectureGallery weeks={weeks} />
-    <p class="monitor-hint" aria-hidden="true">Scroll to view</p>
+    <div class="monitor-boot" aria-hidden="true">
+      <span class="monitor-reticle"></span>
+      <p class="monitor-hint">Scroll to view</p>
+    </div>
     <MonitorShutterLeft />
     <MonitorShutterRight />
   </div>
 </div>
 
 <style>
-  .monitor-slot,
   .monitor-frame {
     position: absolute;
-    left: 12.5%;
-    top: 39%;
-    width: 48.53%;
-    height: 40%;
-  }
-
-  .monitor-slot {
-    pointer-events: none;
-    visibility: hidden;
+    left: var(--mon-left, 26vw);
+    top: var(--mon-top, 38vh);
+    width: var(--mon-width, 48vw);
+    height: var(--mon-height, 42vh);
   }
 
   .monitor-frame {
     overflow: hidden;
     background: #030302;
-    border-radius: clamp(1px, 0.5vw, 6px);
-    box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--photo-cream) 12%, transparent);
+    border: 3px solid #08090a;
+    border-radius: clamp(3px, 0.7vw, 12px);
+    box-shadow:
+      0 0 0 3px rgb(128 132 140 / 36%),
+      0 0 0 8px #090a0c,
+      inset 0 0 30px rgb(0 0 0 / 92%);
     z-index: 10;
-    animation: monitor-frame-fallback-fade 0.7s ease both;
-    animation-delay: 0.15s;
   }
 
   .monitor-screen {
@@ -61,27 +59,48 @@ const { weeks } = Astro.props;
     inset: 0;
   }
 
+  .monitor-boot {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    display: grid;
+    place-items: center;
+    background: #030304;
+    opacity: calc(1 - var(--b-shutter, 0));
+    pointer-events: none;
+  }
+
+  .monitor-boot::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, #fffdf7 0 7%, #e0e1db 19%, #f1f0eb 58%, #efeee9 100%);
+    opacity: var(--b-poweron, 0);
+  }
+
+  .monitor-reticle {
+    position: relative;
+    z-index: 1;
+    width: clamp(2.4rem, 8%, 5rem);
+    aspect-ratio: 1;
+    border: 1px solid rgb(255 255 255 / 42%);
+    clip-path: polygon(0 0, 34% 0, 34% 4%, 4% 4%, 4% 34%, 0 34%, 0 0, 100% 0, 100% 34%, 96% 34%, 96% 4%, 66% 4%, 66% 0, 100% 0, 100% 100%, 66% 100%, 66% 96%, 96% 96%, 96% 66%, 100% 66%, 100% 100%, 0 100%, 0 66%, 4% 66%, 4% 96%, 34% 96%, 34% 100%, 0 100%);
+    opacity: calc(var(--b-poweron, 0) * (1 - var(--b-shutter, 0)));
+  }
+
   .monitor-hint {
     position: absolute;
     inset-inline: 0;
-    inset-block-end: 8%;
+    inset-block-end: 13%;
     margin: 0;
     text-align: center;
     font-family: var(--photo-metadata-font);
     font-size: clamp(0.5rem, 0.3rem + 0.6vw, 0.8rem);
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: color-mix(in oklch, var(--photo-cream) 80%, transparent);
-    z-index: 4;
+    color: color-mix(in oklch, var(--photo-cream) 84%, transparent);
+    z-index: 6;
     pointer-events: none;
-  }
-
-  @keyframes monitor-frame-fallback-fade {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
+    opacity: calc((1 - var(--b-poweron, 0)) * 0.86);
   }
 </style>

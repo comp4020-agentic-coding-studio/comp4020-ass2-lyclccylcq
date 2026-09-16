@@ -5,7 +5,7 @@ import IdentityLayer from "./IdentityLayer.astro";
 import MonitorFrame from "./MonitorFrame.astro";
 
 // The single sticky box that stays pinned for the whole scroll sequence.
-// `.camera-frame` (line art + photoreal) and `.monitor-slot`/`.monitor-frame`
+// `.camera-frame` (line art + rendered colour) and `.monitor-anchor`/`.monitor-frame`
 // are siblings, not nested — CameraRevealSequence fades/scales
 // `.camera-frame` out during the expand stage, and that must never apply a
 // transform to an ancestor of `.monitor-frame`, or the monitor's later
@@ -27,8 +27,9 @@ const { title, kicker, metaLine, weeks } = Astro.props;
     <div class="camera-frame">
       <CameraIllustration />
     </div>
-    <MonitorFrame weeks={weeks} />
+    <div class="monitor-anchor" aria-hidden="true"></div>
   </div>
+  <MonitorFrame weeks={weeks} />
 </div>
 
 <style>
@@ -36,19 +37,20 @@ const { title, kicker, metaLine, weeks } = Astro.props;
     position: sticky;
     top: 0;
     height: 100svh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: clamp(0.5rem, 2vh, 1.25rem);
+    isolation: isolate;
     overflow: hidden;
+    background:
+      radial-gradient(circle at 50% 46%, rgb(42 46 54 / 34%), transparent 48%),
+      #050506;
   }
 
   .camera-visual {
-    position: relative;
-    width: min(92vw, 122svh);
-    aspect-ratio: 1360 / 1000;
-    flex-shrink: 0;
+    position: absolute;
+    left: 50%;
+    top: 53%;
+    width: min(96vw, 158svh);
+    aspect-ratio: 1600 / 1000;
+    transform: translate(-50%, -50%);
   }
 
   .camera-frame {
@@ -57,9 +59,20 @@ const { title, kicker, metaLine, weeks } = Astro.props;
     pointer-events: none;
   }
 
+  .monitor-anchor {
+    position: absolute;
+    left: 26.25%;
+    top: 38.5%;
+    width: 47.5%;
+    height: 42%;
+    pointer-events: none;
+    visibility: hidden;
+  }
+
   @media (width < 640px) {
     .camera-visual {
-      width: min(94vw, 150svh);
+      top: 60%;
+      width: min(156vw, 146svh);
     }
   }
 </style>
