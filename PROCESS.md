@@ -1,53 +1,81 @@
 # Process overview
 
-<!-- TEMPLATE: this file is a shape to fill in, not a form. Replace everything
-     in it with your own overview, and delete this comment — `pnpm
-     check:evidence` will remind you if it's still here. -->
-
-Written by you, for a reader: how you got from the brief to the harness and
-agentic workflow behind this submission. Markers read this file and follow its
-citations; they don't trawl the repo for evidence you didn't point at.
-
-This file is the shape; the course site's
-[assessment page](https://comp.anu.edu.au/courses/comp4020-agentic-coding-studio/topics/assessment/#what-you-submit)
-is the requirement, and its
-[word counts](https://comp.anu.edu.au/courses/comp4020-agentic-coding-studio/topics/assessment/#word-counts)
-cover every deliverable.
-
 ## What I built
 
-One paragraph: the thing, and the idea behind it.
+I built **Partner Photography**, a twelve-week Slop University course about
+making photographs with another person rather than merely taking photographs
+of them. Its dark editorial homepage turns a rear-view camera into navigation:
+a twelve-image stream introduces the weeks, then a line drawing gains material
+as the visitor scrolls. Its monitor powers on, opens and becomes the full-screen
+course wall. The same gallery remains present throughout, so the visual concept
+also serves the information architecture.
 
 ## How I got here
 
-The account of the process: how the work actually went, and how you knew the
-result was right. Tell it in whatever order makes it clear. A weekly prototype
-needs a paragraph or two; an assignment needs more.
+I first separated SlopU's fixed name, marks, palette, collections and generated
+API from the course-level freedom to redesign pages, artwork and language. I
+recorded this boundary in `CLAUDE.md`. The first implementation established the
+course record, assessments, policy, resources and week routes in
+[`17d0279`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/17d0279).
+I then developed the twelve-week teaching arc in
+[`31c68e7`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/31c68e7): beginning with collaboration and planning, moving through direction,
+body language and light, and ending with selection and a partner shoot.
 
-Cite the record as you go, as links whose text is the commit hash or range and
-whose target is this repo's commit or compare URL, so a reader clicks straight
-to the evidence:
+I tested a pastel system, an asymmetric editorial layout and an image-led
+lecture wall across
+[`36c12ca...07daada`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/compare/36c12ca...07daada).
+They established typography and photographic sequencing, but still behaved like
+conventional stacked course pages. The breakthrough was using a camera monitor
+as the transition from identity to navigation. The first prototype arrived in
+[`d3417c8`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/d3417c8).
+I rebuilt rather than merely polished it in
+[`4b82232...b4f4d6d`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/compare/4b82232...b4f4d6d),
+producing one registered SVG camera and three seamless alternating gallery
+streams. The next iterations added the interactive menu camera and full-height
+photographic opening, but browser inspection exposed sparse composition,
+stretched tiles and unstable return navigation. The final direction responded
+to feedback including:
 
-- one commit: [`a1b2c3d`](https://github.com/YOUR-ORG/YOUR-REPO/commit/a1b2c3d)
-- a range:
-  [`a1b2c3d...e4f5a6b`](https://github.com/YOUR-ORG/YOUR-REPO/compare/a1b2c3d...e4f5a6b)
+> “照片流左侧目前明显显得稀疏……点击logo或者进入其他页面然后回退到home的时候home会出现问题。”
 
-To pair a prompt with the commit it produced, quote the prompt (curated, not a
-full transcript) next to the citation:
+> “滚动的时候屏幕发生了肉眼可见的偏移……相机屏幕在初始状态就应该在屏幕中央。”
 
-> the prompt, verbatim
+Across
+[`8d02c5a...75eb717`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/compare/8d02c5a...75eb717),
+I made the stream dense, square and bottom-aligned, with a positional scale ramp
+that peaks only at the right edge. Animation setup became idempotent across
+Astro transitions, with rAF, observers and listeners cleaned on
+`astro:before-swap`. The final camera uses a strict rear elevation, layered EVF,
+rubber eyecup, recessed glass and proportionate controls. Its LCD and DOM anchor
+share an exact horizontal centre, removing lateral drift during expansion.
 
-Screenshots are welcome where one carries the point better than a sentence does.
-Commit the file to this repo and link it with a **relative** path, which is what
-makes it render on GitHub: `![alt text](docs/before.png)`. Images don't count
-towards the word count and don't replace the citation.
+## Model capability or agent framework?
 
-## Before you ship
+This project made me question whether agent quality comes from the base model
+or its surrounding framework. In my A2 work, GPT-5.6 often reached the intended
+layout after one prompt, while my Sonnet setup needed repeated clarification
+that I wanted structural rather than colour or style changes. This was not a
+controlled benchmark: context, tools, instructions and browser feedback
+differed, so I cannot attribute the difference to the model alone.
 
-`pnpm check:evidence` verifies that this comment is gone, that your citations
-resolve to real commits, that a crit week's reflection entry is in
-`reflections/`, and that your `CLAUDE.md` is there. It checks that your account
-is traceable, not that it is good: that is the marker's call.
+The practical lesson was to stop treating `CLAUDE.md` as a generic prompt. In
+[`1d6b932`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/1d6b932),
+I turned it into persistent project memory: fixed constraints, visual rules,
+lifecycle invariants and verification routes. Feedback became reusable rules:
+an exactly centred LCD, one gallery instance and cleanup before Astro page
+swaps. The model proposes solutions; the framework preserves decisions and
+avoids relearning. For a larger project, I would separate design, architecture,
+testing and verification into focused modules instead of one universal file.
 
-Images aren't checked: unlike a citation whose SHA doesn't resolve, a broken
-image is visible the moment this file is rendered on GitHub.
+## How I verified it
+
+I tested the real base-path URL through every scroll state, reverse scrolling,
+fresh load, logo return, browser Back, repeated trips, refresh and resize. At
+[`75eb717`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/75eb717),
+type checking reports no errors; the build generates 42 pages and passes its
+accessibility, base-path and internal-link checks. The evidence gate still
+identifies starter people entries/images, two session entries, the Week 1 deck
+and starter card/hero assets. I have left those failures visible rather than
+weakening checks. The process taught me to treat browser observation and
+critical feedback as engineering evidence: a strong concept succeeds only when
+its geometry, lifecycle and navigation contracts are explicit.
