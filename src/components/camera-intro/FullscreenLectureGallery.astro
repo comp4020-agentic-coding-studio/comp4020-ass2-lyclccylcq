@@ -128,40 +128,56 @@ const firstTile = tiles[0];
 </section>
 
 <script>
-  document.querySelectorAll<HTMLElement>("[data-gallery]").forEach((gallery) => {
-    const preview = gallery.querySelector<HTMLAnchorElement>("[data-gallery-preview]");
-    const previewImage = preview?.querySelector<HTMLImageElement>(".gallery-preview-image");
-    const previewWeek = preview?.querySelector<HTMLElement>("[data-preview-week]");
-    const previewTitle = preview?.querySelector<HTMLElement>("[data-preview-title]");
-    const items = gallery.querySelectorAll<HTMLAnchorElement>("[data-gallery-item]");
+  function setupFullscreenGalleries() {
+    document.querySelectorAll<HTMLElement>("[data-gallery]").forEach((gallery) => {
+      if (gallery.dataset.galleryInitialized === "true") return;
+      gallery.dataset.galleryInitialized = "true";
 
-    const showPreview = (item: HTMLAnchorElement) => {
-      const image = item.querySelector<HTMLImageElement>(".gallery-tile-image");
-      if (!preview || !previewImage || !previewWeek || !previewTitle || !image) return;
+      const controller = new AbortController();
+      const listenerOptions = { signal: controller.signal };
+      const preview = gallery.querySelector<HTMLAnchorElement>("[data-gallery-preview]");
+      const previewImage = preview?.querySelector<HTMLImageElement>(".gallery-preview-image");
+      const previewWeek = preview?.querySelector<HTMLElement>("[data-preview-week]");
+      const previewTitle = preview?.querySelector<HTMLElement>("[data-preview-title]");
+      const items = gallery.querySelectorAll<HTMLAnchorElement>("[data-gallery-item]");
 
-      preview.href = item.href;
-      preview.setAttribute("aria-label", `Enter Week ${item.dataset.week ?? ""} — ${item.dataset.title ?? ""}`);
-      previewImage.removeAttribute("srcset");
-      previewImage.removeAttribute("sizes");
-      previewImage.src = image.currentSrc || image.src;
-      previewWeek.textContent = item.dataset.week ?? "";
-      previewTitle.textContent = item.dataset.title ?? "";
-      gallery.dataset.previewOpen = "true";
-    };
+      const showPreview = (item: HTMLAnchorElement) => {
+        const image = item.querySelector<HTMLImageElement>(".gallery-tile-image");
+        if (!preview || !previewImage || !previewWeek || !previewTitle || !image) return;
 
-    items.forEach((item) => {
-      item.addEventListener("pointerenter", () => showPreview(item));
-      item.addEventListener("focus", () => showPreview(item));
+        preview.href = item.href;
+        preview.setAttribute("aria-label", `Enter Week ${item.dataset.week ?? ""} — ${item.dataset.title ?? ""}`);
+        previewImage.removeAttribute("srcset");
+        previewImage.removeAttribute("sizes");
+        previewImage.src = image.currentSrc || image.src;
+        previewWeek.textContent = item.dataset.week ?? "";
+        previewTitle.textContent = item.dataset.title ?? "";
+        gallery.dataset.previewOpen = "true";
+      };
+
+      items.forEach((item) => {
+        item.addEventListener("pointerenter", () => showPreview(item), listenerOptions);
+        item.addEventListener("focus", () => showPreview(item), listenerOptions);
+      });
+
+      gallery.addEventListener("pointerleave", () => {
+        delete gallery.dataset.previewOpen;
+      }, listenerOptions);
+
+      gallery.addEventListener("focusout", (event) => {
+        if (!gallery.contains(event.relatedTarget as Node | null)) delete gallery.dataset.previewOpen;
+      }, listenerOptions);
+
+      document.addEventListener("astro:before-swap", () => {
+        controller.abort();
+        delete gallery.dataset.galleryInitialized;
+        delete gallery.dataset.previewOpen;
+      }, { once: true });
     });
+  }
 
-    gallery.addEventListener("pointerleave", () => {
-      delete gallery.dataset.previewOpen;
-    });
-
-    gallery.addEventListener("focusout", (event) => {
-      if (!gallery.contains(event.relatedTarget as Node | null)) delete gallery.dataset.previewOpen;
-    });
-  });
+  setupFullscreenGalleries();
+  document.addEventListener("astro:page-load", setupFullscreenGalleries);
 </script>
 
 <style>

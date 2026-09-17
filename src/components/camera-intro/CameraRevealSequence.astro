@@ -63,14 +63,29 @@ const { title, kicker, metaLine, weeks } = Astro.props;
 </div>
 
 <script>
-  const wrapper = document.getElementById("camera-reveal-sequence");
-  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  function setupCameraRevealSequence() {
+    const wrapperElement = document.getElementById("camera-reveal-sequence");
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-  if (wrapper && !reduceMotion.matches && "IntersectionObserver" in window) {
-    const sticky = wrapper.querySelector<HTMLElement>(".sticky-camera-stage");
-    const monitorAnchor = wrapper.querySelector<HTMLElement>(".monitor-anchor");
+    if (
+      !wrapperElement
+      || wrapperElement.dataset.revealInitialized === "true"
+      || reduceMotion.matches
+      || !("IntersectionObserver" in window)
+    ) return;
+
+    const stickyElement = wrapperElement.querySelector<HTMLElement>(".sticky-camera-stage");
+    const monitorAnchorElement = wrapperElement.querySelector<HTMLElement>(".monitor-anchor");
+    if (!stickyElement || !monitorAnchorElement) return;
+
+    const wrapper = wrapperElement;
+    const sticky = stickyElement;
+    const monitorAnchor = monitorAnchorElement;
+    wrapper.dataset.revealInitialized = "true";
     let active = false;
     let ticking = false;
+    let frame = 0;
+    let destroyed = false;
 
     // Measured relative to the sticky stage box, not the tall wrapper: the
     // sticky box's *internal* layout never changes with scroll, so this
@@ -78,7 +93,6 @@ const { title, kicker, metaLine, weeks } = Astro.props;
     // (top: 0, full-bleed), that offset equals the monitor's true
     // viewport-fixed coordinates — exactly what the expand calc() below needs.
     function measure() {
-      if (!wrapper || !sticky || !monitorAnchor) return;
       const stageRect = sticky.getBoundingClientRect();
       const slotRect = monitorAnchor.getBoundingClientRect();
       const currentShift = Number.parseFloat(
@@ -93,9 +107,10 @@ const { title, kicker, metaLine, weeks } = Astro.props;
       wrapper.style.setProperty("--mon-height", `${slotRect.height}px`);
     }
 
-    function update() {
+    function update(force = false) {
       ticking = false;
-      if (!wrapper || !active) return;
+      frame = 0;
+      if (destroyed || !wrapper.isConnected || (!active && !force)) return;
       const rect = wrapper.getBoundingClientRect();
       const runway = rect.height - window.innerHeight;
       const progress = runway > 0 ? Math.min(1, Math.max(0, -rect.top / runway)) : 0;
@@ -116,9 +131,9 @@ const { title, kicker, metaLine, weeks } = Astro.props;
     }
 
     function schedule() {
-      if (!ticking) {
+      if (!ticking && !destroyed) {
         ticking = true;
-        requestAnimationFrame(update);
+        frame = requestAnimationFrame(() => update());
       }
     }
 
@@ -127,21 +142,58 @@ const { title, kicker, metaLine, weeks } = Astro.props;
       schedule();
     }
 
+    function onPageShow() {
+      measure();
+      update(true);
+    }
+
     const io = new IntersectionObserver(
       ([entry]) => {
         active = entry?.isIntersecting ?? false;
-        if (active) schedule();
+        if (active) {
+          measure();
+          schedule();
+        }
       },
       { rootMargin: "200px 0px" },
     );
+
+    const resizeObserver = "ResizeObserver" in window
+      ? new ResizeObserver(() => {
+          measure();
+          schedule();
+        })
+      : undefined;
+
+    function cleanup() {
+      destroyed = true;
+      active = false;
+      ticking = false;
+      cancelAnimationFrame(frame);
+      io.disconnect();
+      resizeObserver?.disconnect();
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", onResize);
+      window.removeEventListener("pageshow", onPageShow);
+      wrapper.classList.remove("is-animated");
+      delete wrapper.dataset.revealInitialized;
+    }
+
     io.observe(wrapper);
+    resizeObserver?.observe(sticky);
+    resizeObserver?.observe(monitorAnchor);
 
     wrapper.classList.add("is-animated");
     measure();
     window.addEventListener("scroll", schedule, { passive: true });
     window.addEventListener("resize", onResize);
-    schedule();
+    window.addEventListener("pageshow", onPageShow);
+    document.addEventListener("astro:before-swap", cleanup, { once: true });
+    update(true);
   }
+
+  setupCameraRevealSequence();
+  document.addEventListener("astro:page-load", setupCameraRevealSequence);
 </script>
 
 <style>
@@ -151,6 +203,7 @@ const { title, kicker, metaLine, weeks } = Astro.props;
     grid-column: full-start / full-end;
     height: 100svh;
     min-height: 38rem;
+    margin-block: 0;
     isolation: isolate;
     overflow: hidden;
     background: #050506;
@@ -162,6 +215,7 @@ const { title, kicker, metaLine, weeks } = Astro.props;
     display: grid;
     place-items: center;
     min-height: 68svh;
+    margin-block: 0;
     overflow: hidden;
     padding: clamp(6rem, 14vh, 10rem) clamp(1.25rem, 8vw, 9rem);
     color: #f1eee7;
@@ -240,6 +294,7 @@ const { title, kicker, metaLine, weeks } = Astro.props;
     position: relative;
     grid-column: full-start / full-end;
     min-height: 100svh;
+    margin-block: 0;
   }
 
   .camera-reveal-sequence.is-animated {
