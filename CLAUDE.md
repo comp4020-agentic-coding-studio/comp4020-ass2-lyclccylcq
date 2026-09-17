@@ -89,21 +89,39 @@ starter homepage sections or replace it with a generic card grid.
 - `src/pages/index.astro` intentionally uses `CameraRevealSequence` as the
   homepage body. Course, assessment and policy material remains available on
   its dedicated routes through the navigation.
-- The opening frame keeps the official light-on-dark SlopU logo and the real
-  course title. The complete white rear-camera drawing sits below the text; it
-  must not cross through the title, metadata or scroll instruction at common
-  desktop and mobile aspect ratios. During the early materialisation band the
-  whole camera moves upward into the viewport centre; the real monitor must
-  travel with the same offset so it never detaches from the camera drawing.
+- The opening is its own full-height section with the official light-on-dark
+  SlopU logo and the real course title over an original photograph of one
+  partner photographing the other. A single bottom-aligned strip previews all
+  twelve weeks and moves continuously from left to right. Each photograph enters
+  small beneath the title, scales up smoothly according to its horizontal
+  viewport position, reaching its deliberately restrained maximum only near the
+  far-right edge so the moving strip does not cover too much of the background.
+  The size gradient is positional, not a set of permanently different card
+  sizes.
+  The visitor must scroll beyond that complete section before reaching the
+  separate camera sequence below it: the camera must never overlap or replace
+  the opening strip. The first frame of the camera section already shows the
+  complete line-art camera centred and occupying most of the viewport. Do not
+  animate the camera upward from below; scrolling begins by materialising that
+  registered drawing in place.
+- A dedicated course-intent statement sits between the opening photo stream and
+  the camera sequence. Preserve that breathing space rather than joining the two
+  interactive sections directly.
 - `CameraIllustration.astro` contains one registered SVG camera. Its complete
-  line-art and rendered-colour layers share the same geometry. Scroll only
-  crossfades material, shading and highlights onto that camera: do not animate
-  the drawing as an assembly, swap to a different camera, or introduce a stock
-  camera photograph.
+  line-art and rendered-colour layers share the same geometry. Scroll reveals
+  material, shading, leather grain and a moving materialisation highlight on
+  that registered camera: do not animate the drawing as an assembly, swap to a
+  different camera, or introduce a stock camera photograph. Its rendered state
+  uses restrained retro mirrorless cues—knurled top dials, gunmetal edging,
+  glass, inset controls and leather—without copying a real branded camera. The
+  body engraving contains only `SLOP1810`; do not restore a plus mark, location
+  slogan or the full course title there.
 - The rear monitor progresses from dark to illuminated, opens from the centre
-  with left/right shutters, and then expands into the viewport. The same
-  gallery instance lives inside the monitor throughout; there is no second
-  gallery crossfaded in after expansion.
+  with left/right shutters, and then expands into the viewport. The camera body
+  scales up strongly with the expanding monitor before fading beyond the frame,
+  leaving the course wall full-screen. The same gallery instance lives inside
+  the monitor throughout; there is no second gallery crossfaded in after
+  expansion.
 - `FullscreenLectureGallery.astro` is the real twelve-week navigation. Its
   three seamless horizontal streams alternate direction and continue moving
   while a photograph is selected. Hover or keyboard focus reveals a centred
@@ -114,9 +132,11 @@ starter homepage sections or replace it with a generic card grid.
   one-image-per-week mapping when changing layout or motion.
 - The homepage's expanded menu is a two-column composition: navigation on the
   left and an original front-view line-art camera on the right. The camera and
-  its lens respond subtly to pointer position, return to neutral when the menu
-  closes or the pointer leaves, never intercept link clicks, and remain static
-  under `prefers-reduced-motion`.
+  its lens respond quickly with a clearly visible but controlled pointer-driven
+  tilt, return to neutral when the menu closes or the pointer leaves, never
+  intercept link clicks, and remain static under `prefers-reduced-motion`.
+  The closed toggle visibly says `MENU` beside its icon and changes to `CLOSE`
+  while expanded; do not regress it to an unexplained icon-only control.
 - Motion remains native-scroll-driven and reversible. Do not intercept wheel
   input or add a second scroll system. `prefers-reduced-motion` must retain a
   useful static state, and all twelve unique week links must remain reachable
@@ -130,16 +150,19 @@ ship. CI runs the same plus links, secrets and the deploy.
 For the homepage, a green compiler is not sufficient. Visually check these
 states at the base-path URL before pushing a camera/gallery change:
 
-1. complete line-art camera below (not behind) the identity text;
-2. partially materialised camera with no geometry jump;
-3. fully rendered camera with a dark monitor;
-4. monitor powering on;
-5. left/right shutters opening onto the moving gallery;
-6. monitor expanding to a full-screen gallery;
-7. three continuously looping rows moving in alternating directions;
-8. hover and keyboard-focus previews, including a second week to prove the
+1. background photograph, course identity and one continuously moving preview
+   strip, with the camera still completely below the viewport;
+2. complete line-art camera entering from below with no geometry jump;
+3. leather grain and materialisation highlight resolving into the rendered
+   camera;
+4. fully rendered camera with a dark monitor;
+5. monitor powering on;
+6. left/right shutters opening onto the moving gallery;
+7. camera body and monitor enlarging together before the body disappears;
+8. full-screen course wall with three continuously looping, alternating rows;
+9. hover and keyboard-focus previews, including a second week to prove the
    image, title and link update together;
-9. reverse scrolling, a narrow/mobile viewport and reduced motion.
+10. reverse scrolling, a narrow/mobile viewport and reduced motion.
 
 As of `b4f4d6d`, the production build, accessibility audit, base-path check and
 internal-link check pass. `pnpm check` still reports two content-contract gaps

@@ -1,10 +1,12 @@
 ---
 import CameraIllustration from "./CameraIllustration.astro";
 import type { GalleryWeek } from "./FullscreenLectureGallery.astro";
-import IdentityLayer from "./IdentityLayer.astro";
 import MonitorFrame from "./MonitorFrame.astro";
 
 // The single sticky box that stays pinned for the whole scroll sequence.
+// The complete camera is already centred and nearly viewport-filling on the
+// first frame of this section; scroll changes its material and monitor state,
+// never its entrance position.
 // `.camera-frame` (line art + rendered colour) and `.monitor-anchor`/`.monitor-frame`
 // are siblings, not nested — CameraRevealSequence fades/scales
 // `.camera-frame` out during the expand stage, and that must never apply a
@@ -12,17 +14,13 @@ import MonitorFrame from "./MonitorFrame.astro";
 // `position: fixed` would be re-parented to that ancestor instead of the
 // viewport (see the containing-block note in CameraRevealSequence).
 export interface Props {
-  title: string;
-  kicker: string;
-  metaLine: string;
   weeks: GalleryWeek[];
 }
 
-const { title, kicker, metaLine, weeks } = Astro.props;
+const { weeks } = Astro.props;
 ---
 
 <div class="sticky-camera-stage">
-  <IdentityLayer title={title} kicker={kicker} metaLine={metaLine} />
   <div class="camera-visual">
     <div class="camera-frame">
       <CameraIllustration />
@@ -46,9 +44,10 @@ const { title, kicker, metaLine, weeks } = Astro.props;
 
   .camera-visual {
     position: absolute;
+    z-index: 10;
     left: 50%;
-    top: 80%;
-    width: min(94vw, 92svh);
+    top: 52%;
+    width: min(126vw, 148svh);
     aspect-ratio: 1600 / 1000;
     transform: translate(-50%, -50%);
   }
@@ -71,8 +70,8 @@ const { title, kicker, metaLine, weeks } = Astro.props;
 
   @media (max-aspect-ratio: 4 / 3) {
     .camera-visual {
-      top: 70%;
-      width: 94vw;
+      top: 52%;
+      width: 126vw;
     }
   }
 </style>

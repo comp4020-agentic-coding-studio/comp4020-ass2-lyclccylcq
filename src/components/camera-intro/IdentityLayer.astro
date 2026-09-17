@@ -30,7 +30,6 @@ const { title, kicker, metaLine } = Astro.props;
   <p class="identity-layer-kicker">{kicker}</p>
   <h1 class="identity-layer-title">{title}</h1>
   <p class="identity-layer-meta">{metaLine}</p>
-  <span class="identity-layer-scroll" aria-hidden="true">Scroll to develop</span>
 </div>
 
 <style>
@@ -74,20 +73,12 @@ const { title, kicker, metaLine } = Astro.props;
   }
 
   .identity-layer-meta {
-    margin: 0;
+    margin: clamp(1rem, 2.2vh, 1.55rem) 0 0;
     font-family: var(--photo-metadata-font);
-    font-size: var(--at-font-size-xs);
+    font-size: clamp(0.78rem, 0.7rem + 0.22vw, 1rem);
+    line-height: 1.5;
     letter-spacing: 0.06em;
     opacity: 0.64;
-  }
-
-  .identity-layer-scroll {
-    margin-block-start: 0.45rem;
-    font-family: var(--photo-metadata-font);
-    font-size: 0.65rem;
-    letter-spacing: 0.2em;
-    text-transform: uppercase;
-    opacity: 0.5;
   }
 
   @media (width < 640px) {

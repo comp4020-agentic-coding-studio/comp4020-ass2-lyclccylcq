@@ -95,7 +95,7 @@ const { courseCode, courseTitle } = Astro.props;
 
     function render() {
       frame = 0;
-      const ease = 0.11;
+      const ease = 0.22;
       current.rx += (target.rx - current.rx) * ease;
       current.ry += (target.ry - current.ry) * ease;
       current.lx += (target.lx - current.lx) * ease;
@@ -128,10 +128,10 @@ const { courseCode, courseTitle } = Astro.props;
       const rect = wrapper.getBoundingClientRect();
       const x = Math.max(-1, Math.min(1, ((event.clientX - rect.left) / rect.width - 0.5) * 2));
       const y = Math.max(-1, Math.min(1, ((event.clientY - rect.top) / rect.height - 0.5) * 2));
-      target.rx = y * -5.5;
-      target.ry = x * 8;
-      target.lx = x * 13;
-      target.ly = y * 9;
+      target.rx = y * -10;
+      target.ry = x * 14;
+      target.lx = x * 26;
+      target.ly = y * 18;
       requestRender();
     });
     wrapper.addEventListener("pointerleave", resetCamera);

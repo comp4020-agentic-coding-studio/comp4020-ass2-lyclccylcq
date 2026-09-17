@@ -1,6 +1,8 @@
 ---
 import StickyCameraStage from "./StickyCameraStage.astro";
 import type { GalleryWeek } from "./FullscreenLectureGallery.astro";
+import IdentityLayer from "./IdentityLayer.astro";
+import IntroGalleryStrip from "./IntroGalleryStrip.astro";
 
 // The homepage's signature opening. A giant, original SVG line drawing of a
 // rear-view camera (CameraIllustration) fills the sticky stage; as the
@@ -39,8 +41,25 @@ export interface Props {
 const { title, kicker, metaLine, weeks } = Astro.props;
 ---
 
+<section class="home-intro-stage" aria-label="Course introduction">
+  <IntroGalleryStrip weeks={weeks} />
+  <IdentityLayer title={title} kicker={kicker} metaLine={metaLine} />
+</section>
+
+<section class="course-thesis" aria-labelledby="course-thesis-heading">
+  <div class="course-thesis-inner">
+    <p class="course-thesis-kicker">Course intent · twelve shared frames</p>
+    <h2 id="course-thesis-heading">Make photographs with someone, not just of them.</h2>
+    <p class="course-thesis-copy">
+      Partner Photography is a twelve-week studio in attention, trust and collaboration.
+      We learn to plan together, direct without erasing personality, work with available
+      light and choose photographs in which the person pictured still recognises themselves.
+    </p>
+  </div>
+</section>
+
 <div class="camera-reveal-sequence" id="camera-reveal-sequence">
-  <StickyCameraStage title={title} kicker={kicker} metaLine={metaLine} weeks={weeks} />
+  <StickyCameraStage weeks={weeks} />
 </div>
 
 <script>
@@ -82,17 +101,18 @@ const { title, kicker, metaLine, weeks } = Astro.props;
       const progress = runway > 0 ? Math.min(1, Math.max(0, -rect.top / runway)) : 0;
 
       const band = (start: number, end: number) => Math.min(1, Math.max(0, (progress - start) / (end - start)));
-      const compactStage = window.matchMedia("(max-aspect-ratio: 4 / 3)").matches;
-      const cameraTravel = window.innerHeight * (compactStage ? 0.2 : 0.3);
+      const materialize = band(0.04, 0.3);
 
       wrapper.style.setProperty("--progress", String(progress));
-      wrapper.style.setProperty("--camera-y-shift", `${band(0.02, 0.24) * cameraTravel}px`);
-      wrapper.style.setProperty("--b-identity", String(band(0.06, 0.2)));
-      wrapper.style.setProperty("--b-materialize", String(band(0.08, 0.32)));
-      wrapper.style.setProperty("--b-poweron", String(band(0.36, 0.46)));
-      wrapper.style.setProperty("--b-shutter", String(band(0.48, 0.62)));
-      wrapper.style.setProperty("--b-expand", String(band(0.6, 0.76)));
-      wrapper.style.setProperty("--b-gallery", String(band(0.7, 0.82)));
+      wrapper.style.setProperty("--camera-y-shift", "0px");
+      wrapper.style.setProperty("--b-materialize", String(materialize));
+      wrapper.style.setProperty("--b-material-glow", String(Math.sin(Math.PI * materialize)));
+      wrapper.style.setProperty("--material-scan-x", `${materialize * 2100}px`);
+      wrapper.style.setProperty("--b-poweron", String(band(0.4, 0.5)));
+      wrapper.style.setProperty("--b-shutter", String(band(0.51, 0.64)));
+      wrapper.style.setProperty("--b-expand", String(band(0.62, 0.84)));
+      wrapper.style.setProperty("--b-camera-exit", String(band(0.75, 0.9)));
+      wrapper.style.setProperty("--b-gallery", String(band(0.73, 0.9)));
     }
 
     function schedule() {
@@ -125,6 +145,83 @@ const { title, kicker, metaLine, weeks } = Astro.props;
 </script>
 
 <style>
+  .home-intro-stage {
+    --b-intro-exit: 0;
+    position: relative;
+    grid-column: full-start / full-end;
+    height: 100svh;
+    min-height: 38rem;
+    isolation: isolate;
+    overflow: hidden;
+    background: #050506;
+  }
+
+  .course-thesis {
+    position: relative;
+    grid-column: full-start / full-end;
+    display: grid;
+    place-items: center;
+    min-height: 68svh;
+    overflow: hidden;
+    padding: clamp(6rem, 14vh, 10rem) clamp(1.25rem, 8vw, 9rem);
+    color: #f1eee7;
+    background:
+      radial-gradient(circle at 80% 20%, rgb(130 91 36 / 16%), transparent 34%),
+      linear-gradient(135deg, #17191d, #090a0c 68%);
+    border-block: 1px solid rgb(255 255 255 / 10%);
+  }
+
+  .course-thesis::before {
+    content: "SLOP1810";
+    position: absolute;
+    inset-inline-end: clamp(1rem, 4vw, 4rem);
+    inset-block-start: clamp(1.5rem, 4vh, 3.5rem);
+    color: rgb(255 255 255 / 10%);
+    font-family: var(--photo-metadata-font);
+    font-size: clamp(2.5rem, 9vw, 9rem);
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+
+  .course-thesis-inner {
+    position: relative;
+    z-index: 1;
+    width: min(100%, 76rem);
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(16rem, 0.65fr);
+    gap: clamp(2rem, 7vw, 8rem);
+    align-items: end;
+  }
+
+  .course-thesis-kicker {
+    grid-column: 1 / -1;
+    margin: 0;
+    color: rgb(241 238 231 / 56%);
+    font-family: var(--photo-metadata-font);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .course-thesis h2 {
+    margin: 0;
+    max-width: 12ch;
+    font-family: var(--photo-font-display);
+    font-size: clamp(3rem, 6.6vw, 7.2rem);
+    font-weight: 400;
+    line-height: 0.92;
+    letter-spacing: -0.045em;
+    text-wrap: balance;
+  }
+
+  .course-thesis-copy {
+    margin: 0 0 0.5rem;
+    color: rgb(241 238 231 / 72%);
+    font-family: var(--at-font-body);
+    font-size: clamp(1rem, 1.2vw, 1.22rem);
+    line-height: 1.65;
+  }
+
   .camera-reveal-sequence {
     --progress: 1;
     --mon-left: 0px;
@@ -132,11 +229,13 @@ const { title, kicker, metaLine, weeks } = Astro.props;
     --mon-width: 100px;
     --mon-height: 60px;
     --camera-y-shift: 0px;
-    --b-identity: 0;
     --b-materialize: 1;
+    --b-material-glow: 0;
+    --material-scan-x: 2100px;
     --b-poweron: 1;
     --b-shutter: 1;
     --b-expand: 0;
+    --b-camera-exit: 0;
     --b-gallery: 0;
     position: relative;
     grid-column: full-start / full-end;
@@ -144,12 +243,26 @@ const { title, kicker, metaLine, weeks } = Astro.props;
   }
 
   .camera-reveal-sequence.is-animated {
-    min-height: 520vh;
+    min-height: 620vh;
   }
 
   @media (width < 640px) {
+    .course-thesis {
+      min-height: auto;
+      padding-block: 7rem;
+    }
+
+    .course-thesis-inner {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .course-thesis-kicker {
+      grid-column: 1;
+    }
+
     .camera-reveal-sequence.is-animated {
-      min-height: 360vh;
+      min-height: 500vh;
     }
   }
 
@@ -158,18 +271,14 @@ const { title, kicker, metaLine, weeks } = Astro.props;
      descending into StickyCameraStage/IdentityLayer/MonitorFrame/etc.
      needs :global()). --- */
 
-  :global(.camera-reveal-sequence .identity-layer) {
-    opacity: calc(1 - var(--b-identity, 0));
-    transform: translateY(calc(var(--b-identity, 0) * -1rem));
-  }
-
   :global(.camera-reveal-sequence .camera-frame) {
-    opacity: calc(1 - var(--b-expand, 0));
-    transform: scale(calc(1 + 0.22 * var(--b-expand, 0)));
+    opacity: calc(1 - var(--b-camera-exit, 0));
+    transform: scale(calc(1 + 1.45 * var(--b-expand, 0)));
+    transform-origin: 50% 58%;
   }
 
   :global(.camera-reveal-sequence .camera-visual) {
-    transform: translate(-50%, calc(-50% - var(--camera-y-shift, 0px)));
+    transform: translate(-50%, -50%);
   }
 
   :global(.camera-reveal-sequence .monitor-hint) {
@@ -205,5 +314,12 @@ const { title, kicker, metaLine, weeks } = Astro.props;
 
   :global(.camera-reveal-sequence .gallery-streams) {
     translate: 0 calc((1 - var(--b-gallery, 0)) * 1.5%);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :global(.camera-reveal-sequence .camera-visual),
+    :global(.camera-reveal-sequence .monitor-frame) {
+      display: none;
+    }
   }
 </style>

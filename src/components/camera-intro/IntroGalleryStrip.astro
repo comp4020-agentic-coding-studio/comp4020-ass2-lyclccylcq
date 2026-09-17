@@ -1,0 +1,262 @@
+---
+import { Image } from "astro:assets";
+import { withBase } from "astro-theme-university/url";
+import heroPartnerPhotographer from "../../assets/images/hero-partner-photographer.png";
+import week01 from "../../assets/images/gallery/week-01.png";
+import week02 from "../../assets/images/gallery/week-02.png";
+import week03 from "../../assets/images/gallery/week-03.png";
+import week04 from "../../assets/images/gallery/week-04.png";
+import week05 from "../../assets/images/gallery/week-05.png";
+import week06 from "../../assets/images/gallery/week-06.png";
+import week07 from "../../assets/images/gallery/week-07.png";
+import week08 from "../../assets/images/gallery/week-08.png";
+import week09 from "../../assets/images/gallery/week-09.png";
+import week10 from "../../assets/images/gallery/week-10.png";
+import week11 from "../../assets/images/gallery/week-11.png";
+import week12 from "../../assets/images/gallery/week-12.png";
+import type { GalleryWeek } from "./FullscreenLectureGallery.astro";
+
+export interface Props {
+  weeks: GalleryWeek[];
+}
+
+const { weeks } = Astro.props;
+const images = [week01, week02, week03, week04, week05, week06, week07, week08, week09, week10, week11, week12];
+const tiles = weeks.map((entry, index) => ({ ...entry, image: images[index] }));
+---
+
+<div class="intro-backdrop" aria-hidden="true">
+  <Image
+    src={heroPartnerPhotographer}
+    alt=""
+    widths={[960, 1280, 1680]}
+    sizes="100vw"
+    loading="eager"
+    class="intro-backdrop-image"
+  />
+</div>
+
+<section class="intro-gallery-strip" aria-label="Preview the twelve course weeks">
+  <div class="intro-gallery-track">
+    <ul class="intro-gallery-run" role="list">
+      {
+        tiles.map((tile) => (
+          <li class="intro-gallery-tile">
+            <a href={withBase(tile.href)} aria-label={`Week ${tile.number} — ${tile.title}`}>
+              <Image
+                src={tile.image}
+                alt=""
+                widths={[260, 420, 620]}
+                sizes="(max-width: 640px) 46vw, 23vw"
+                loading="eager"
+              />
+              <span>{tile.number}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <ul class="intro-gallery-run" role="list" aria-hidden="true">
+      {
+        tiles.map((tile) => (
+          <li class="intro-gallery-tile">
+            <a href={withBase(tile.href)} tabindex="-1">
+              <Image
+                src={tile.image}
+                alt=""
+                widths={[260, 420]}
+                sizes="(max-width: 640px) 46vw, 23vw"
+                loading="lazy"
+              />
+              <span>{tile.number}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<script>
+  const introStrips = document.querySelectorAll<HTMLElement>(".intro-gallery-strip");
+
+  for (const strip of introStrips) {
+    const tiles = Array.from(strip.querySelectorAll<HTMLElement>(".intro-gallery-tile"));
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let active = false;
+    let frame = 0;
+
+    function renderScaleGradient() {
+      if (!active) return;
+
+      const rampStart = window.innerWidth * -0.04;
+      const rampEnd = window.innerWidth * 0.94;
+
+      for (const tile of tiles) {
+        const rect = tile.getBoundingClientRect();
+        const centre = rect.left + rect.width / 2;
+        const raw = Math.min(1, Math.max(0, (centre - rampStart) / (rampEnd - rampStart)));
+        const eased = raw * raw * (3 - 2 * raw);
+        const scale = 0.34 + eased * 0.56;
+        tile.style.setProperty("--flow-scale", scale.toFixed(3));
+      }
+
+      frame = requestAnimationFrame(renderScaleGradient);
+    }
+
+    if (!reduceMotion.matches && "IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(([entry]) => {
+        active = entry?.isIntersecting ?? false;
+        cancelAnimationFrame(frame);
+        if (active) frame = requestAnimationFrame(renderScaleGradient);
+      });
+      observer.observe(strip);
+    }
+  }
+</script>
+
+<style>
+  .intro-backdrop {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    opacity: calc(1 - var(--b-intro-exit, 0));
+    transform: scale(calc(1.035 + var(--b-intro-exit, 0) * 0.075));
+    transform-origin: 50% 45%;
+  }
+
+  .intro-backdrop::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to bottom, rgb(2 3 5 / 58%), rgb(3 4 6 / 52%) 43%, rgb(3 3 4 / 82%) 100%),
+      linear-gradient(to right, rgb(3 3 4 / 70%) 0 34%, transparent 72%);
+  }
+
+  .intro-backdrop-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 82% 50%;
+    filter: saturate(0.76) contrast(1.06) brightness(0.8);
+  }
+
+  .intro-gallery-strip {
+    position: absolute;
+    inset-inline: 0;
+    inset-block-end: 0;
+    z-index: 14;
+    height: clamp(17rem, 44vh, 31rem);
+    overflow: hidden;
+    opacity: calc(1 - var(--b-intro-exit, 0));
+    translate: 0 calc(var(--b-intro-exit, 0) * 2.5rem);
+    mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  }
+
+  .intro-gallery-track {
+    display: flex;
+    width: max-content;
+    height: 100%;
+    will-change: transform;
+  }
+
+  .intro-gallery-run {
+    display: flex;
+    flex: none;
+    align-items: flex-end;
+    gap: clamp(0.3rem, 0.5vw, 0.55rem);
+    height: 100%;
+    margin: 0;
+    padding: 0 clamp(0.3rem, 0.5vw, 0.55rem) 0 0;
+    list-style: none;
+  }
+
+  .intro-gallery-tile {
+    --flow-scale: 1;
+    flex: none;
+    width: clamp(9rem, 14vw, 15rem);
+    height: 100%;
+    overflow: hidden;
+    border: 1px solid rgb(255 255 255 / 22%);
+    background: #101114;
+    box-shadow: 0 1rem 3rem rgb(0 0 0 / 42%);
+    transform: scale(var(--flow-scale));
+    transform-origin: 50% 100%;
+    will-change: transform;
+  }
+
+  .intro-gallery-tile a {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: #fff;
+  }
+
+  .intro-gallery-tile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(0.76) contrast(1.04) brightness(0.72);
+    transform: scale(1.02);
+    transition: filter 0.25s ease, transform 0.45s ease;
+  }
+
+  .intro-gallery-tile span {
+    position: absolute;
+    inset-inline-start: 0.65rem;
+    inset-block-end: 0.55rem;
+    font-family: var(--photo-metadata-font);
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-shadow: 0 1px 8px #000;
+  }
+
+  .intro-gallery-tile a:hover img,
+  .intro-gallery-tile a:focus-visible img {
+    filter: saturate(1) contrast(1.02) brightness(0.95);
+    transform: scale(1.07);
+  }
+
+  .intro-gallery-tile a:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: -3px;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .intro-gallery-track {
+      animation: intro-gallery-flow 64s linear infinite;
+    }
+  }
+
+  @keyframes intro-gallery-flow {
+    from { transform: translate3d(-50%, 0, 0); }
+    to { transform: translate3d(0, 0, 0); }
+  }
+
+  @media (width < 640px) {
+    .intro-backdrop::after {
+      background:
+        linear-gradient(to bottom, rgb(2 3 5 / 58%), rgb(3 4 6 / 56%) 50%, rgb(3 3 4 / 84%) 100%),
+        linear-gradient(to right, rgb(3 3 4 / 42%), transparent);
+    }
+
+    .intro-gallery-strip {
+      inset-block-end: 0;
+      height: clamp(14rem, 38vh, 20rem);
+    }
+
+    .intro-gallery-tile {
+      width: min(44vw, 13rem);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .intro-gallery-track {
+      animation: none;
+    }
+  }
+</style>

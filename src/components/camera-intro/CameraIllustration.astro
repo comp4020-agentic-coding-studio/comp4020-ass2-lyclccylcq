@@ -46,10 +46,30 @@
       <stop offset="0.35" stop-color="#34363b" />
       <stop offset="1" stop-color="#111214" />
     </radialGradient>
+    <linearGradient id="camera-metal" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#a8abb0" />
+      <stop offset="0.12" stop-color="#656970" />
+      <stop offset="0.52" stop-color="#303238" />
+      <stop offset="0.86" stop-color="#17181b" />
+      <stop offset="1" stop-color="#74777d" />
+    </linearGradient>
+    <radialGradient id="camera-dial-face" cx="35%" cy="24%" r="88%">
+      <stop offset="0" stop-color="#686c72" />
+      <stop offset="0.24" stop-color="#303238" />
+      <stop offset="0.78" stop-color="#111214" />
+      <stop offset="1" stop-color="#050506" />
+    </radialGradient>
     <linearGradient id="camera-rim" x1="0" y1="0" x2="1" y2="0">
       <stop offset="0" stop-color="#f8f7f2" stop-opacity="0.06" />
       <stop offset="0.48" stop-color="#ffffff" stop-opacity="0.46" />
       <stop offset="1" stop-color="#f8f7f2" stop-opacity="0.02" />
+    </linearGradient>
+    <linearGradient id="camera-material-light" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#fff" stop-opacity="0" />
+      <stop offset="0.34" stop-color="#fff" stop-opacity="0.04" />
+      <stop offset="0.52" stop-color="#f5e4c2" stop-opacity="0.56" />
+      <stop offset="0.7" stop-color="#fff" stop-opacity="0.05" />
+      <stop offset="1" stop-color="#fff" stop-opacity="0" />
     </linearGradient>
     <pattern id="camera-leather" width="18" height="18" patternUnits="userSpaceOnUse">
       <rect width="18" height="18" fill="#17181a" />
@@ -59,6 +79,18 @@
     </pattern>
     <filter id="camera-shadow" x="-20%" y="-30%" width="140%" height="170%">
       <feDropShadow dx="0" dy="28" stdDeviation="28" flood-color="#000" flood-opacity="0.72" />
+    </filter>
+    <filter id="camera-leather-grain" x="-8%" y="-12%" width="116%" height="124%" color-interpolation-filters="sRGB">
+      <feTurbulence type="fractalNoise" baseFrequency="0.42 0.68" numOctaves="4" seed="29" result="grain" />
+      <feColorMatrix in="grain" type="saturate" values="0" result="mono" />
+      <feComponentTransfer in="mono" result="contrast-grain">
+        <feFuncR type="gamma" amplitude="1.6" exponent="1.8" offset="-0.22" />
+        <feFuncG type="gamma" amplitude="1.6" exponent="1.8" offset="-0.22" />
+        <feFuncB type="gamma" amplitude="1.6" exponent="1.8" offset="-0.22" />
+        <feFuncA type="table" tableValues="0 0.78" />
+      </feComponentTransfer>
+      <feComposite in="contrast-grain" in2="SourceGraphic" operator="in" result="masked-grain" />
+      <feBlend in="SourceGraphic" in2="masked-grain" mode="soft-light" />
     </filter>
   </defs>
 
@@ -70,25 +102,46 @@
 
     <rect x="105" y="185" width="1390" height="710" rx="54" fill="url(#camera-lower)" />
     <rect x="105" y="185" width="1390" height="190" rx="54" fill="url(#camera-body)" />
-    <rect x="132" y="112" width="1336" height="155" rx="34" fill="url(#camera-top)" />
-    <rect x="116" y="338" width="1370" height="510" rx="36" fill="url(#camera-leather)" opacity="0.78" />
+    <rect x="132" y="112" width="1336" height="155" rx="34" fill="url(#camera-top)" stroke="#797c82" stroke-width="4" />
+    <path d="M159 136h1278" stroke="#fff" stroke-opacity="0.13" stroke-width="5" stroke-linecap="round" />
+    <rect
+      class="camera-leather-surface"
+      x="116"
+      y="338"
+      width="1370"
+      height="510"
+      rx="36"
+      fill="url(#camera-leather)"
+      filter="url(#camera-leather-grain)"
+      opacity="0.94"
+    />
+    <g class="camera-leather-detail" fill="none" stroke-linecap="round">
+      <path d="M146 456c182-23 335-17 478 4M987 453c150-18 305-12 470 8" stroke="#fff" stroke-opacity="0.055" stroke-width="4" />
+      <path d="M143 795c164 19 318 16 468-6M986 791c149 18 305 18 468-5" stroke="#000" stroke-opacity="0.48" stroke-width="5" />
+      <path d="M148 472c12 87 10 180-3 280m1312-278c-13 94-12 190 2 286" stroke="#7a7d82" stroke-opacity="0.22" stroke-width="3" stroke-dasharray="2 10" />
+    </g>
     <path d="M126 343h1360v86H126z" fill="url(#camera-body)" opacity="0.96" />
 
-    <path d="M650 184v-72c0-29 22-52 51-52h198c29 0 51 23 51 52v72Z" fill="url(#camera-top)" />
-    <rect x="706" y="75" width="188" height="92" rx="18" fill="#111316" />
-    <rect x="730" y="91" width="140" height="58" rx="12" fill="url(#camera-glass)" />
+    <path d="M650 184v-72c0-29 22-52 51-52h198c29 0 51 23 51 52v72Z" fill="url(#camera-metal)" stroke="#898c91" stroke-width="4" />
+    <rect x="700" y="69" width="200" height="104" rx="21" fill="#090a0c" stroke="#85888e" stroke-width="5" />
+    <rect x="730" y="91" width="140" height="58" rx="12" fill="url(#camera-glass)" stroke="#14171b" stroke-width="4" />
     <path d="M742 100h82c-18 7-28 16-38 33h-44Z" fill="#fff" opacity="0.12" />
 
     <g class="camera-top-controls">
       <g transform="translate(210 125)">
-        <rect x="0" y="0" width="190" height="62" rx="20" fill="#17181a" />
-        <path d="M12 15h166M12 28h166M12 41h166" stroke="#64676d" stroke-width="5" opacity="0.7" />
+        <rect x="0" y="0" width="190" height="62" rx="20" fill="url(#camera-dial-face)" stroke="#777a80" stroke-width="4" />
+        <path d="M14 8v46m16-49v52M46 4v54M62 4v54M78 4v54M94 4v54M110 4v54M126 4v54M142 4v54M158 5v52M176 8v46" stroke="#9a9da3" stroke-width="4" opacity="0.68" />
+        <rect x="28" y="15" width="134" height="31" rx="10" fill="#151619" stroke="#030304" stroke-width="3" />
+        <path d="M42 21h106" stroke="#fff" stroke-opacity="0.12" stroke-width="3" />
       </g>
       <g transform="translate(1130 124)">
-        <rect x="0" y="0" width="184" height="64" rx="20" fill="#17181a" />
-        <path d="M12 15h160M12 29h160M12 43h160" stroke="#64676d" stroke-width="5" opacity="0.72" />
+        <rect x="0" y="0" width="184" height="64" rx="20" fill="url(#camera-dial-face)" stroke="#777a80" stroke-width="4" />
+        <path d="M13 8v48m16-51v54M45 4v56M61 4v56M77 4v56M93 4v56M109 4v56M125 4v56M141 4v56M157 5v54M173 9v47" stroke="#9a9da3" stroke-width="4" opacity="0.7" />
+        <rect x="26" y="15" width="132" height="33" rx="10" fill="#151619" stroke="#030304" stroke-width="3" />
+        <path d="M40 21h104" stroke="#fff" stroke-opacity="0.12" stroke-width="3" />
       </g>
-      <rect x="1350" y="130" width="76" height="46" rx="18" fill="#d7333f" />
+      <rect x="1346" y="126" width="84" height="54" rx="21" fill="#17181a" stroke="#777a80" stroke-width="4" />
+      <rect x="1354" y="132" width="68" height="42" rx="16" fill="#d7333f" />
       <rect x="1360" y="135" width="56" height="11" rx="5" fill="#ff7b82" opacity="0.65" />
     </g>
 
@@ -96,9 +149,10 @@
     <rect x="397" y="362" width="806" height="468" rx="20" fill="#070708" stroke="#5c5f64" stroke-width="4" />
 
     <g class="camera-left-controls">
-      <rect x="175" y="414" width="132" height="84" rx="18" fill="url(#camera-button)" />
-      <rect x="175" y="520" width="132" height="84" rx="18" fill="url(#camera-button)" />
-      <rect x="175" y="626" width="132" height="84" rx="18" fill="url(#camera-button)" />
+      <rect x="175" y="414" width="132" height="84" rx="18" fill="url(#camera-button)" stroke="#777a80" stroke-width="4" />
+      <rect x="175" y="520" width="132" height="84" rx="18" fill="url(#camera-button)" stroke="#777a80" stroke-width="4" />
+      <rect x="175" y="626" width="132" height="84" rx="18" fill="url(#camera-button)" stroke="#777a80" stroke-width="4" />
+      <path d="M193 428h94M193 534h94M193 640h94" stroke="#fff" stroke-opacity="0.12" stroke-width="4" stroke-linecap="round" />
       <text x="241" y="466" text-anchor="middle">PLAY</text>
       <text x="241" y="572" text-anchor="middle">FN</text>
       <text x="241" y="678" text-anchor="middle">MENU</text>
@@ -106,25 +160,37 @@
 
     <g class="camera-right-controls">
       <path d="M1252 408c26-55 160-55 186 0" fill="none" stroke="#17181a" stroke-width="34" stroke-linecap="round" />
-      <circle cx="1345" cy="555" r="112" fill="#121315" stroke="#52555b" stroke-width="9" />
+      <circle cx="1345" cy="555" r="116" fill="none" stroke="url(#camera-metal)" stroke-width="12" />
+      <circle cx="1345" cy="555" r="104" fill="#121315" stroke="#050506" stroke-width="7" />
       <circle cx="1345" cy="555" r="75" fill="url(#camera-button)" stroke="#090a0b" stroke-width="12" />
       <circle cx="1345" cy="555" r="33" fill="url(#camera-button)" stroke="#777a80" stroke-width="3" />
       <path d="m1345 474-12 21h24Zm0 162-12-21h24Zm-81-81 21-12v24Zm162 0-21-12v24Z" fill="#f4f2ed" opacity="0.82" />
-      <circle cx="1274" cy="754" r="30" fill="url(#camera-button)" />
-      <circle cx="1345" cy="754" r="30" fill="url(#camera-button)" />
-      <circle cx="1416" cy="754" r="30" fill="url(#camera-button)" />
+      <circle cx="1274" cy="754" r="30" fill="url(#camera-button)" stroke="#686b71" stroke-width="4" />
+      <circle cx="1345" cy="754" r="30" fill="url(#camera-button)" stroke="#686b71" stroke-width="4" />
+      <circle cx="1416" cy="754" r="30" fill="url(#camera-button)" stroke="#686b71" stroke-width="4" />
       <circle cx="1428" cy="385" r="13" fill="#d7333f" />
     </g>
 
     <g class="camera-brand-engraving">
-      <circle cx="1285" cy="270" r="22" fill="none" stroke="#f4f2ed" stroke-width="4" />
-      <path d="M1275 270h20m-10-10v20" stroke="#f4f2ed" stroke-width="3" />
-      <text x="1320" y="263">SLOP1810</text>
-      <text x="1320" y="290" opacity="0.56">PARTNER PHOTOGRAPHY</text>
+      <rect x="1227" y="240" width="205" height="58" rx="12" fill="#121315" stroke="#686b71" stroke-width="3" />
+      <path d="M1242 249h175" stroke="#fff" stroke-opacity="0.1" stroke-width="3" />
+      <text x="1330" y="278" text-anchor="middle">SLOP1810</text>
     </g>
 
     <path d="M154 203Q800 150 1445 203" fill="none" stroke="url(#camera-rim)" stroke-width="11" />
     <path d="M155 864Q800 902 1445 858" fill="none" stroke="#fff" stroke-opacity="0.09" stroke-width="7" />
+  </g>
+
+  <g class="camera-material-pass" aria-hidden="true">
+    <rect
+      class="camera-material-scan"
+      x="-500"
+      y="70"
+      width="650"
+      height="850"
+      rx="80"
+      fill="url(#camera-material-light)"
+    />
   </g>
 
   <g class="camera-sketch" fill="none" stroke="#f4f2ed" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
@@ -167,6 +233,11 @@
   .camera-render {
     opacity: var(--b-materialize, 1);
     transform-origin: 50% 52%;
+    transform: scale(calc(0.985 + var(--b-materialize, 1) * 0.015));
+    filter:
+      url(#camera-shadow)
+      saturate(calc(0.45 + var(--b-materialize, 1) * 0.55))
+      contrast(calc(0.88 + var(--b-materialize, 1) * 0.12));
   }
 
   .camera-cast-shadow {
@@ -174,8 +245,23 @@
   }
 
   .camera-sketch {
-    opacity: calc(1 - var(--b-materialize, 1));
+    opacity: calc(1 - var(--b-materialize, 1) * 0.94);
     filter: drop-shadow(0 0 7px rgb(244 242 237 / 14%));
+  }
+
+  .camera-material-pass {
+    opacity: var(--b-material-glow, 0);
+    mix-blend-mode: screen;
+    pointer-events: none;
+  }
+
+  .camera-material-scan {
+    transform: translateX(var(--material-scan-x, 2100px));
+    filter: blur(16px);
+  }
+
+  .camera-leather-detail {
+    opacity: calc(0.3 + var(--b-materialize, 1) * 0.7);
   }
 
   .camera-left-controls text,
