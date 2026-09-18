@@ -11,11 +11,10 @@ photo: ./marisol-quaye.avif
 photoAlt: A stylised portrait of a person in three-quarter view, flat gold and black shapes on warm cream, in a two-ink risograph print
 ---
 
-<!-- STARTER_CONTENT: replace this person entry, then remove this comment. -->
+Marisol convenes Partner Photography and guides its twelve-week progression
+from planning a shoot to sharing a final selection. Her teaching keeps the
+person being photographed at the centre of each decision: a successful image
+should feel right to them, not only to the photographer.
 
-Replace this entry. A people page carries a short bio and whatever a student
-needs in order to contact the right person for the right thing --- and nothing
-that will be stale by week 3.
-
-Consultation hours, contact preferences and the escalation path (who to ask
-first, who to ask when that does not work) are the parts students actually read.
+Bring questions about the course as a whole to Marisol by email. For feedback
+on a particular shoot, bring your photographs to the weekly session first.

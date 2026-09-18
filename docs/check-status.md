@@ -6,8 +6,8 @@ the snapshot only with results actually observed. Fix every newly introduced
 failure before committing; disclose any unchanged baseline failure in the
 handoff and continue working toward a green submission.
 
-Snapshot: 18 September 2026, working tree based on `fd2c7c9`, including the
-uncommitted daylight homepage photograph and backdrop styling.
+Snapshot: 18 September 2026, working tree based on `f6a8934`, including the
+uncommitted homepage course-intent copy, Teaching Team navigation and profiles.
 
 | Command | Observed result |
 | --- | --- |
@@ -19,8 +19,9 @@ sessions for Weeks 1 and 2 exist instead of all twelve, and the linked Week 1
 deck remains a starter placeholder. Do not weaken or edit the spec tests to
 make these failures disappear.
 
-The evidence gate reports `STARTER_CONTENT` in both people entries, both
-session entries and `src/decks/week-01.deck.mdx`. It also identifies the
+The evidence gate reports `STARTER_CONTENT` in both session entries and
+`src/decks/week-01.deck.mdx`. The people entries no longer contain starter
+text, but their portraits are still starter assets. The gate also identifies the
 unchanged starter assets `src/assets/images/card.png`,
 `src/assets/images/hero-home.avif`, and both person images in
 `src/content/people/`. Replace the content and assets deliberately; removing

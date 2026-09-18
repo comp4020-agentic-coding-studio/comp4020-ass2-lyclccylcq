@@ -11,7 +11,9 @@ photo: ./idris-fenn.avif
 photoAlt: A stylised portrait of a person facing the viewer, flat gold and black shapes on warm cream, in a two-ink risograph print
 ---
 
-<!-- STARTER_CONTENT: replace this person entry, then remove this comment. -->
+Idris supports the practical sessions and early reviews. He helps students
+look beyond exposure and composition to the small choices that shape how a
+partner feels in a photograph: distance, timing, direction and the final edit.
 
-Replace this entry. A second person makes the listing, role ordering and
-teacher-reference fields visible before you replace the cast with your own.
+Bring a short selection of images and a specific question to a session for
+feedback. If the question cannot wait, use the email address above.

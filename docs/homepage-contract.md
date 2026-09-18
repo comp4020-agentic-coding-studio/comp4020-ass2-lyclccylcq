@@ -23,10 +23,13 @@ and new directions in the same contract.
   Each image enters at roughly 62% scale and grows with horizontal viewport
   position, reaching full scale only near the far-right edge. Use
   `object-fit: cover`; never stretch the photographs.
-- A separate course-intent statement follows the complete opening. Preserve
-  its breathing space before the camera sequence. The camera must not overlap
-  the opening strip or rise into view from below: its first frame is already a
-  complete, centred line drawing occupying most of the viewport.
+- A separate course-intent statement follows the complete opening. Its message
+  frames photographing a girlfriend or partner as an act of care and love: make
+  photographs they feel at home in and genuinely want to keep, with technique
+  serving the person rather than the photographer's artistic ambition.
+  Preserve its breathing space before the camera sequence. The camera must not
+  overlap the opening strip or rise into view from below: its first frame is
+  already a complete, centred line drawing occupying most of the viewport.
 - Motion follows native scroll and reverses cleanly. Do not intercept wheel
   input or create a second scroll system. Reduced motion and no-JS states must
   remain useful.
@@ -62,6 +65,9 @@ and new directions in the same contract.
 
 ## Menu and route lifecycle
 
+- The six primary links end with Teaching Team (`/people/`), not Policies.
+  Keep the Policies page at `/policies/` reachable from Course Details; it is
+  supporting course information rather than a primary menu destination.
 - The expanded menu places navigation on the left and an original front-view
   line-art camera on the right. Keep restrained outlines, an open background
   and small amber details. Its body follows the pointer up to 12 degrees
