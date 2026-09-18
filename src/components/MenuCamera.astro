@@ -8,70 +8,94 @@ export interface Props {
   courseTitle: string;
 }
 
-const { courseCode, courseTitle } = Astro.props;
+const { courseCode } = Astro.props;
 ---
 
 <div class="menu-camera" data-menu-camera aria-hidden="true">
   <div class="menu-camera-scene">
     <svg class="menu-camera-model" viewBox="0 0 1000 720" role="presentation">
       <defs>
-        <radialGradient id="menu-lens-glass" cx="38%" cy="32%" r="72%">
-          <stop offset="0" stop-color="#dfe8ef" stop-opacity="0.28" />
-          <stop offset="0.28" stop-color="#536576" stop-opacity="0.22" />
-          <stop offset="0.64" stop-color="#12161c" stop-opacity="0.76" />
-          <stop offset="1" stop-color="#020304" stop-opacity="0.94" />
+        <radialGradient id="menu-lens-glass" cx="36%" cy="30%" r="76%">
+          <stop offset="0" stop-color="#9eb3bd" stop-opacity="0.22" />
+          <stop offset="0.28" stop-color="#26353c" stop-opacity="0.18" />
+          <stop offset="0.7" stop-color="#081014" stop-opacity="0.48" />
+          <stop offset="1" stop-color="#010304" stop-opacity="0.72" />
         </radialGradient>
-        <linearGradient id="menu-camera-edge" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stop-color="#fff" stop-opacity="0.92" />
-          <stop offset="0.52" stop-color="#aeb5bc" stop-opacity="0.62" />
-          <stop offset="1" stop-color="#fff" stop-opacity="0.86" />
-        </linearGradient>
-        <filter id="menu-camera-glow" x="-30%" y="-30%" width="160%" height="160%">
-          <feGaussianBlur stdDeviation="4" result="blur" />
-          <feMerge>
-            <feMergeNode in="blur" />
-            <feMergeNode in="SourceGraphic" />
-          </feMerge>
-        </filter>
+        <radialGradient id="menu-viewfinder-glass" cx="30%" cy="24%" r="82%">
+          <stop offset="0" stop-color="#78909d" stop-opacity="0.24" />
+          <stop offset="0.4" stop-color="#182329" stop-opacity="0.36" />
+          <stop offset="1" stop-color="#020405" stop-opacity="0.68" />
+        </radialGradient>
       </defs>
 
-      <g class="menu-camera-ghost" fill="none" stroke="#f7f5ef" stroke-width="1.25" opacity="0.16">
-        <path d="M75 266 116 184l156-37 65-68h319l68 70 160 39 42 78-21 342-131 33H207L76 603Z" />
-        <path d="M103 247 91 618m806-368 16 365M263 153l-23 475m521-477 18 476" />
-        <circle cx="515" cy="397" r="247" />
-        <circle cx="515" cy="397" r="221" />
+      <ellipse cx="510" cy="642" rx="370" ry="28" fill="#000" opacity="0.24" />
+
+      <g class="menu-camera-ghost" transform="translate(-20 14)" fill="none" stroke="#f7f5ef" stroke-width="1.4" opacity="0.12">
+        <path d="M120 217Q120 180 157 180H838Q876 180 891 216L914 278V561Q914 610 865 610H151Q102 610 102 561V231Q102 217 120 217Z" />
+        <path d="M105 278h808M108 548h802" />
+        <rect x="174" y="218" width="158" height="74" rx="15" />
+        <circle cx="520" cy="410" r="180" />
+        <circle cx="520" cy="410" r="153" />
       </g>
 
-      <g class="menu-camera-body" fill="rgb(7 8 10 / 36%)" stroke="url(#menu-camera-edge)" stroke-width="3">
-        <path d="M101 242c0-30 21-55 51-61l149-31 55-72h306l57 72 151 31c30 6 51 31 51 61v322c0 39-31 70-70 70H171c-39 0-70-31-70-70Z" />
-        <path d="M101 278h798M123 568h754" fill="none" opacity="0.52" />
-        <path d="M362 151V87c0-18 15-33 33-33h238c18 0 33 15 33 33v64" />
-        <path d="M393 151V99h242v52" fill="none" opacity="0.62" />
-        <rect x="157" y="205" width="146" height="58" rx="20" />
-        <path d="M174 220h112m-112 13h112m-112 13h112" fill="none" opacity="0.44" />
-        <rect x="736" y="206" width="104" height="56" rx="18" />
-        <circle cx="791" cy="234" r="12" fill="#b97d1c" stroke="none" />
-        <rect x="128" y="327" width="46" height="130" rx="18" />
-        <rect x="826" y="327" width="46" height="130" rx="18" />
-        <circle cx="206" cy="534" r="28" />
-        <circle cx="794" cy="534" r="28" />
-        <path d="M238 612 198 670m564-58 42 58M171 670h658" fill="none" />
-        <text x="150" y="311">{courseCode}</text>
-        <text x="820" y="311" text-anchor="end">{courseTitle.toUpperCase()}</text>
+      <g class="menu-camera-body" fill="none" stroke="#d9d7d2" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round">
+        <g class="menu-camera-strap-lugs" stroke-width="2.4">
+          <path d="M108 307H84q-18 0-18 20t18 20h20" />
+          <path d="M906 307h24q18 0 18 20t-18 20h-18" />
+        </g>
+
+        <path d="M120 217Q120 180 157 180H838Q876 180 891 216L914 278V561Q914 610 865 610H151Q102 610 102 561V231Q102 217 120 217Z" fill="rgb(2 3 4 / 28%)" stroke-width="2.8" />
+        <path d="M112 278V224Q112 190 151 190H837Q864 190 877 219L900 278Z" />
+        <path d="M110 279h792" stroke-width="2.6" />
+        <path d="M116 286h782" stroke-opacity="0.24" stroke-width="1.3" />
+
+        <path d="M106 290H906V548H106Z" stroke-opacity="0.5" />
+        <path d="M792 291h114v257H792q26-52 26-129T792 291Z" stroke-opacity="0.38" />
+        <path d="M110 548h792v27q0 35-35 35H145q-35 0-35-35Z" />
+        <path d="M128 585h756" stroke-width="2" opacity="0.62" />
+
+        <g class="menu-camera-top-controls">
+          <rect x="183" y="158" width="128" height="36" rx="10" />
+          <path d="M195 164v25m11-28v31m11-31v31m11-31v31m11-31v31m11-31v31m11-31v31m11-31v31m11-28v25" stroke-width="1.3" opacity="0.66" />
+          <rect x="704" y="158" width="132" height="36" rx="10" />
+          <path d="M716 164v25m11-28v31m11-31v31m11-31v31m11-31v31m11-31v31m11-31v31m11-31v31m11-28v25" stroke-width="1.3" opacity="0.66" />
+          <path d="M438 181v-23h164v23" />
+          <path d="M455 168h130" stroke-width="3" opacity="0.62" />
+          <circle cx="862" cy="205" r="14" />
+          <circle cx="862" cy="205" r="6" fill="#b97d1c" stroke="none" />
+        </g>
+
+        <g class="menu-camera-viewfinder">
+          <rect x="170" y="214" width="166" height="82" rx="16" />
+          <rect x="185" y="228" width="136" height="54" rx="11" fill="url(#menu-viewfinder-glass)" stroke-width="2" />
+          <path d="M198 238h96c-27 7-49 18-66 34h-30Z" fill="#d8e4e8" opacity="0.12" />
+        </g>
+
+        <g class="menu-camera-front-details">
+          <rect x="748" y="222" width="94" height="58" rx="15" />
+          <rect x="765" y="237" width="60" height="28" rx="8" fill="#b97d1c" stroke="none" opacity="0.74" />
+          <circle cx="356" cy="339" r="19" />
+          <path d="M356 329v20m-10-10h20" stroke="#c9c8c1" stroke-width="3" opacity="0.7" />
+          <circle cx="827" cy="358" r="12" />
+          <path d="M827 346v24" stroke="#b5b5af" stroke-width="3" opacity="0.55" />
+          <text x="166" y="336">{courseCode.replace("SLOP", "SLOP ")}</text>
+        </g>
       </g>
 
-      <g class="menu-camera-lens" filter="url(#menu-camera-glow)">
-        <circle cx="515" cy="397" r="224" fill="rgb(4 5 7 / 84%)" stroke="#f7f5ef" stroke-width="3" />
-        <circle cx="515" cy="397" r="191" fill="none" stroke="#aeb5bc" stroke-width="2.5" />
-        <circle cx="515" cy="397" r="158" fill="url(#menu-lens-glass)" stroke="#f7f5ef" stroke-width="3" />
-        <circle cx="515" cy="397" r="118" fill="#050608" stroke="#8f979f" stroke-width="2.5" />
-        <circle cx="515" cy="397" r="78" fill="url(#menu-lens-glass)" stroke="#f7f5ef" stroke-width="2" />
-        <circle cx="493" cy="373" r="28" fill="#fff" opacity="0.08" stroke="none" />
-        <path d="M401 260c42-43 93-66 154-70M383 523c35 42 78 69 129 80" fill="none" stroke="#fff" stroke-width="2" opacity="0.34" />
+      <g class="menu-camera-lens" stroke="#d9d7d2" fill="none" stroke-linecap="round">
+        <circle cx="520" cy="410" r="180" fill="rgb(2 3 4 / 34%)" stroke-width="2.8" />
+        <circle cx="520" cy="410" r="160" stroke-width="2.2" />
+        <circle cx="520" cy="410" r="151" stroke-width="2.2" stroke-dasharray="2 8" opacity="0.68" />
+        <circle cx="520" cy="410" r="137" stroke-width="2.4" />
+        <circle cx="520" cy="410" r="111" fill="url(#menu-lens-glass)" stroke-width="2.2" />
+        <circle cx="520" cy="410" r="78" stroke-width="2" />
+        <circle cx="520" cy="410" r="54" fill="url(#menu-lens-glass)" stroke-width="1.8" />
+        <circle cx="500" cy="386" r="23" fill="#dce8eb" opacity="0.08" />
+        <path d="M420 310c34-34 77-52 128-55M409 508c31 34 68 54 113 59" stroke-width="1.6" opacity="0.22" />
       </g>
 
-      <g class="menu-camera-focus" fill="none" stroke="#b97d1c" stroke-width="3" opacity="0.88">
-        <path d="M52 155v-34h34M948 155v-34h-34M52 573v34h34M948 573v34h-34" />
+      <g class="menu-camera-focus" fill="none" stroke="#b97d1c" stroke-width="3" opacity="0.72">
+        <path d="M68 185v-30h30M932 185v-30h-30M68 563v30h30M932 563v30h-30" />
       </g>
     </svg>
   </div>
@@ -128,10 +152,10 @@ const { courseCode, courseTitle } = Astro.props;
       const rect = wrapper.getBoundingClientRect();
       const x = Math.max(-1, Math.min(1, ((event.clientX - rect.left) / rect.width - 0.5) * 2));
       const y = Math.max(-1, Math.min(1, ((event.clientY - rect.top) / rect.height - 0.5) * 2));
-      target.rx = y * -10;
-      target.ry = x * 14;
-      target.lx = x * 26;
-      target.ly = y * 18;
+      target.rx = y * -12;
+      target.ry = x * 18;
+      target.lx = x * 10;
+      target.ly = y * 7;
       requestRender();
     });
     wrapper.addEventListener("pointerleave", resetCamera);
