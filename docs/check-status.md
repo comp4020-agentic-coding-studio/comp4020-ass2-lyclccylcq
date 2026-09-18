@@ -6,8 +6,8 @@ the snapshot only with results actually observed. Fix every newly introduced
 failure before committing; disclose any unchanged baseline failure in the
 handoff and continue working toward a green submission.
 
-Snapshot: 18 September 2026, code baseline `427522a` (documentation edits
-uncommitted when checked).
+Snapshot: 18 September 2026, working tree based on `fd2c7c9`, including the
+uncommitted daylight homepage photograph and backdrop styling.
 
 | Command | Observed result |
 | --- | --- |

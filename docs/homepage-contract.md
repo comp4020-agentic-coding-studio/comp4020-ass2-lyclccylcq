@@ -12,8 +12,11 @@ and new directions in the same contract.
   Course, assessment and policy content remains available through its own
   routes and the navigation.
 - The full-height photographic opening carries the official light-on-dark
-  SlopU logo and course title over an original partner-photography image. Its
-  single twelve-week preview strip sits at the true bottom of the section, with
+  SlopU logo and course title over an original partner-photography image. Use a
+  clean, softly lit daytime scene with open space behind the title; keep the
+  dark editorial tone through targeted gradients, not an underexposed night
+  street or a heavy full-frame black overlay. Its single twelve-week preview
+  strip sits at the true bottom of the section, with
   no spacer, oversized section height or negative-margin overlap below it.
   Square photographs form a staggered editorial stream, not a grid. The left
   side must not be sparse; gaps can vary while the stream stays continuous.
