@@ -1,29 +1,39 @@
 # Your harness
 
-Nothing about the starter is recorded here. The platform under you is fixed and
-documented in `README.md`, and the
+This file holds durable decisions and working rules, not a running status log.
+The fixed platform is documented in `README.md`, and the
 [course website](https://comp.anu.edu.au/courses/comp4020-agentic-coding-studio/)
-publishes this deliverable's brief and spec. Read both before you plan or build;
-what the agent needs to carry from either is your call.
+publishes this deliverable's brief and spec. Read both before substantial work.
+For homepage geometry and visual acceptance use
+[`docs/homepage-contract.md`](docs/homepage-contract.md); for the latest
+observed test baseline use [`docs/check-status.md`](docs/check-status.md).
 
-## How to work in here
+## Decision order and working loop
 
-- Keep the dev server running (`pnpm dev`) so you see changes as you make them.
-- Run `pnpm check` before you push.
-- Open the page in a browser and look at it. The rendered page is the truth;
-  your mental model of it isn't.
-- Record accepted structural and interaction decisions here when they become
-  stable. Do not wait until final handoff and try to reconstruct the design
-  history from a diff.
-- For homepage work, use the real base-path URL
-  `http://localhost:4321/comp4020-ass2-lyclccylcq/`. A root-path preview is not
-  evidence that the deployed route works.
-- When a check fails, read its output before you change anything.
-- Never commit a red state.
-- Never edit a spec test to make it pass. A red test names a contract the
-  implementation hasn't met yet; fix the implementation.
-- Explain before departing. If a substantial decision moves away from the
-  agreed direction, say why before implementing it, not after.
+- The assignment brief, `README.md` and `spec/README.md` define fixed platform
+  and required contracts. Within that boundary, the latest explicit user
+  direction supersedes an earlier student-controlled design decision. Do not
+  defend an outdated aesthetic rule against new feedback; explain any genuine
+  conflict with a fixed requirement before changing direction.
+- For each change: identify whether the request concerns structure, appearance,
+  behaviour or content; reproduce the current state at the real base-path URL
+  and write down the observable success condition; fix the underlying cause in
+  the smallest relevant scope; then inspect the rendered result and regression
+  paths. For a reported bug, reproduce the failing path before the edit and
+  repeat that same path afterward. A root-path preview is insufficient.
+- Keep `pnpm dev` running while designing. Use screenshots or browser states as
+  evidence, not a mental model of the DOM. Check reverse motion, narrow screens,
+  keyboard access, reduced motion and route returns when the change touches
+  them.
+- Once a structural or interaction decision is accepted, update the relevant
+  contract document with the new rule, rationale and verification path. Keep
+  `PROCESS.md` as the retrospective account, not a duplicate rulebook. Do not
+  reconstruct decisions from a final diff.
+- Run `pnpm check` before every push and `pnpm check:evidence` before submission.
+  Read the actual failures and compare them with `docs/check-status.md`. New
+  failures caused by the current work block a commit. An unchanged, unrelated
+  baseline failure is not a pass: document it and disclose it in the handoff.
+  Never alter a spec test, marker or asset hash solely to silence a check.
 
 ## Assignment design constraints (fixed vs. student-controlled)
 
@@ -82,137 +92,32 @@ requirement.
 
 ### Current homepage direction
 
-The camera-to-gallery homepage is now the accepted design direction (established
-across `4b82232` through `75eb717`). Extend it deliberately; do not restore the
-starter homepage sections or replace it with a generic card grid.
-
-- `src/pages/index.astro` intentionally uses `CameraRevealSequence` as the
-  homepage body. Course, assessment and policy material remains available on
-  its dedicated routes through the navigation.
-- The opening is its own full-height section with the official light-on-dark
-  SlopU logo and the real course title over an original photograph of one
-  partner photographing the other. A single bottom-aligned strip previews all
-  twelve weeks and moves continuously from left to right. Its square photographs
-  are staggered into an editorial wall rather than a grid. The left side must
-  begin with useful density rather than a large dead zone; spacing may vary, but
-  the stream should feel continuous across the viewport. Each photograph enters
-  at roughly 62% scale and grows smoothly according to horizontal viewport
-  position, reaching full scale only near the far-right edge. The size gradient
-  is positional, not a set of permanently different card sizes, and images use
-  `object-fit: cover` so the squares never stretch.
-  The strip's lowest edge forms the true bottom of the Home section. Do not add
-  a spacer, oversized section height, or negative-margin overlap between it and
-  the following course-intent section.
-  The visitor must scroll beyond that complete section before reaching the
-  separate camera sequence below it: the camera must never overlap or replace
-  the opening strip. The first frame of the camera section already shows the
-  complete line-art camera centred and occupying most of the viewport. Do not
-  animate the camera upward from below; scrolling begins by materialising that
-  registered drawing in place.
-- A dedicated course-intent statement sits between the opening photo stream and
-  the camera sequence. Preserve that breathing space rather than joining the two
-  interactive sections directly.
-- `CameraIllustration.astro` contains one registered SVG camera. Its complete
-  line-art and rendered-colour layers share the same geometry. Scroll reveals
-  material, shading, leather grain and a moving materialisation highlight on
-  that registered camera: do not animate the drawing as an assembly, swap to a
-  different camera, or introduce a stock camera photograph. Its rendered state
-  is a strict rear elevation of a compact mirrorless body: no exaggerated top
-  perspective or visible elliptical dial faces. Use restrained realistic cues
-  instead—low knurled dial edges, gunmetal shell gradients, a layered central
-  EVF housing, soft rubber eyecup, recessed glass, inset controls, leather grain
-  and proportionate strap lugs. Top and rear command dials must read as mechanical
-  controls, not vents, sliders or controls floating in an extra casing. The red
-  record control stays inside the body silhouette. The body engraving contains
-  only `SLOP 1810`; do not restore a plus mark, location slogan or the full
-  course title there.
-- The illustrated LCD opening is intentionally centred at
-  `420/385/760/420` inside the camera's `1600×1000` SVG viewBox. The invisible
-  `.monitor-anchor` in `StickyCameraStage.astro` must remain registered to
-  `26.25%/38.5%/47.5%/42%`. This shared centre is an interaction invariant: it
-  prevents visible lateral drift while the monitor interpolates from the camera
-  to the viewport. If the monitor geometry ever changes, update the SVG opening,
-  anchor and `MonitorFrame` documentation together, then verify intermediate
-  scroll positions rather than only the endpoints.
-- The rear monitor progresses from dark to illuminated, opens from the centre
-  with left/right shutters, and then expands into the viewport. The camera body
-  scales up strongly with the expanding monitor before fading beyond the frame,
-  leaving the course wall full-screen. The same gallery instance lives inside
-  the monitor throughout; there is no second gallery crossfaded in after
-  expansion.
-- `FullscreenLectureGallery.astro` is the real twelve-week navigation. Its
-  three seamless horizontal streams alternate direction and continue moving
-  while a photograph is selected. Hover or keyboard focus reveals a centred
-  detailed preview; both the photograph and preview lead to the correct week
-  using the configured base path.
-- The twelve original gallery images live in
-  `src/assets/images/gallery/week-01.png` through `week-12.png`. Preserve the
-  one-image-per-week mapping when changing layout or motion.
-- The homepage's expanded menu is a two-column composition: navigation on the
-  left and an original front-view line-art camera on the right. The camera and
-  its lens respond quickly with a clearly visible but controlled pointer-driven
-  tilt, return to neutral when the menu closes or the pointer leaves, never
-  intercept link clicks, and remain static under `prefers-reduced-motion`.
-  The closed toggle visibly says `MENU` beside its icon and changes to `CLOSE`
-  while expanded; do not regress it to an unexplained icon-only control.
-- Motion remains native-scroll-driven and reversible. Do not intercept wheel
-  input or add a second scroll system. `prefers-reduced-motion` must retain a
-  useful static state, and all twelve unique week links must remain reachable
-  by keyboard even though visual clones are used for seamless looping.
-- Astro uses client-side route transitions. Homepage animation modules must be
-  safe to mount, unmount and mount again: initialise immediately and on
-  `astro:page-load`, guard against duplicate setup, and clean up rAF work,
-  observers and window/document listeners on `astro:before-swap`. Re-measure on
-  `pageshow`, resize and observed layout changes. Never repair navigation or
-  Back-button bugs with a full-page reload. The required regression paths are a
-  fresh Home load, Home → internal page → logo → Home, Home → internal
-  page → browser Back → Home, repeated round trips, direct refresh and resize
-  after returning.
+The current baseline is a photographic opening and bottom week stream, a
+separate course-intent statement, then one rear-camera reveal whose monitor
+becomes the twelve-week gallery. The expanded menu uses a front-view line-art
+camera. This direction replaced earlier stacked course layouts, but it remains
+student-controlled: a later explicit user request can revise it. Read
+[`docs/homepage-contract.md`](docs/homepage-contract.md) before homepage,
+camera, gallery or menu work; update that contract when a new direction is
+accepted.
 
 ## The checks
 
-`pnpm check` runs them, and `pnpm check:evidence` is the extra gate before you
-ship. CI runs the same plus links, secrets and the deploy.
+`pnpm check` runs Astro type checking, the production build and the spec tests;
+`pnpm check:evidence` is the extra submission gate. CI also checks links,
+secrets and deployment. A green compiler alone does not validate the homepage:
+use the browser acceptance matrix in
+[`docs/homepage-contract.md`](docs/homepage-contract.md). No browser navigation
+test command exists yet, so do not claim automated coverage for those paths.
 
-For the homepage, a green compiler is not sufficient. Visually check these
-states at the base-path URL before pushing a camera/gallery change:
-
-1. background photograph, course identity and one continuously moving preview
-   strip, with the camera still completely below the viewport;
-2. complete line-art camera already centred in its section with no geometry
-   jump or upward entrance;
-3. leather grain and materialisation highlight resolving into the rendered
-   camera;
-4. fully rendered camera with a dark monitor;
-5. monitor powering on;
-6. left/right shutters opening onto the moving gallery;
-7. camera body and monitor enlarging together, with the monitor remaining
-   horizontally centred, before the body disappears;
-8. full-screen course wall with three continuously looping, alternating rows;
-9. hover and keyboard-focus previews, including a second week to prove the
-   image, title and link update together;
-10. reverse scrolling, a narrow/mobile viewport and reduced motion;
-11. logo navigation, internal navigation, browser Back, repeated return trips,
-    refresh and resize without duplicate animation, blank content or console
-    errors.
-
-As of `75eb717`, Astro type checking reports no errors, and the production
-build, accessibility audit, base-path check and internal-link check pass across
-42 generated pages. `pnpm check` still reports two content-contract gaps
-outside the homepage implementation: only sessions for Weeks 1–2 exist, and
-the linked Week 1 deck is still recognised as starter placeholder content.
-These are outstanding course-content tasks, not reasons to weaken or edit the
-spec tests. Separately, `pnpm check:evidence` still rejects tracked
-`STARTER_CONTENT` markers in both people entries, both session entries and the
-Week 1 deck, plus unchanged starter card, hero and people images. Replace those
-assets and entries deliberately; do not remove markers or change hashes merely
-to silence the gate.
-
-`spec/README.md`, `PROCESS.md` and `reflections/README.md` are in this repo and
-say what they are for.
+[`docs/check-status.md`](docs/check-status.md) holds the latest observed
+results and outstanding baseline failures. It is a dated snapshot, not
+permission to ignore them. Re-run checks and update it with evidence rather
+than copying an old result forward. `spec/README.md`, `PROCESS.md` and
+`reflections/README.md` describe the other assessment artefacts.
 
 ## This file is yours
 
-A starting point, not a rulebook: what you add to it is the harness, and the
-harness is assessed. This file and the sensors you wire into `check` carry
-across the course --- both come with you into next week's repo.
+Keep this assessed harness current as decisions mature. Prefer a short durable
+rule and a link to its detailed contract over repeating a stale status report
+here; the harness and the checks both carry into the next week's repository.
