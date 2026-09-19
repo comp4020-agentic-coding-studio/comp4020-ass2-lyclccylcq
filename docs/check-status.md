@@ -6,8 +6,8 @@ the snapshot only with results actually observed. Fix every newly introduced
 failure before committing; disclose any unchanged baseline failure in the
 handoff and continue working toward a green submission.
 
-Snapshot: 18 September 2026, working tree based on `f6a8934`, including the
-uncommitted homepage course-intent copy, Teaching Team navigation and profiles.
+Snapshot: 19 September 2026, working tree based on `f8dd5a9`, including the
+uncommitted shorter, smoothed homepage camera-reveal sequence.
 
 | Command | Observed result |
 | --- | --- |

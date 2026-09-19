@@ -31,8 +31,12 @@ and new directions in the same contract.
   overlap the opening strip or rise into view from below: its first frame is
   already a complete, centred line drawing occupying most of the viewport.
 - Motion follows native scroll and reverses cleanly. Do not intercept wheel
-  input or create a second scroll system. Reduced motion and no-JS states must
-  remain useful.
+  input or create a second scroll system. The animated camera runway is 390vh
+  on desktop and 350vh on narrow screens; materialisation leads directly into
+  power-on, and the shutters finish opening after roughly one viewport of
+  camera-section travel. Ease only the displayed progress over a few animation
+  frames so discrete mouse-wheel steps do not appear as jumps. Reduced motion
+  and no-JS states must remain useful.
 
 ## Registered camera and course wall
 

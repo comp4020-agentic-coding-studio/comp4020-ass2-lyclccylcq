@@ -15,11 +15,13 @@ import IntroGalleryStrip from "./IntroGalleryStrip.astro";
 // fill the viewport as the camera's body fades and grows past the edges,
 // leaving the gallery (the site's real week navigation) as a full-screen,
 // continuously moving photo wall. One rAF loop (gated by
-// IntersectionObserver) reads native scrollTop every frame and writes a
-// single --progress plus derived, clamped-linear "band" custom properties;
-// every visual change is a pure calc() of those, so scrolling backwards is
-// exactly the reverse of forwards and no wheel/scroll event is ever
-// intercepted. The CSS custom-property *defaults* below already describe
+// IntersectionObserver) reads native scrollTop and eases the displayed
+// progress toward it over a few frames, absorbing discrete mouse-wheel steps
+// without creating a second scroll system. It writes a single --progress plus
+// derived, clamped-linear "band" custom properties; every visual change is a
+// pure function of those, so scrolling backwards remains the exact reverse of
+// forwards and no wheel/scroll event is ever intercepted. The CSS
+// custom-property *defaults* below already describe
 // the finished, non-scrolling state (line art gone, monitor lit and open,
 // gallery visible, monitor still docked/small rather than full-viewport),
 // so prefers-reduced-motion and no-JS share that one static fallback: the
@@ -88,6 +90,17 @@ const { title, kicker, metaLine, weeks } = Astro.props;
     let ticking = false;
     let frame = 0;
     let destroyed = false;
+    let displayedProgress: number | undefined;
+    let lastFrameTime = 0;
+    let snapNextFrame = false;
+    let forceNextFrame = false;
+
+    // A short time-based ease removes the visible stepping of a physical
+    // mouse wheel while staying close enough to the native scroll position to
+    // feel immediate. This is visual interpolation only: no wheel input or
+    // page scroll is captured or rewritten.
+    const progressEaseMs = 48;
+    const progressEpsilon = 0.0004;
 
     // Measured relative to the sticky stage box, not the tall wrapper: the
     // sticky box's *internal* layout never changes with scroll, so this
@@ -109,44 +122,72 @@ const { title, kicker, metaLine, weeks } = Astro.props;
       wrapper.style.setProperty("--mon-height", `${slotRect.height}px`);
     }
 
-    function update(force = false) {
+    function update(timestamp: number) {
       ticking = false;
       frame = 0;
+      const force = forceNextFrame;
+      const snap = snapNextFrame;
+      forceNextFrame = false;
+      snapNextFrame = false;
       if (destroyed || !wrapper.isConnected || (!active && !force)) return;
+
       const rect = wrapper.getBoundingClientRect();
       const runway = rect.height - window.innerHeight;
-      const progress = runway > 0 ? Math.min(1, Math.max(0, -rect.top / runway)) : 0;
+      const targetProgress = runway > 0 ? Math.min(1, Math.max(0, -rect.top / runway)) : 0;
+
+      if (displayedProgress === undefined || snap) {
+        displayedProgress = targetProgress;
+      } else {
+        const elapsed = lastFrameTime > 0 ? Math.min(64, timestamp - lastFrameTime) : 16.67;
+        const ease = 1 - Math.exp(-elapsed / progressEaseMs);
+        displayedProgress += (targetProgress - displayedProgress) * ease;
+        if (Math.abs(targetProgress - displayedProgress) < progressEpsilon) {
+          displayedProgress = targetProgress;
+        }
+      }
+      lastFrameTime = timestamp;
+      const progress = displayedProgress;
 
       const band = (start: number, end: number) => Math.min(1, Math.max(0, (progress - start) / (end - start)));
-      const materialize = band(0.04, 0.3);
+      const materialize = band(0.03, 0.18);
 
       wrapper.style.setProperty("--progress", String(progress));
       wrapper.style.setProperty("--camera-y-shift", "0px");
       wrapper.style.setProperty("--b-materialize", String(materialize));
       wrapper.style.setProperty("--b-material-glow", String(Math.sin(Math.PI * materialize)));
       wrapper.style.setProperty("--material-scan-x", `${materialize * 2100}px`);
-      wrapper.style.setProperty("--b-poweron", String(band(0.4, 0.5)));
-      wrapper.style.setProperty("--b-shutter", String(band(0.51, 0.64)));
-      wrapper.style.setProperty("--b-expand", String(band(0.62, 0.84)));
-      wrapper.style.setProperty("--b-camera-exit", String(band(0.75, 0.9)));
-      wrapper.style.setProperty("--b-gallery", String(band(0.73, 0.9)));
+      wrapper.style.setProperty("--b-poweron", String(band(0.2, 0.27)));
+      wrapper.style.setProperty("--b-shutter", String(band(0.26, 0.39)));
+      wrapper.style.setProperty("--b-expand", String(band(0.37, 0.61)));
+      wrapper.style.setProperty("--b-camera-exit", String(band(0.5, 0.69)));
+      wrapper.style.setProperty("--b-gallery", String(band(0.48, 0.66)));
+
+      if (active && Math.abs(targetProgress - displayedProgress) >= progressEpsilon) {
+        schedule();
+      }
     }
 
-    function schedule() {
+    function schedule({ snap = false, force = false }: { snap?: boolean; force?: boolean } = {}) {
+      snapNextFrame ||= snap;
+      forceNextFrame ||= force;
       if (!ticking && !destroyed) {
         ticking = true;
-        frame = requestAnimationFrame(() => update());
+        frame = requestAnimationFrame(update);
       }
+    }
+
+    function onScroll() {
+      schedule();
     }
 
     function onResize() {
       measure();
-      schedule();
+      schedule({ snap: true, force: true });
     }
 
     function onPageShow() {
       measure();
-      update(true);
+      schedule({ snap: true, force: true });
     }
 
     const io = new IntersectionObserver(
@@ -154,7 +195,7 @@ const { title, kicker, metaLine, weeks } = Astro.props;
         active = entry?.isIntersecting ?? false;
         if (active) {
           measure();
-          schedule();
+          schedule({ snap: displayedProgress === undefined });
         }
       },
       { rootMargin: "200px 0px" },
@@ -163,7 +204,7 @@ const { title, kicker, metaLine, weeks } = Astro.props;
     const resizeObserver = "ResizeObserver" in window
       ? new ResizeObserver(() => {
           measure();
-          schedule();
+          schedule({ snap: true, force: true });
         })
       : undefined;
 
@@ -174,7 +215,7 @@ const { title, kicker, metaLine, weeks } = Astro.props;
       cancelAnimationFrame(frame);
       io.disconnect();
       resizeObserver?.disconnect();
-      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onResize);
       window.removeEventListener("pageshow", onPageShow);
       wrapper.classList.remove("is-animated");
@@ -187,11 +228,11 @@ const { title, kicker, metaLine, weeks } = Astro.props;
 
     wrapper.classList.add("is-animated");
     measure();
-    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onResize);
     window.addEventListener("pageshow", onPageShow);
     document.addEventListener("astro:before-swap", cleanup, { once: true });
-    update(true);
+    schedule({ snap: true, force: true });
   }
 
   setupCameraRevealSequence();
@@ -300,7 +341,7 @@ const { title, kicker, metaLine, weeks } = Astro.props;
   }
 
   .camera-reveal-sequence.is-animated {
-    min-height: 620vh;
+    min-height: 390vh;
   }
 
   @media (width < 640px) {
@@ -319,7 +360,7 @@ const { title, kicker, metaLine, weeks } = Astro.props;
     }
 
     .camera-reveal-sequence.is-animated {
-      min-height: 500vh;
+      min-height: 350vh;
     }
   }
 
