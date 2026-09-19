@@ -370,6 +370,110 @@ main[data-page="people"] {
   --photo-accent-soft: var(--photo-peach-soft);
 }
 
+/* --- Teaching team portraits: circular, portrait-led and individually
+   framed. Neko's source is vertical, so her crop needs its own focal point;
+   Lion Yuu's transparent black mark needs a light field to remain legible on
+   the dark site. --- */
+
+.person-card {
+  align-content: start;
+  text-align: center;
+}
+
+.person-card .at-card-body {
+  padding-block-start: var(--at-spacing-lg);
+}
+
+.person-avatar {
+  inline-size: clamp(11rem, 28vw, 15rem);
+  aspect-ratio: 1;
+  margin: clamp(1.5rem, 4vw, 2.5rem) auto 0;
+  padding: 0.35rem;
+  border: 1px solid color-mix(in oklch, var(--photo-accent) 62%, white);
+  border-radius: 50%;
+  background: linear-gradient(145deg, color-mix(in oklch, var(--photo-accent) 42%, white), var(--at-bg-elevated));
+  box-shadow:
+    0 1.2rem 2.8rem rgb(0 0 0 / 24%),
+    inset 0 0 0 1px rgb(255 255 255 / 16%);
+}
+
+.person-avatar.at-card-image-frame {
+  overflow: visible;
+  line-height: normal;
+}
+
+.person-avatar-frame {
+  inline-size: 100%;
+  block-size: 100%;
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--photo-ink);
+}
+
+.person-avatar-image {
+  --person-avatar-scale: 1;
+
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  transform: scale(var(--person-avatar-scale));
+  transition: transform 0.35s ease;
+}
+
+.person-avatar--neko-azusa .person-avatar-image {
+  object-position: 52% 20%;
+}
+
+.person-avatar--lion-yuu .person-avatar-frame {
+  background: #f4f0e8;
+}
+
+.person-avatar--lion-yuu .person-avatar-image {
+  --person-avatar-scale: 1.045;
+
+  box-sizing: border-box;
+  object-fit: contain;
+}
+
+.person-avatar--kiroro .person-avatar-image {
+  --person-avatar-scale: 1.14;
+
+  object-position: 50% 65%;
+}
+
+.person-avatar--suika-wang .person-avatar-image {
+  --person-avatar-scale: 1.6;
+
+  object-position: 46% 48%;
+}
+
+.person-avatar--placeholder .person-avatar-frame {
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 35% 30%, color-mix(in oklch, var(--photo-accent) 38%, transparent), transparent 52%),
+    var(--photo-ink);
+}
+
+.person-avatar-initials {
+  color: color-mix(in oklch, var(--photo-accent) 72%, white);
+  font-family: var(--photo-font-display);
+  font-size: clamp(3.5rem, 9vw, 5.75rem);
+  line-height: 1;
+  letter-spacing: -0.06em;
+}
+
+a.person-card:hover .person-avatar-image {
+  transform: scale(calc(var(--person-avatar-scale) + 0.035));
+}
+
+.person-profile-avatar {
+  justify-self: start;
+  margin-block: var(--at-spacing-lg) var(--at-spacing-xl);
+  margin-inline: 0;
+}
+
 /* Homepage: five hand-placed sections, each pinned to one of the same four
    accents (internal variety, still the same controlled system). */
 

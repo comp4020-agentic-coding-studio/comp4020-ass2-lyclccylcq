@@ -1,5 +1,6 @@
 ---
 import { render } from "astro:content";
+import { Image } from "astro:assets";
 import { getPublishedCollection } from "astro-course-university/content";
 import ContentLayout from "astro-theme-university/layouts/ContentLayout.astro";
 import { siteConfig } from "../../site-config";
@@ -26,6 +27,12 @@ const roleLabel = person.data.role ? roleLabels[person.data.role] : undefined;
 // so narrow the alt at the rendering boundary as well.
 const rawPhotoAlt = (person.data as { photoAlt?: unknown }).photoAlt;
 const photoAlt = typeof rawPhotoAlt === "string" ? rawPhotoAlt : "";
+const personInitials = person.data.title
+  .split(/\s+/)
+  .map((part) => part[0])
+  .join("")
+  .slice(0, 2)
+  .toUpperCase();
 // Every page owes a description --- it is what a search result and a shared
 // link show underneath the title.
 const description = person.data.description;
@@ -34,11 +41,38 @@ const description = person.data.description;
 <ContentLayout
   title={person.data.title}
   description={description}
-  heroImage={person.data.photo ?? undefined}
-  heroImageAlt={photoAlt}
+  socialImage={person.data.photo ?? undefined}
+  socialImageAlt={photoAlt}
+  socialType="profile"
   mainAttrs={{ "data-page": "people" }}
   {...siteConfig}
 >
+  <figure
+    class:list={[
+      "person-profile-avatar",
+      "person-avatar",
+      `person-avatar--${person.id}`,
+      !person.data.photo && "person-avatar--placeholder",
+    ]}
+  >
+    <div class="person-avatar-frame">
+      {person.data.photo ? (
+        <Image
+          src={person.data.photo}
+          alt={photoAlt}
+          widths={[160, 240, 320, 480]}
+          sizes="(min-width: 48rem) 15rem, 12rem"
+          width={480}
+          format="webp"
+          class="person-avatar-image"
+          loading="eager"
+        />
+      ) : (
+        <span class="person-avatar-initials" aria-hidden="true">{personInitials}</span>
+      )}
+    </div>
+  </figure>
+
   <dl>
     {roleLabel && (
       <>
@@ -68,8 +102,12 @@ const description = person.data.description;
         </dd>
       </>
     )}
-    <dt>Contact</dt>
-    <dd>{person.data.contact}</dd>
+    {person.data.contact && (
+      <>
+        <dt>Contact</dt>
+        <dd>{person.data.contact}</dd>
+      </>
+    )}
   </dl>
 
   <Content />

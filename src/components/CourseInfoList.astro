@@ -4,7 +4,7 @@ import { courseMeta } from "../course-config";
 import { formatCourseDate } from "../lib/dates";
 
 const people = await getPublishedCollection("people");
-const convenorEntry = people.find((person) => person.data.role === "convenor");
+const convenorEntries = people.filter((person) => person.data.role === "convenor");
 ---
 
 <dl class="course-info-list">
@@ -31,8 +31,12 @@ const convenorEntry = people.find((person) => person.data.role === "convenor");
     <dd>To be confirmed</dd>
   </div>
   <div>
-    <dt>Convenor</dt>
-    <dd>{convenorEntry ? convenorEntry.data.title : "To be confirmed"}</dd>
+    <dt>{convenorEntries.length === 1 ? "Convenor" : "Convenors"}</dt>
+    <dd>
+      {convenorEntries.length > 0
+        ? convenorEntries.map((person) => person.data.title).join(" · ")
+        : "To be confirmed"}
+    </dd>
   </div>
 </dl>
 

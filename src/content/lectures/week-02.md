@@ -7,7 +7,7 @@ description:
 week: 2
 date: 2027-03-01
 teachers:
-  - idris-fenn
+  - neko-azusa
 related:
   - sessions/02-first-review
   - assessments/assessment-01
