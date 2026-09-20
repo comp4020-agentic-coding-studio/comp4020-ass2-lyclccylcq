@@ -1,9 +1,9 @@
 ---
-title: Partner Photography Is Not a Photoshoot
-description:
-  Good photos are useless if you ruin the date. The course prologue — four
-  recognisable partner-photography failures, and why this job was never the
-  same as a commercial portrait session.
+title: Does Your Girlfriend Like the Photos You Take?
+description: >-
+  Start with the question that matters in everyday partner photography: not
+  whether a portrait is technically correct, but whether your girlfriend
+  likes it, wants to share it, and enjoyed making it with you.
 week: 1
 date: 2027-02-22
 teachers:
@@ -13,231 +13,242 @@ related:
   - sessions/01-getting-started
 ---
 
-## The Problem Already Exists
+## Start With Her Answer
 
-No theory yet. Four scenes first, because anyone who has ever photographed a
-partner will recognise at least one of them.
+Think about the last time your girlfriend asked you to take a photo while you
+were out together.
 
-### The Tourist Photo
+- Did she keep the first photo?
+- Did she ask you to take it again?
+- Did you understand what she wanted changed?
+- Did the photography improve the day, or become the part of the day you both
+  wanted to finish?
 
-Subject dead-centre, landmark squarely behind them, camera held at exactly
-eye height. The photo proves the couple stood in that spot. It says almost
-nothing about what it felt like to be there — and a photo that only proves
-presence is a receipt, not a memory.
+The easiest answer is that the camera or the photographer was not good enough.
+Sometimes that is true. A tilted frame, a blurred face or an awkward crop can
+ruin a photograph immediately. But many arguments begin after the basic
+technical requirements have already been met. The photograph is clear and
+properly exposed. The photographer likes it. The person in the photograph
+still does not.
 
-### The Low-Angle Disaster
+This course begins with that disagreement.
 
-An attempt to make the subject look taller goes wrong: nostrils, a
-foreshortened torso, a chin caught at an angle nobody would choose for
-themselves. The intention was kind. The result is not.
+> A successful everyday portrait is one your girlfriend likes, made in a way
+> that leaves both of you comfortable enough to enjoy the rest of the day.
 
-### The Candid Disaster
+Photographic skill helps achieve that result. It does not define the result by
+itself.
 
-"Just take a candid one, something natural." What comes back is a
-mid-blink, a half-chew, a sentence caught on an unflattering syllable, a
-phone-check, a bend-and-reach for a dropped napkin. The photographer, mildly
-wounded, offers a defence: **"but that's natural."**
+## Question 1: What Counts as a Good Photograph?
 
-It is. **Natural does not automatically mean flattering.** A candid photo is
-still a photo, and it still needs a moment worth catching, not just an
-unposed one.
+Before preference enters the discussion, a portrait needs a usable technical
+foundation.
 
-### The Technically Good Photo They Still Hate
+### The frame looks intentional
 
-Exposure correct, composition clean, background nicely separated, focus
-exactly where it should be, light doing something genuinely nice to the
-scene. The subject asks for it to be deleted anyway.
+The horizon is level when it should be. The subject is not accidentally cut at
+an awkward joint. A lamp post does not appear to grow from her head. Empty
+space and background clutter do not overpower the person the photograph is
+supposed to show.
 
-:::info[Visual placeholder]
-A four-panel contact sheet showing these four failures side by side: the
-dead-centre tourist shot, the unflattering low angle, a mid-blink "candid,"
-and a technically clean portrait with a visibly unhappy subject.
+### The person is clear
+
+The face is in focus. Motion blur appears only when it contributes something.
+The exposure keeps important facial detail. The photograph makes it easy to
+recognise the person and read the expression.
+
+### The moment is usable
+
+The frame avoids a blink, a half-finished sentence or an expression caught
+between two better ones. The photograph does not merely prove that the shutter
+button worked.
+
+These qualities make a photograph technically sound. They create the minimum
+standard from which preference can begin.
+
+:::tip[Technical quality is the floor]
+A straight composition and a clear face can prevent obvious failure. They
+cannot tell you which photograph she will like.
 :::
 
-> If a photograph is technically good but the person in it hates it, is it a
-> successful portrait?
+## Question 2: Why Can a Good Photograph Still Be the Wrong Photograph?
 
-Hold that question. The rest of the semester is the answer.
+Two people can look at the same portrait and judge different things.
 
-## The Three Elements of Portrait Photography
+| The photographer may notice | Your girlfriend may notice |
+| --- | --- |
+| sharp focus and clean exposure | whether the expression feels like her |
+| an interesting background | whether the background distracts from her |
+| dramatic perspective | whether the angle changes her proportions |
+| an unusual crop | whether the photo works for the way she wants to share it |
+| a strong colour grade | whether her skin tone still looks familiar |
 
-There's an old photography joke about what a great portrait needs.
+Neither list is automatically more intelligent or more artistic. The two
+people are answering different questions. The photographer may ask, “Did I
+make an interesting image?” The subject may ask, “Do I like how I look, and do
+I want other people to see this?”
 
-> MODEL. MODEL. MODEL.
+Photography style sits inside this difference. One person may prefer clean,
+bright images with an obvious face. Another may prefer muted colour, movement
+and less direct posing. A technically strong photograph can use the wrong
+style for the person in it.
 
-Treat it as a joke, not a rule — but a joke usually points at something
-true. In a professional portrait or commercial shoot, the person in front of
-the camera very often already knows how to:
+### What people call “straight-male photography”
 
-- face the camera and find their own best angle
-- control their expression on request, and repeat it
-- hold a pose without going stiff
-- take direction and adjust immediately
-- tolerate take after take without losing patience
-- treat the shoot itself as the point of the day
+Complaints about a boyfriend's “straight-male aesthetic” often describe a
+recognisable habit: the photographer records the whole scene, the landmark or
+the activity, while his girlfriend expected a flattering portrait she could
+share. He thinks the photograph accurately records the moment. She thinks he
+failed to notice what mattered about her appearance.
 
-That last one matters as much as the rest. In a professional session,
-photography **is** the appointment. Everyone showed up to make an image, and
-everyone's incentives point the same way.
+It is tempting to turn this into a universal rule about how men and women see.
+That shortcut will fail as soon as the person in front of the camera has a
+different preference. Gendered habits and social-media conventions can shape
+expectations, but they cannot replace a conversation with the actual person.
 
-**Many portrait-photography techniques quietly assume that the subject
-already knows how to be photographed.** That assumption is invisible right
-up until it's wrong.
+> Do not guess what “women like.” Learn what she likes.
 
-## Your Partner Is Not a Model
+## Question 3: Is an Artistic Portrait the Same as a Useful Everyday Photo?
 
-So: what happens when the person in front of the camera never learned any of
-that?
+An artistic portrait may use a silhouette, hide part of the face, embrace
+motion blur, crop unexpectedly or push colour far away from reality. Those
+choices can produce a strong photograph. They can also produce a photograph
+that is difficult to use as a profile image, a travel record or a casual post
+about the day.
 
-They don't know what to do with their hands. They go stiff the instant the
-lens turns toward them. They have no idea which is their better side. They
-feel foolish being told to "turn slightly" or "chin down a bit." A few
-takes in, they've had enough — and everyone involved has a different, firm
-opinion about what actually looks good.
+| Creative portrait | Everyday shareable portrait |
+| --- | --- |
+| may value ambiguity and atmosphere | usually needs a recognisable face and readable expression |
+| may hide detail deliberately | usually keeps the person visually clear |
+| may challenge familiar ideas of beauty | usually works within the subject's own preferred appearance |
+| succeeds as an artwork | succeeds when the subject wants to keep or share it |
 
-None of that is a character flaw. It's the default state of an ordinary
-person who was not hired to model and never asked to learn how. The
-temptation is to solve it by training them — a few tips, some practice, a
-bit more patience next time. Resist it.
+The distinction does not make creative photography less valuable. It means the
+photograph needs a purpose before the photographer chooses a style.
 
-:::tip[The rule]
-Do not ask your partner to become a better model.
-Become a better photographer of ordinary people.
+Ask first:
+
+- Is this photograph an artwork, a travel memory or something she wants to
+  post tonight?
+- Does she want atmosphere, a clear portrait or both?
+- Is the experiment for the photographer, for the subject, or something both
+  people agreed to try?
+
+The same scene may need two different frames: one for the photographer's
+creative idea and one for the person who asked for a photograph.
+
+## Question 4: How Does a Simple Photo Become an Argument?
+
+Most conflicts do not begin with one catastrophic mistake. Several small
+problems accumulate.
+
+### Different viewpoints
+
+The photographer thinks the location and the story matter most. His
+girlfriend thinks her expression, angle or clothing should lead the frame.
+Neither person says this aloud before the first photograph.
+
+### Different ideas of beauty
+
+One person prefers dramatic shadows, wide-angle energy or an unguarded candid.
+The other prefers a controlled angle, clean skin tone and a calm expression.
+The photographer defends the image as “natural” or “artistic” instead of
+asking why she does not like it.
+
+### Failed composition
+
+The horizon tilts, the camera sits too low, the body is cut awkwardly, or the
+background dominates. Repeating the same framing without checking it turns an
+easy correction into ten unwanted versions.
+
+### Failed post-production
+
+Excessive smoothing removes skin texture. Strong saturation changes skin
+tone. Face or body reshaping stops the photograph from feeling honest. Even a
+subtle edit can fail when the person did not ask for it.
+
+### Fatigue changes the conversation
+
+After many attempts, the subject becomes tired of holding an expression and
+the photographer becomes frustrated that nothing seems to work. Directions
+become shorter. Feedback starts to sound like criticism. The next frame now
+records the tension created by the previous frames.
+
+### The date loses its rhythm
+
+A two-minute photo stop expands into twenty minutes. Food gets cold, a booking
+time approaches, or the same location takes over an activity that both people
+originally wanted to enjoy. The photographer keeps trying to rescue the image
+while the experience around it gets worse.
+
+:::info[A common sequence]
+Different expectations lead to repeated attempts. Repetition creates fatigue.
+Fatigue makes communication harsher. The argument appears to be about one bad
+photo, but the whole process produced it.
 :::
 
-Everything from Week 5 onward is what that second sentence actually
-requires.
+## Question 5: What Does Success Need to Protect?
 
-## Partner Photography Is Not Commercial Photography
+Every everyday partner shoot produces two outcomes at the same time.
 
-There's a second, separate reason this isn't a commercial shoot: it isn't
-the only thing happening. A booked portrait session might run like this:
+1. **A photograph.** It should be clear, intentional and appropriate for its
+   purpose. Most importantly, the person in it should want to keep it.
+2. **A shared experience.** Both people should remain comfortable, respected
+   and able to enjoy the activity that the photograph sits inside.
 
-| Time | Activity |
-| --- | --- |
-| 14:00 | Arrive |
-| 14:10 | Preparation |
-| 14:30 | Lighting |
-| 15:00 | Shoot |
-| 17:00 | Finish |
+A technically excellent image cannot repair a miserable afternoon. A happy
+afternoon does not automatically excuse careless photography when someone
+trusted you to make them look good. The task is to protect both outcomes.
 
-A date, or a trip, looks nothing like it:
+The rest of the course will teach composition, perspective, direction, light,
+selection and editing. Week 1 establishes why those skills matter: they help
+you solve ordinary problems without turning your girlfriend into a model or
+turning the date into a commercial production.
 
-| Time | Activity |
-| --- | --- |
-| 10:00 | Breakfast |
-| 11:00 | Museum |
-| 12:30 | Lunch |
-| 14:00 | Walk |
-| 14:15 | "Can you take a photo here?" |
-| 14:17 | Continue the day |
+## Questions to Ask Before Raising the Camera
 
-**Photography is only one activity inside a larger shared experience.** It
-gets a few minutes borrowed from a day that has its own plans, its own
-booking times, and its own mood to protect.
+Use plain questions instead of assumptions.
 
-That changes what "the right call" means. Waiting fifteen minutes for
-slightly better light, camping at one pretty wall, asking for "one more"
-for the fourth time, or nearly missing a dinner reservation for the shot —
-each one might be the correct decision in a studio and the wrong one on a
-date.
+1. **What is this photo for?** A private memory, a post, a profile image and a
+   creative experiment may need different photographs.
+2. **Can you show me one or two examples you like?** References reveal more
+   than “make me look good.”
+3. **Is there an angle, feature or type of edit you like or dislike?** Ask
+   before deciding for her.
+4. **How long do we want to spend here?** A clear limit protects the rest of
+   the outing.
+5. **Can we review a few frames now?** Early feedback prevents twenty versions
+   of the same mistake.
 
-> The best possible photograph may not be the best decision.
+If she dislikes a frame, “Why?” is more useful than “But this is a good
+photo.” Her answer becomes information for the next photograph.
 
-## The Date Has a Rhythm
+## Practical: The First Photo Conversation
 
-Three questions worth asking before raising the camera at all.
+Bring three photographs taken during ordinary outings:
 
-### When to shoot
+- one you think is technically good;
+- one your girlfriend likes; and
+- one where your opinions differ.
 
-Not every good-looking wall, sunset or doorway needs to become a photo
-stop. Some views are for looking at, not for standing in front of.
+For each photograph, answer four questions:
 
-### How long to shoot
+1. Is the composition intentional and the person clear?
+2. What does the photographer value in this frame?
+3. What does the subject value or dislike?
+4. What small decision could improve both the photograph and the experience?
 
-Two minutes, ten minutes and thirty minutes are three different
-experiences for the person on the other side of the lens, even at the same
-excellent location.
+Finish by writing a short agreement for the next outing: the intended use,
+one visual preference, one editing boundary and a clear stopping condition.
 
-### When to stop
+## Week 1 Conclusion
 
-The next frame might genuinely be better. It might also not be worth what
-getting it costs — a partner's patience, the next item on the day's plan,
-the mood of the hour that follows.
+A good photograph begins with technical competence. A photograph your
+girlfriend likes also needs to match her taste, her intended use and her way
+of seeing herself. A successful shoot protects the mood of the day while it
+produces that image.
 
-> At some point, the next photograph costs more than it is worth.
+The central question for the semester is therefore simple:
 
-## Mood Is Part of the Exposure
-
-A face doesn't hold still for bad news, and it doesn't relax on command
-either. What a photographer says between frames shapes the frame as much as
-the light does — expression, posture, confidence, patience, whether the
-subject still trusts the process by frame thirty.
-
-Some direction actively works against itself:
-
-| Instead of saying | Try |
-| --- | --- |
-| "You look weird like that." | "Let's try a different angle." |
-| "You're too stiff." | "Walk toward me and fix your sleeve on the way." |
-| "No, not like that." | "Don't look at the camera yet." |
-
-This isn't the full directing lesson — that's later in the course. The point
-for now is only this: **the photographer manages not only light and
-composition, but also the emotional conditions in which the photograph is
-made.**
-
-## The Four Systems of Partner Photography
-
-One framework, used for the rest of the semester. A partner photographer is
-always running four systems at once, and a shoot can succeed at some of
-them while failing the others entirely.
-
-| System | You're managing |
-| --- | --- |
-| **Image** | light, framing, perspective, timing |
-| **Person** | comfort, preferences, confidence, appearance |
-| **Moment** | location, timing, activity, pace |
-| **Relationship** | communication, patience, trust, mood |
-
-:::info[Visual placeholder]
-A simple four-quadrant diagram — Image / Person / Moment / Relationship —
-designed as a recurring motif to reuse in later weeks' slides and pages.
-:::
-
-## Practical — The Bad Photo Autopsy
-
-A short, non-graded activity. You'll be given several partner-photography
-failures and asked to diagnose each one using the four systems above:
-IMAGE, PERSON, MOMENT, RELATIONSHIP.
-
-Worked example: a technically excellent sunset portrait, perfectly exposed,
-where the subject's smile plainly doesn't reach their eyes.
-
-| Category | Verdict |
-| --- | --- |
-| IMAGE | successful |
-| PERSON | unsuccessful |
-| MOMENT | questionable |
-| RELATIONSHIP | unsuccessful |
-
-The point isn't to land on one correct answer — reasonable people will
-disagree on "questionable" versus "unsuccessful," and that disagreement is
-the useful part. The point is to show that a failed partner photograph is
-often not a technical photography failure at all.
-
-## Takeaways
-
-- **A technically good portrait can still be a failed partner photograph.**
-- **Professional portrait photography often assumes a subject who already
-  knows how to be photographed.**
-- **Your partner is not a model, and should not need to become one.**
-- **Photography is only one activity inside the larger rhythm of a date,
-  trip, or shared experience.**
-- **You are managing the image, the person, the moment, and the
-  relationship at the same time.**
-
-:::tip[Closing]
-The goal is not to get the photograph at any cost.
-The goal is to get the photograph without costing the experience.
-:::
+> Can you make a photograph she wants to share without making the process
+> something both of you want to forget?

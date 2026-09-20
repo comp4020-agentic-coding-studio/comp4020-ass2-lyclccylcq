@@ -44,6 +44,16 @@ const nextWeek = weekNumber < 12 ? String(weekNumber + 1).padStart(2, "0") : und
   <MetaLine parts={[courseMeta.code, `WEEK ${padded}`, date ? formatCourseDate(date) : "DATE TBC"]} />
 
   {
+    lecture?.data.slides && (
+      <p>
+        <a class="photo-cta" href={withBase(lecture.data.slides)}>
+          Open the slides
+        </a>
+      </p>
+    )
+  }
+
+  {
     !intro && (
       <Callout type="info">
         <p>This page was out of focus. No premise written yet for week {padded}.</p>
@@ -55,16 +65,7 @@ const nextWeek = weekNumber < 12 ? String(weekNumber + 1).padStart(2, "0") : und
     <h2 id="week-lecture">Lecture</h2>
     {
       lecture && lectureRender ? (
-        <>
-          <lectureRender.Content />
-          {lecture.data.slides && (
-            <p>
-              <a class="photo-cta" href={withBase(lecture.data.slides)}>
-                Open the slides
-              </a>
-            </p>
-          )}
-        </>
+        <lectureRender.Content />
       ) : (
         <p>No shots selected. No lecture linked for this week yet.</p>
       )
