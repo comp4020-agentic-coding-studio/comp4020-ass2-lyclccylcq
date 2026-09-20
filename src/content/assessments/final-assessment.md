@@ -3,9 +3,9 @@ title: "Assessment 03: Final Partner Portrait Series"
 description:
   Design, photograph and finish your strongest partner portrait series, then
   submit the final images with partner feedback and your own reflection.
-week: 12
-release: 2027-05-10T00:00:00+10:00
-due: 2027-05-24T23:59:00+10:00
+week: 8
+release: 2027-04-12T00:00:00+10:00
+due: 2027-05-14T23:59:00+10:00
 weight: 40
 marking:
   mode: weighted
