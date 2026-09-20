@@ -356,13 +356,6 @@ main[data-page="assessments"] {
   --photo-accent-soft: var(--photo-lavender-soft);
 }
 
-main[data-page="resources"] {
-  --photo-accent-tint: var(--photo-mint-tint);
-  --photo-accent: var(--photo-mint);
-  --photo-accent-deep: var(--photo-mint-deep);
-  --photo-accent-soft: var(--photo-mint-soft);
-}
-
 main[data-page="people"] {
   --photo-accent-tint: var(--photo-peach-tint);
   --photo-accent: var(--photo-peach);

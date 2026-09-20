@@ -49,7 +49,9 @@ export const collections = {
       .extend({
         week: weekSchema,
         release: z.coerce.date(),
+        releaseLabel: z.string().trim().min(1).optional(),
         due: z.coerce.date(),
+        dueLabel: z.string().trim().min(1).optional(),
         weight: z.coerce.number().positive().max(100),
         marking: z.discriminatedUnion("mode", [weightedMarking, holisticMarking]).optional(),
       })
