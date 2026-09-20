@@ -45,9 +45,6 @@ export const slopCourseMetaSchema = z
 // provisioned, and no other course in the cohort has them. Change the first
 // digit to your course's level (and `level` to match); keep the other three.
 //
-// Title and tagline are settled; the description below is a structural
-// placeholder — it names the shape of the course without deciding the
-// philosophy, weekly topics or assessment detail, which come later.
 export const courseMeta = slopCourseMetaSchema.parse({
   code: "SLOP1810",
   title: "Partner Photography",
@@ -57,9 +54,9 @@ export const courseMeta = slopCourseMetaSchema.parse({
   startDate: "2027-02-22",
   endDate: "2027-05-28",
   description:
-    "Partner Photography is a semester-long photography studio: twelve weeks " +
-    "moving from lecture to practical shoot to review, building toward a " +
-    "final body of work. Course philosophy, weekly topics and assessment " +
-    "detail are still being finalised.",
+    "Partner Photography is a twelve-week, in-person course with one central " +
+    "aim: helping students make photographs their girlfriends will genuinely " +
+    "love. It teaches the complete process before, during and after taking the " +
+    "photos.",
   tags: ["photography", "studio"],
 }) satisfies CourseMetaInput;

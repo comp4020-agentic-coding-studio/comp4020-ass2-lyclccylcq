@@ -21,6 +21,22 @@ const api = JSON.parse(readFileSync(resolve("dist/api/index.json"), "utf8")) as 
 const PROVISIONED_DIGITS = "810";
 
 describe("assignment 2 spec", () => {
+  it.each([
+    ["index.html", "/comp4020-ass2-lyclccylcq/"],
+    ["course/index.html", "/comp4020-ass2-lyclccylcq/course/"],
+    ["weeks/01/index.html", "/comp4020-ass2-lyclccylcq/weeks/"],
+  ])("marks only the current navigation section on %s", (page, expectedHref) => {
+    const html = readFileSync(resolve("dist", page), "utf8");
+    const nav = html.match(/<nav class="at-nav"[\s\S]*?<\/nav>/)?.[0];
+    expect(nav, `navigation not found in ${page}`).toBeDefined();
+
+    const currentLinks = Array.from(
+      nav!.matchAll(/<a href="([^"]+)" aria-current="page">/g),
+      (match) => match[1],
+    );
+    expect(currentLinks).toEqual([expectedHref]);
+  });
+
   it("keeps the SLOP code's provisioned three digits", () => {
     expect(api.course.code).toMatch(/^SLOP\d{4}$/);
     expect(api.course.code.slice(-3)).toBe(PROVISIONED_DIGITS);

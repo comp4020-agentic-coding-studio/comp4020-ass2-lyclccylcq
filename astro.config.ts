@@ -2,16 +2,38 @@ import { defineConfig } from "astro/config";
 import courseGraph from "astro-course-university";
 import universityTheme from "astro-theme-university";
 import { astromotion, deckRemarkPlugins } from "astromotion";
+import { fileURLToPath } from "node:url";
 import { courseMeta } from "./src/course-config.ts";
 import { courseApiCollections } from "./src/site-config.ts";
 import { gitOrigin, resolveDeployment } from "./scripts/pages-base.ts";
 
 // Derived, never hardcoded --- see scripts/pages-base.ts for why.
 const { site, base } = resolveDeployment(process.env, gitOrigin);
+const siteNavPath = fileURLToPath(new URL("./src/components/SiteNav.astro", import.meta.url));
+
+// The upstream nav treats the deployment base path as an ordinary section,
+// which marks Home active on every page when the site lives below /<repo>/.
+// Replace only BaseLayout's private Nav import with the local, base-aware copy.
+const siteNavOverride = {
+  name: "site-nav-override",
+  enforce: "pre" as const,
+  resolveId(source: string, importer?: string) {
+    const normalizedImporter = importer?.replaceAll("\\", "/");
+    if (
+      source === "../components/Nav.astro" &&
+      normalizedImporter?.endsWith("astro-theme-university/layouts/BaseLayout.astro")
+    ) {
+      return siteNavPath;
+    }
+  },
+};
 
 export default defineConfig({
   site,
   base,
+  vite: {
+    plugins: [siteNavOverride],
+  },
   // Pages build as directories, so every route URL ends in a slash. Saying so
   // explicitly makes Astro emit matching links, which keeps the canonical URL
   // and what a visitor clicks in agreement --- otherwise each click costs a

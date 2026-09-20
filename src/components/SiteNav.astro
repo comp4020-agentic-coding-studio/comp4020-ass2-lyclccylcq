@@ -1,0 +1,176 @@
+---
+import Icon from "astro-theme-university/components/Icon.astro";
+import SearchDialog from "astro-theme-university/components/SearchDialog.astro";
+import type { NavLink } from "astro-theme-university/types";
+import { withBase } from "astro-theme-university/url";
+
+export interface NavProps {
+  name: string;
+  links?: NavLink[];
+  search?: boolean;
+  logo?: ImageMetadata;
+  logoDark?: ImageMetadata;
+  logoCompact?: ImageMetadata;
+  logoCompactDark?: ImageMetadata;
+}
+
+type Props = NavProps;
+
+const {
+  name,
+  links = [],
+  search = true,
+  logo,
+  logoDark,
+  logoCompact,
+  logoCompactDark,
+} = Astro.props;
+const currentPath = Astro.url.pathname;
+const homePath = withBase("/");
+---
+
+<nav class="at-nav" aria-label="Main">
+  <div class="at-nav-inner">
+    <a href={import.meta.env.BASE_URL} class="at-nav-brand">
+      {
+        logo ? (
+          <>
+            <span class="at-nav-logo-full">
+              <img
+                src={logo.src}
+                width={logo.width}
+                height={logo.height}
+                alt={name}
+                class:list={["at-nav-logo", { "at-nav-logo--has-dark": !!logoDark }]}
+              />
+              {logoDark && (
+                <img
+                  src={logoDark.src}
+                  width={logoDark.width}
+                  height={logoDark.height}
+                  alt={name}
+                  class="at-nav-logo at-nav-logo--dark"
+                />
+              )}
+            </span>
+            {logoCompact && (
+              <span class="at-nav-logo-compact">
+                <img
+                  src={logoCompact.src}
+                  width={logoCompact.width}
+                  height={logoCompact.height}
+                  alt={name}
+                  class:list={[
+                    "at-nav-logo",
+                    { "at-nav-logo--has-dark": !!logoCompactDark },
+                  ]}
+                />
+                {logoCompactDark && (
+                  <img
+                    src={logoCompactDark.src}
+                    width={logoCompactDark.width}
+                    height={logoCompactDark.height}
+                    alt={name}
+                    class="at-nav-logo at-nav-logo--dark"
+                  />
+                )}
+              </span>
+            )}
+          </>
+        ) : (
+          <span class="at-nav-wordmark">{name}</span>
+        )
+      }
+    </a>
+    {
+      links.length > 0 && (
+        <>
+          <button
+            class="at-icon-button at-nav-toggle"
+            aria-expanded="false"
+            aria-controls="at-nav-menu"
+            aria-label="Menu"
+          >
+            <Icon name="menu" size={20} class="at-nav-icon-open" />
+            <Icon name="xmark" size={20} class="at-nav-icon-close" />
+          </button>
+          <div class="at-nav-links-wrapper" inert>
+            <ul class="at-nav-links" id="at-nav-menu" role="list">
+              {links.map((link) => {
+                const resolved = withBase(link.href);
+                const nestedPath = resolved.endsWith("/") ? resolved : `${resolved}/`;
+                const isActive =
+                  currentPath === resolved ||
+                  (resolved !== homePath && currentPath.startsWith(nestedPath));
+                return (
+                  <li>
+                    <a href={resolved} aria-current={isActive ? "page" : undefined}>
+                      {link.text}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </>
+      )
+    }
+    {
+      search && (
+        <button
+          class="at-icon-button at-search-trigger"
+          aria-label="Search (Cmd+K)"
+          title="Search (Cmd+K)"
+          data-search-trigger
+        >
+          <Icon name="search" size={20} />
+        </button>
+      )
+    }
+  </div>
+  {search && <SearchDialog basePath={import.meta.env.BASE_URL} />}
+</nav>
+
+<script>
+  function setupNav() {
+    for (const toggle of document.querySelectorAll<HTMLButtonElement>(".at-nav-toggle")) {
+      if (toggle.hasAttribute("data-at-nav-initialized")) continue;
+      toggle.setAttribute("data-at-nav-initialized", "true");
+      toggle.addEventListener("click", () => {
+        const expanded = toggle.getAttribute("aria-expanded") === "true";
+        toggle.setAttribute("aria-expanded", String(!expanded));
+        const wrapper = toggle
+          .closest(".at-nav")
+          ?.querySelector<HTMLElement>(".at-nav-links-wrapper");
+        if (wrapper) wrapper.inert = expanded;
+      });
+    }
+    for (const trigger of document.querySelectorAll("[data-search-trigger]")) {
+      if (trigger.hasAttribute("data-at-search-trigger-initialized")) continue;
+      trigger.setAttribute("data-at-search-trigger-initialized", "true");
+      trigger.addEventListener("click", function () {
+        document.dispatchEvent(new CustomEvent("at-search-open"));
+      });
+    }
+    function syncNavInert() {
+      for (const wrapper of document.querySelectorAll<HTMLElement>(".at-nav-links-wrapper")) {
+        const toggle = wrapper
+          .closest(".at-nav")
+          ?.querySelector<HTMLButtonElement>(".at-nav-toggle");
+        if (!toggle || getComputedStyle(toggle).display === "none") {
+          wrapper.inert = false;
+        } else {
+          const expanded = toggle.getAttribute("aria-expanded") === "true";
+          wrapper.inert = !expanded;
+        }
+      }
+    }
+    syncNavInert();
+    if (document.documentElement.dataset.atNavMediaInitialized !== "true") {
+      document.documentElement.dataset.atNavMediaInitialized = "true";
+      matchMedia("(width >= 640px)").addEventListener("change", syncNavInert);
+    }
+  }
+  setupNav();
+  document.addEventListener("astro:page-load", setupNav);
+</script>
