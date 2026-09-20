@@ -53,6 +53,57 @@ dark scheme in
 [`67e74b7`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/67e74b7)
 instead of pretending an untested light theme was a feature.
 
+## Revising the course after the visual system
+
+Once the visual system was stable, the remaining weaknesses were curricular,
+not cosmetic. The initial policy route existed without enough course-specific
+guidance. In
+[`cbf2171`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/cbf2171)
+and
+[`44a47c2`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/44a47c2)
+I turned it into a usable policy surface: academic integrity, extensions and
+respectful practice now lead to the relevant ANU sources; AI retouching of the
+student's own capture is allowed, while generating the submitted image or
+falsifying capture parameters is not. This distinction mattered because a
+generic “AI prohibited” statement would contradict a course that explicitly
+teaches post-production.
+
+The assessment model also became concrete across
+[`c4e267e...2e007d8`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/compare/c4e267e...2e007d8).
+Three assignments contribute 20%, 20% and 40%; ten Week 2–11 tutorials add the
+remaining 20% through one participation mark and one submitted-photo mark each.
+The first task analyses supplied photographs and their date plan, the second
+tests planning and capture without editing, and the final task carries a
+portrait series through post-production before partner feedback and
+self-reflection. Moving the final task to a Week 8 release and Week 12 Friday
+deadline gave that complete process a defensible span. I removed the Resources
+route in
+[`a41b584`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/a41b584)
+because it duplicated material without serving a distinct task; completeness
+did not justify an unnecessary page.
+
+Week 1 then changed from a conventional introduction into the question the
+whole course needed to answer: “Does your girlfriend like the photos you
+take?” In
+[`7afaa5f`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/7afaa5f)
+the lecture, practical and deck distinguish technical correctness from subject
+preference, art photographs from everyday shareable images, and one failed
+frame from the fatigue and disrupted date around it. The repeated
+“good-looking person” joke exposes how much published portraiture relies on a
+trained model; the follow-up asks students to observe an ordinary partner's
+preferred angle and help expression and body confidence develop together. The
+slide link now appears before the lesson so the web page can remain a readable
+version without hiding the teaching presentation.
+
+Finally,
+[`39bc7ec`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/39bc7ec)
+carried the homepage's photographic language into the Weeks index. Each week
+card now uses its matching gallery photograph with a legible overlay, while the
+course-intent paragraph gains an intentional break before “Across twelve
+weeks”. This was a small interface change, but it made the route students use
+to enter the curriculum feel connected to the opening rather than like a
+fallback content grid.
+
 ## Model capability or agent framework?
 
 This work made me question whether agent quality comes from the base model or
@@ -70,9 +121,11 @@ failure.
 
 I repeated fresh load, reverse scroll, logo return, browser Back, refresh and
 resize at both marking viewports, including keyboard and reduced-motion paths.
-The final observed state builds 54 pages; all five spec tests, accessibility,
-base-path, link and evidence checks pass. The dated commands and remaining
-manual boundary are recorded in
+The current observed state builds 54 pages; all eight automated tests,
+accessibility, base-path, internal-link and deck checks pass. Astro type
+checking reports no errors and retains one pre-existing unused-type hint in
+`MetaLine.astro`. The dated submission baseline and remaining manual boundary
+are recorded in
 [`8cb6800`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/8cb6800)
 and the [verification snapshot](docs/check-status.md). Green checks established the
 floor; I accepted the result only when the course's voice, interaction and

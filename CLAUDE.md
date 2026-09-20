@@ -103,6 +103,14 @@ student-controlled: a later explicit user request can revise it. Read
 camera, gallery or menu work; update that contract when a new direction is
 accepted.
 
+The intent statement is deliberately paced in two beats: the second begins on
+a new line with “Across twelve weeks”. The standalone Weeks index extends the
+same image-led language by filling Week 01–12 cards with the corresponding
+`src/assets/images/gallery/week-01.png` through `week-12.png` photographs.
+Keep the dark overlays, visible week labels and base-path-safe card links when
+changing that grid; the photograph may crop, but its text and focus state must
+remain legible.
+
 ### Responsive geometry and media
 
 - A clean desktop render is never evidence that a page fits on a phone. At both
@@ -143,6 +151,45 @@ accepted.
   reachable from Course. Supporting experiences—the social card, people pages
   and 404 recovery actions—must use the same voice, base-path-safe links,
   responsive checks and accessible labels as the core course pages.
+
+### Current teaching, assessment and policy decisions
+
+- Week 1 begins with “Does your girlfriend like the photos you take?” and uses
+  questions to distinguish a technically sound photograph, a photograph the
+  subject likes, and an artistic image from a useful everyday image. It treats
+  failed composition or editing, mismatched viewpoints, fatigue and disruption
+  to the date as one connected experience rather than isolated camera errors.
+- The Week 1 page remains a readable lesson while its deck is the live teaching
+  version. Keep the **Open the slides** action near the start of the week page.
+  The deck's “a portrait needs three things: a good-looking person, a
+  good-looking person, and a good-looking person” line is a joke that opens a
+  serious comparison: professional models already manage expression and body
+  position, while an ordinary partner and photographer need to improve
+  together. Observation—including asking which side of the partner's face they
+  prefer—is a core relationship skill, not a beauty rule.
+- Assessment weights are fixed by the accepted course design: Assessment 01 is
+  20%, Assessment 02 is 20%, Assessment 03 is 40%, and ten marked tutorials
+  contribute the remaining 20%. Each Week 2–11 tutorial awards one mark for
+  participation and one for the photograph submitted during that tutorial.
+- Assessment 01 releases on the Monday of Week 2 and is due Monday of Week 4 at
+  23:59; Assessment 02 releases Monday of Week 4 and is due Monday of Week 7 at
+  23:59; Assessment 03 releases Monday of Week 8 and is due Friday of Week 12 at
+  23:59. Keep front matter, cards, detail pages and prose consistent when any
+  date changes. All assessment grading language uses the official ANU grade
+  bands linked from the assessment index.
+- The Resources route was intentionally removed because it was not required by
+  the brief and duplicated teaching material. Do not restore it as placeholder
+  navigation; add a resource surface only when it has a distinct course task.
+- Policies must link to the current authoritative ANU source rather than
+  inventing a local university process. Academic integrity cites the ANU
+  Student Academic Integrity Policy and Academic Integrity Rule; extension
+  guidance links to ANU's Extenuating Circumstances page; respectful practice
+  links to the ANU Student Code of Conduct.
+- AI-assisted editing of a photograph the student captured is permitted. The
+  prohibited boundary is generating the submitted photograph from scratch or
+  fabricating/changing capture settings, parameters or EXIF metadata. Preserve
+  that distinction across policy and assessment copy; Assessment 02 still
+  separately requires unedited original captures because that is the task.
 
 ## The checks
 
