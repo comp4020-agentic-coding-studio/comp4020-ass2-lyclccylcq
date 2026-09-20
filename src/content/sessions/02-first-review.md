@@ -1,17 +1,19 @@
 ---
-title: Plan the Day, Not Only the Photograph
+title: Build the Date and Shoot Plan
 description:
-  Build a realistic photo plan inside a date or shared outing, protecting the
-  experience while still finding worthwhile moments.
+  Turn seasonal research, a location scout, preparation time and two short
+  photo windows into a realistic outing that protects both light and energy.
 week: 2
 date: 2027-03-01
 teachers:
   - lion-yuu
   - suika-wang
 spec:
-  - your plan names an activity and route rather than only a picturesque location
-  - it identifies two short photo windows and a clear stopping condition
-  - it includes a weather, light or energy fallback
+  - your plan uses current seasonal and location research
+  - it protects preparation, travel, food and rest time
+  - it identifies no more than two short photo windows and a stopping condition
+  - every prop or extra item has a reason connected to weather, comfort or the visual idea
+  - it includes an easier fallback for crowds, weather or fatigue
 related:
   - lectures/week-02
   - assessments/assessment-01
@@ -19,22 +21,64 @@ related:
 
 ## Before the session
 
-Choose a real outing you could take with a partner. Bring its route, timing,
-booking constraints and two reference images. Note when the person is likely
-to have the most energy and when photography would become intrusive.
+Choose one real outing you could take with your partner. Bring:
+
+- current evidence of what the location looks like in this season;
+- opening hours, transport time and expected crowd information;
+- two reference photographs that show the intended mood rather than poses to
+  copy exactly; and
+- an honest estimate of how long both people need to get ready.
+
+If you can visit the location safely before class, bring three phone snapshots:
+the intended background, the likely light direction and an easier covered or
+shaded alternative. If a scout is not practical, use maps and recent images and
+mark the questions that still need checking.
 
 ## In the session
 
-Map the outing as a shared day first and a photographic opportunity second.
-Mark two locations where a short stop fits naturally into the activity. For
-each stop, decide what light you expect, how long you will spend and what will
-make you move on.
+### 1. Test the research
 
-Pairs then exchange plans and test them against three disruptions: the weather
-changes, the location is crowded, or the partner does not want another photo.
-Revise the plan without turning the outing into a production schedule.
+Partners check whether each plan answers four basic questions: what is there
+now, when it is accessible, when it is least crowded, and what happens if the
+expected view is unavailable.
+
+### 2. Build the day backwards
+
+Begin with the most important photo window, then add travel, getting-ready
+time, meals, rest and the activity itself. Students planning sunset or blue
+hour must show how the daytime schedule protects enough energy for it.
+
+### 3. Pack with a reason
+
+Make a short list of weather, comfort and story items. A transparent umbrella,
+book, flower, spare layer or insect repellent belongs on the list only when the
+location or concept explains it. Remove anything that adds more carrying and
+decision-making than value.
+
+### 4. Stress-test the plan
+
+Exchange plans and draw two disruptions:
+
+- the location is crowded;
+- preparation takes forty minutes longer;
+- rain begins before the main photo window;
+- your partner is tired before blue hour; or
+- the planned prop or outfit does not feel comfortable on the day.
+
+Revise the route without rushing the person or turning the fallback into a
+second full production.
 
 ## Afterwards
 
-Submit a one-page field plan containing the route, two photo windows, a backup
-and the sentence you will use to ask before beginning. Bring it to Week 3.
+Submit a one-page date and shoot plan containing:
+
+1. the purpose and current seasonal research;
+2. the route, preparation buffer and departure time;
+3. no more than two short photo windows;
+4. planned food or rest;
+5. the weather, comfort and prop list;
+6. one easier fallback; and
+7. a clear condition for putting the camera away.
+
+The strongest plan is not the one with the most locations. It is the one both
+people could realistically enjoy.

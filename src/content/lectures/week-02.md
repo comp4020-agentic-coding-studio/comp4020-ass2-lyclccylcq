@@ -1,9 +1,8 @@
 ---
-title: Planning the Day, Finding the Moment
+title: Plan the Date Before the Photograph
 description:
-  Shoot during the date, not instead of it. How time of day, weather,
-  location and a partner's own energy decide which photographic style will
-  work — before any lens, pose or camera setting does.
+  Research the season, scout the location, protect time for getting ready and
+  build soft-light photo windows into a day that both people can still enjoy.
 week: 2
 date: 2027-03-01
 teachers:
@@ -13,343 +12,229 @@ related:
   - assessments/assessment-01
 ---
 
-## The Light Was Perfect. The Date Wasn't.
+## A Good Photograph Starts Before You Leave Home
 
-A couple spends the afternoon walking around. The photographer wants to wait
-for golden hour, because the light will be better then. By the time it
-arrives:
+Imagine planning a sunset portrait at a famous garden. You arrive late because
+the trip took longer than expected. The flowers students saw online finished
+blooming two weeks ago. The best path is closed, the remaining viewpoint is
+crowded, and your girlfriend had to rush her makeup because nobody agreed on a
+departure time. By sunset, both of you are already tired.
 
-- the partner is tired
-- they're hungry, having walked for hours on an empty stomach
-- posing has stopped being interesting to them
-- the photographer is rushing because the light is already fading
-- both people are now a little frustrated with each other
+The camera has not caused any of these problems. The photograph is failing
+because the day around it was not planned.
 
-The photograph that finally gets taken may be technically excellent. The
-half hour that produced it was not a good time.
+> The goal is not to organise a date around a photograph. It is to make room
+> for a photograph inside a date worth enjoying.
 
-> What is the point of perfect light if the person no longer wants to be
-> photographed?
+Week 2 treats research, timing, preparation and energy as photographic
+decisions. A good plan cannot guarantee perfect weather or a perfect
+expression. It can prevent avoidable stress and leave enough flexibility for
+both people to respond to the day they actually have.
 
-Partner photography runs on two clocks at once.
+## Research the Season, Not Just the Destination
 
-**The clock of the light** moves toward its best moment on a schedule the sun
-sets, not the photographer. **The clock of the person** moves toward
-tiredness, hunger and impatience on a schedule the day sets, not the
-photographer either.
+A location that looked beautiful in somebody else's photograph may not look
+the same this week. Before proposing an outing, search for information that is
+specific to the current season and date:
 
-:::tip[The rule for this week]
-The best time to photograph your partner is not simply when the light is
-best. It is when good light and a willing person overlap.
+- Which gardens, streets, beaches or lookouts are visually interesting now?
+- Are blossoms, autumn colour, markets, decorations or temporary installations
+  currently present?
+- What are the opening hours, booking rules and access restrictions?
+- How busy is the location likely to be on that day and at that time?
+- Where does the light come from in the morning and evening?
+- Is there shade, shelter or an indoor alternative if the weather changes?
+- How long will transport, parking and walking actually take?
+
+Use official venue information for opening and access rules. Maps, recent
+visitor photographs, weather forecasts and location-tagged posts can help you
+understand the current appearance of a place. Check when an image was made;
+last year's flower season is not evidence that the same view exists today.
+
+:::tip[Research for the person as well as the picture]
+A beautiful location may still be a poor choice if it requires an exhausting
+walk, has nowhere to sit, offers no privacy, or does not suit the clothes and
+photographs your partner wants.
 :::
 
-:::info[Visual placeholder]
-Comparison 4 of 5 — gorgeous golden-hour light next to a subject who is
-visibly tired, cold or impatient. The point of the pair is that ideal light
-does not compensate for poor timing in the date; a technically perfect
-frame can still document a moment nobody enjoyed.
+## Know When You Need to Scout
+
+For a few casual photographs during an ordinary outing, online research may be
+enough. If you are planning a deliberate portrait session, visit the location
+before the shoot whenever possible.
+
+A useful scout answers practical questions that attractive online photographs
+usually hide:
+
+1. **Where can the photographer stand?** A good background is useless when a
+   road, fence or crowd prevents the required camera position.
+2. **Where can the subject stand comfortably?** Check the ground, wind,
+   privacy, traffic and whether the pose would block other people.
+3. **What does the light do at the intended time?** Note direct sun, open shade,
+   reflections, artificial lighting and where the sun will disappear.
+4. **What is the backup?** Find a covered walkway, café window, arcade or second
+   nearby background before rain or crowds make the decision for you.
+
+Take simple reference photographs with your phone and record the time. The
+scout is not a rehearsal for every pose. It removes uncertainty so that the
+actual outing can feel less like a production.
+
+## Give the Day a Real Departure Time
+
+“We will go in the afternoon” is not a schedule. Work backwards from the light
+or activity you care about and include the time the day really needs:
+
+- getting dressed, doing hair and makeup, and changing an outfit if planned;
+- travel, parking, walking and finding the exact meeting point;
+- queues, bookings, meals and rest;
+- a small delay that does not immediately destroy the photo window; and
+- enough time to stop photographing without ruining the rest of the plan.
+
+Do not announce the departure time after the photographer is already ready.
+Agree on it in advance and leave a comfortable preparation buffer. Rushing
+somebody through makeup or clothing choices often creates tension before the
+first frame, and that tension will return when the camera appears.
+
+## Put Portraits Where the Light Is Kind
+
+Early morning and late afternoon or evening are often the easiest natural-light
+periods for portraits. The lower sun produces gentler facial shadows than
+midday light, while the environment can feel calmer and less visually harsh.
+This is an advantage, not an absolute rule: weather, buildings and shade can
+change the result.
+
+### Morning
+
+Morning can combine soft light with fewer people. For a popular garden,
+lookout, market street or landmark, arriving near opening time may matter more
+than owning a better lens. The compromise is an earlier wake-up and preparation
+time, so both people need to agree that the quieter location is worth it.
+
+### Late afternoon and sunset
+
+Late light often suits warm, romantic portraits, but it creates a short window.
+Arrive early enough to walk to the exact spot, settle in and make a few test
+frames. If the photographer begins looking for parking when the good light
+starts, the plan is already late.
+
+### Midday
+
+Midday is not forbidden. It simply needs a different plan. Use open shade,
+covered streets, cafés or indoor activities, and save the close portraits for a
+more suitable stop. Do not make your partner stand facing hard overhead sun
+while squinting because the itinerary says a portrait must happen there.
+
+:::tip[Popular place, earlier arrival]
+When a photograph depends on a clean background, arriving early is often the
+simplest crowd-control technique. Waiting for every stranger to leave during
+the busiest hour wastes the date and tests everybody's patience.
 :::
 
-Everything below is about noticing that overlap, and about what to do when
-it's smaller than you hoped.
+## Blue Hour Must Be Earned by the Day Before It
 
-## Light Changes the Face Before You Touch a Setting
+Blue hour can create beautiful cool ambient colour, city lights and a strong
+sense of place. It also arrives after an entire day has already used the
+subject's energy.
 
-This is the most important idea in the lecture, so it's worth stating
-plainly: natural light is not just "enough" or "not enough." Where it comes
-from and how hard it falls changes the face itself.
+If evening or blue-hour photographs are the priority, do not fill the daytime
+schedule with continuous walking, shopping and repeated photo stops. Include a
+proper meal, somewhere to sit, and a period when nobody is performing for the
+camera. Consider beginning the date later rather than expecting somebody to
+look fresh after ten hours outside.
 
-The same person, in the same clothes, holding the same expression, looks
-different depending on the light because it changes:
+A workable evening sequence might be:
 
-- how deep the eye sockets look
-- whether there's a shadow under the nose or the chin
-- how visible skin texture becomes
-- how much contrast sits across the face
-- whether the person is squinting
-- whether the person is physically comfortable enough to look natural at all
-
-**Before you change the lens, the pose or the camera settings, changing the
-light can already change how a face looks.** A beginner who gets a
-disappointing portrait usually blames the camera, the lens, the subject, or
-the pose. Very often none of those was the problem — the light was.
-
-## The Midday Problem
-
-"Don't shoot at noon" is a rule students hear constantly and rarely
-understand. Here is why it's true often enough to be worth saying.
-
-Around midday, the sun sits close to directly overhead. Light falling almost
-straight down onto a face behaves in a specific, unflattering way:
-
-- the forehead and the bridge of the nose catch the most light
-- the eye sockets fall into shadow, sometimes losing detail entirely
-- a hard shadow forms under the nose
-- a second hard shadow collects under the chin and jaw
-- the contrast between lit and shadowed areas is sharp rather than gradual
-- skin texture — pores, fine lines, blemishes — becomes more visible under
-  hard, direct light than it would under softer light
-
-> At midday, the brightest part of the face may become the forehead while
-> the eyes disappear into shadow.
-
-And the problem isn't only visual. Strong overhead sun also makes the
-*subject* harder to work with: uncomfortable, squinting rather than looking
-naturally at the camera, sweating, impatient to get back into the shade.
-
-:::info[Visual placeholder]
-Comparison 1 of 5 — the same subject, same spot, photographed in direct
-midday sun versus in open shade a few metres away. The point of the pair is
-the eye sockets and forehead: show the harsh top-down shadow pattern next to
-the same face lit evenly.
-:::
-
-This connects directly to the four systems from Week 1. A difficult light
-doesn't stay a technical problem — it becomes a PERSON problem (squinting,
-discomfort) and a RELATIONSHIP problem (an impatient subject, a photographer
-who keeps asking for "one more" in light that isn't cooperating) almost
-immediately.
-
-## Midday Is Difficult, Not Forbidden
-
-None of this means midday photography is impossible. It means the default
-plan — a soft, static, close portrait, subject facing the sun — is fighting
-the conditions. There are better options.
-
-### Find open shade
-
-Building shade, a covered walkway, a large awning, the shaded side of a
-wall, the edge of tree cover — moving a few metres often replaces hard
-top-down light with something soft and even. One caution: shade under a
-tree with gaps in the leaves can throw dappled light across a face, which
-reads as messier than plain midday sun. Look for shade that's even, not
-shade that's just shade.
-
-### Change the subject's orientation
-
-Instead of facing the subject straight into the overhead sun, try side
-light, backlight, or side-backlight. Turning the body relative to the sun,
-rather than trying to out-wait it, is often enough to stop the squinting and
-soften the shadow pattern.
-
-### Change the photograph instead of fighting the light
-
-If the light itself is hard, a soft dreamy close-up was probably the wrong
-goal to begin with. Hard light supports its own set of styles well:
-movement, sunglasses, graphic shadows, strong contrast, architecture,
-energetic street photography, wider shots where the environment carries
-more of the frame than the face does.
-
-:::tip[Principle]
-Do not fight the light. Choose a photograph the light can support.
-:::
-
-## Comparison — A Sunny Day
-
-:::info[Visual placeholder]
-Comparison 2 of 5 — two treatments of the same hard midday sun.
-:::
-
-| Aspect | Bad match | Better match |
+| Time | Plan | Why it helps |
 | --- | --- | --- |
-| Approach | Soft, static, romantic close portrait, facing the sun | Dynamic, energetic photography that uses the hard light |
-| What it looks like | Subject standing still, asked to relax and look soft | Subject walking, turning, interacting with the space, maybe wearing sunglasses |
-| What goes wrong / right | Squinting, heavy facial shadows, harsh skin texture, a stiffly posed and visibly uncomfortable subject | Strong shadows and contrast read as energy, not as a mistake; movement hides the squint; wider framing uses the light instead of exposing its problems |
+| Late afternoon | Meet after both people have prepared without rushing | The shoot does not begin with stress |
+| Before sunset | Walk, eat or have a drink near the location | Travel risk is removed and energy is protected |
+| Golden hour | Make the clear, flattering portraits first | The important result is secured while light and energy are available |
+| Blue hour | Make a short set using city lights or the evening atmosphere | The special look has a defined window rather than taking over the night |
+| Afterwards | Put the camera away and continue the date | Photography has a clear ending |
 
-The point isn't "sunny weather is bad." It's that **sunny weather supports a
-different visual language** than an overcast one — and the mismatch, not
-the sun itself, is what produces the bad photo.
+## Pack for the Weather and the Story
 
-## Comparison — An Overcast Day
+Preparation is not limited to camera equipment. Small objects can solve a
+weather problem, give the hands something natural to do, or make the planned
+photograph feel specific to the outing.
 
-Cloud cover behaves like an enormous diffusion layer between the sun and the
-ground. It softens shadows, lowers contrast, keeps skin tone stable, and
-makes exposure far less dependent on exactly which direction the photographer
-is facing. Beginners often read a grey sky as bad luck. It usually isn't.
+### Useful weather and comfort items
 
-:::info[Visual placeholder]
-Comparison 3 of 5 — the same overcast light, used two different ways.
-:::
+- a transparent umbrella that protects against rain without hiding the face;
+- a spare layer or coat for temperature changes;
+- comfortable shoes for travel, with the planned shoes changed into on site;
+- water, tissues and simple makeup touch-up items;
+- insect repellent for gardens, water, grass and warm evenings; and
+- a small bag for personal items that should not appear in the frame.
 
-| Aspect | Poor match | Better match |
-| --- | --- | --- |
-| Approach | Trying to force dramatic, hard-directional light or a golden glow that the sky simply isn't producing | Quiet, static, soft, intimate portraiture that the diffused light already supports |
-| What it looks like | Chasing a rim light or a warm backlight that isn't there | Close portraits, still poses, gentle expression, muted colour, detail shots |
-| What goes wrong / right | The result feels flat and disappointing next to the photographer's mental image of what the shot should look like | The mood reads as calm and intentional rather than as a compromise |
+### Simple props with a reason
 
-> A boring grey day can be easier for portraits than a spectacular blue-sky
-> noon.
+- a book for a café, library or quiet park scene;
+- a flower or small bouquet when it fits the date and visual idea;
+- a drink, ticket, map or other object already connected to the activity; and
+- one clothing layer or accessory that can create a second look without a full
+  wardrobe change.
 
-Overcast weather isn't inferior to sun. It supports a different style, the
-same way midday sun does.
+Props are most useful when they belong to the story or help a person move
+naturally. Do not carry five unrelated objects and ask your partner to perform
+with each one. Agree on the idea first, and keep the bag light enough that it
+does not become another source of fatigue.
 
-## Weather Changes the Photograph, Not Just the Odds of It Happening
+## Plan the Date in Blocks, Not as One Long Shoot
 
-The same logic extends past sun and cloud. Weather should change the visual
-plan, not automatically cancel the shoot.
+A good day alternates activity, rest and short photographic windows. It does
+not keep the camera active from departure until home.
 
-:::info[Visual placeholder]
-Comparison 5 of 5 — four small examples side by side: sunny, cloudy, rainy
-and windy, each shot in the visual style suited to it. Arrange these as
-equal alternatives, not as a best-to-worst ranking.
-:::
+For each proposed photo stop, write down:
 
-| Condition | Instead of forcing the original plan, consider | Watch for |
-| --- | --- | --- |
-| Rain | Umbrellas, reflections in wet pavement, shop windows, cafés, covered arcades, closer and more intimate framing | Trying to recreate a sunny outdoor portrait anyway |
-| Wind | Hair and clothing movement, a more dynamic, energetic frame | Any pose that depends on controlled hair or a delicate, still arrangement |
-| Heat | Shorter shooting windows before fatigue and sweat set in; makeup wears faster than plans do | Patience running out well before the photographer expects |
-| Cold | Visible physical discomfort, stiff posture, real tension in the shoulders and hands; limited time outside before that shows | Asking for "just a few more minutes" past the point the subject can hold still comfortably |
+- the purpose of the picture;
+- the expected light and crowd level;
+- the maximum time you will spend;
+- the prop or clothing choice, if one is genuinely needed;
+- what happens immediately before and after the stop; and
+- the condition that makes you abandon or shorten it.
 
-:::tip[Principle]
-Bad weather is often just the wrong weather for the photograph you planned.
-:::
+One carefully planned ten-minute window can produce better expressions than an
+hour of repeated, unstructured attempts. Between windows, put the camera away.
+Eat, talk, travel and enjoy the activity without treating every background as
+unfinished work.
 
-## Light Has a Clock
+## Every Plan Needs an Easier Version
 
-The visual character of natural light also changes across the day — not as
-a solar-position lecture, but as a set of practical consequences worth
-recognising in the moment.
+Weather changes, transport runs late, popular places fill up and people become
+tired. A fallback should reduce effort rather than reproduce the same ambitious
+shoot somewhere else.
 
-| Time | What the light tends to do | Tends to suit | Tends to fight |
-| --- | --- | --- | --- |
-| Early morning | Lower angle, quieter locations, fewer people, cooler and softer atmosphere | Casual travel shots, street walks, breakfast scenes, calm portraits | Anything that needs a crowd or warmth |
-| Midday | High sun, strong contrast, hard shadows, bright open environments | Dynamic photography, architecture, graphic compositions, energetic street scenes | Soft close-up portraiture facing the sun |
-| Late afternoon / golden hour | Lower sun, softer facial shadows, easy side light and backlight, warm colour, more separation from the background | The classic romantic portrait — for good reason | A short window, popular spots getting crowded, and the temptation to build the whole day around ten minutes of light |
-| Blue hour / evening | Stronger environmental mood, city lights, cooler ambient tone, more technical difficulty | Atmosphere and place, saved for later weeks' technique | Confident handheld portraiture without more light knowledge than this course has covered yet |
+| Problem | Easier response |
+| --- | --- |
+| The landmark is crowded | Use a tighter frame, a nearby side street, or return early another day |
+| It begins raining | Use the transparent umbrella, reflections, a covered arcade or a café window |
+| Preparation takes longer | Drop the first photo stop instead of rushing the person |
+| Your partner is tired | Make one agreed portrait now, or stop and keep the planned activity |
+| The light does not match the idea | Change the style or save that concept for another day |
 
-Golden hour earns its reputation honestly — but treating it as automatically
-"the best" is exactly what created the opening scene of this lecture. A
-gorgeous ten-minute window is only useful if the person in front of the
-camera is still willing to be in it.
+Planning succeeds when it helps both people make a calm decision. It fails when
+the written itinerary becomes more important than how the day actually feels.
 
-## Choose the Picture the Day Can Support
+## A One-Page Plan Is Enough
 
-The original plan was grass, warm backlight, golden-hour couple portraits.
-The actual day is overcast, lightly raining, and cold.
+Before the outing, you should be able to fit the essentials on one page:
 
-A weak response keeps chasing the original photograph anyway — waiting out
-the rain, forcing the couple back onto the wet grass, hoping the light
-improves. A stronger response changes the visual idea entirely: a café
-window portrait, reflections in a wet street, a quiet close-up in muted
-tones, a covered arcade instead of the open field.
+1. **Purpose:** What kind of memory or portrait are we trying to make?
+2. **Current research:** What is actually available in this season and on this
+   date?
+3. **Route:** Where are we going, and how long will travel and walking take?
+4. **Preparation:** When do we start getting ready and when do we leave?
+5. **Photo windows:** Which one or two short periods have the best combination
+   of light, space and energy?
+6. **Comfort and props:** What do we need for weather, clothing and the idea?
+7. **Fallback:** What is the easier alternative?
+8. **Stopping condition:** When does the camera go away?
 
-:::tip[Principle]
-Planning is not about guaranteeing that the original plan happens. Planning
-is knowing when to abandon it.
-:::
+The plan is there to protect the experience, not control it. Research gives you
+better options. Scouting removes uncertainty. Good timing protects light and
+energy. Thoughtful preparation prevents small discomforts from becoming the
+main story of the day.
 
-## The Date Has Its Own Schedule
-
-Week 1 already established that partner photography borrows a few minutes
-from a day with its own plans. Planning the day means taking that seriously
-before the camera ever comes out: booking times, meal windows, travel time
-between locations, queues, opening hours, how the weather is expected to
-change, and how many stops are actually realistic without turning the date
-into an itinerary.
-
-That reframes the question a photographer should be asking at any given
-spot. It isn't only:
-
-**Is this a good place to take a photo?**
-
-It's also:
-
-**Does stopping here make sense for the day we're having?**
-
-A beautiful wall isn't worth much if stopping there means missing a dinner
-booking, or arriving at the next place too rushed to enjoy it.
-
-## Energy Is a Photographic Resource
-
-Physical energy has to be planned for the same way light does. Walking for
-hours, missing a meal, carrying bags, being too hot or too cold, waiting too
-long between frames, or being asked for "one more" repeatedly — all of it
-changes a person's posture, expression, patience, confidence and general
-willingness to cooperate.
-
-:::tip[Principle]
-You are scheduling energy, not just locations.
-:::
-
-There's no universal rule for exactly when to place the important shots —
-early, before a long walk, after a break, before dinner rather than after
-several tiring activities. The goal is awareness: know that the same person
-who happily poses at 1pm may not have that in them by 6pm, regardless of how
-good the light gets.
-
-## Mood Is Also a Schedule
-
-Zooming out from energy to emotional state: does the partner actually want
-to be photographed right now? Has a run of failed attempts already produced
-some frustration? Is the light disappearing fast enough that the
-photographer is rushing?
-
-:::tip[Principle]
-Urgency is visible in portraits.
-:::
-
-A rushed photographer tends to produce a rushed, tense subject — and this is
-exactly when it happens most: short lighting windows like sunset put time
-pressure on the photographer, which shows up on the other side of the
-camera as pressure on the subject.
-
-## Shooting Windows
-
-Not every good background deserves the same amount of time. It helps to
-classify a stop roughly before committing to it:
-
-| Window | Roughly | What it's for |
-| --- | --- | --- |
-| Quick capture | 1–3 minutes | A few frames grabbed while already doing something else |
-| Short stop | 5–10 minutes | Enough to adjust position and try a couple of variations, then keep moving |
-| Key location | Deliberately longer | One of the day's actual planned photographic moments — chosen in advance, not stumbled into |
-
-:::tip[Principle]
-Not every good background deserves twenty minutes of your date.
-:::
-
-The point of naming the window before stopping is that it stops every
-interesting doorway or nice patch of light from silently expanding into a
-full impromptu photoshoot.
-
-## Practical — Plan a Date, Not a Shoot
-
-A short, non-graded planning exercise.
-
-A couple has a Saturday date running from 1pm to 8pm. The forecast: sunny
-early afternoon, becoming overcast, with possible light rain in the evening.
-The day includes lunch, one main activity, some walking, and dinner. They'd
-also like to come home with a few genuinely good photographs.
-
-Design the day's plan. It should include:
-
-- the route
-- meal timing and travel time between stops
-- the lighting conditions likely at each point in the day
-- two or three realistic shooting windows
-- a visual style suited to the conditions expected at each window
-- one backup location
-- one photographic idea to abandon outright if conditions don't support it
-- how rest and energy are accounted for
-
-Then answer, in your own words: **why does this plan protect both the
-photographs and the date?**
-
-## Takeaways
-
-- **Natural light changes how a face looks before the camera settings do.**
-- **Midday light is difficult because it creates hard top-down shadows and
-  uncomfortable conditions — not because noon is magically forbidden.**
-- **Different weather supports different visual styles, not a ranking from
-  good to bad.**
-- **Do not fight the conditions. Choose a photograph the conditions can
-  support.**
-- **Light changes with time — but so do people.**
-- **You are scheduling energy, not just locations.**
-- **You are taking photos during the date, not sacrificing the date to take
-  photos.**
-
-:::tip[Closing]
-Plan for the photograph. Protect the day.
-:::
+> Plan enough that you can pay attention to your partner when the photograph
+> begins.
