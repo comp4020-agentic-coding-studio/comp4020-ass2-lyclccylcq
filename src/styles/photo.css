@@ -714,3 +714,39 @@ body:has(main[data-page="home"]) .at-nav-links a[aria-current="page"] {
     grid-row: 1;
   }
 }
+
+/* The still background and animated courier use the same 1672:941 canvas.
+   Both layers therefore scale with `contain` as one composition instead of
+   drifting apart or being cropped on differently shaped screens. Keeping the
+   GIF in CSS prevents Astro's image pipeline from flattening the animation. */
+.at-hero[aria-label="Page not found"] {
+  height: min(56.28vw, calc(100svh - 5rem));
+  min-height: 20rem;
+  background: #050505;
+}
+
+.at-hero[aria-label="Page not found"] .at-hero-image {
+  object-fit: contain;
+}
+
+.at-hero[aria-label="Page not found"]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  background: url("../assets/images/delivery-404.gif") center / contain no-repeat;
+  filter: drop-shadow(0 0.75rem 1.5rem rgb(0 0 0 / 45%));
+  pointer-events: none;
+}
+
+.at-hero[aria-label="Page not found"] .at-hero-content {
+  z-index: 2;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .at-hero[aria-label="Page not found"]::after {
+    background-image: none;
+  }
+}

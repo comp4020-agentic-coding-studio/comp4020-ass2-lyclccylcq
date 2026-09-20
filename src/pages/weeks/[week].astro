@@ -82,16 +82,6 @@ const nextWeek = weekNumber < 12 ? String(weekNumber + 1).padStart(2, "0") : und
     }
   </section>
 
-  <section aria-labelledby="week-before">
-    <h2 id="week-before">Before class</h2>
-    <p>What to bring or prepare beforehand — to be added.</p>
-  </section>
-
-  <section aria-labelledby="week-after">
-    <h2 id="week-after">After class</h2>
-    <p>What to do or hand in afterwards — to be added.</p>
-  </section>
-
   <nav class="week-pager" aria-label="Week navigation">
     {prevWeek ? <a href={withBase(`/weeks/${prevWeek}/`)}>&larr; Week {prevWeek}</a> : <span />}
     <a href={withBase("/weeks/")}>All weeks</a>

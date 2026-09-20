@@ -1,36 +1,40 @@
 ---
-title: First review
+title: Plan the Day, Not Only the Photograph
 description:
-  The second session, where work made in week 1 meets an audience for the first
-  time
+  Build a realistic photo plan inside a date or shared outing, protecting the
+  experience while still finding worthwhile moments.
 week: 2
 date: 2027-03-01
 teachers:
-  - neko-azusa
+  - lion-yuu
+  - suika-wang
 spec:
-  - work from week 1 is running and can be shown in under two minutes
-  - you can name the one decision you are least sure about
+  - your plan names an activity and route rather than only a picturesque location
+  - it identifies two short photo windows and a clear stopping condition
+  - it includes a weather, light or energy fallback
 related:
+  - lectures/week-02
   - assessments/assessment-01
 ---
 
-<!-- STARTER_CONTENT: replace this session, then remove this comment. -->
-
-Replace this page. It is here so the sessions listing sorts by week, the detail
-route renders a second spec, and the related block has an edge into the
-assessment collection.
-
 ## Before the session
 
-Bring the work from week 1 and the one decision you are least sure about.
+Choose a real outing you could take with a partner. Bring its route, timing,
+booking constraints and two reference images. Note when the person is likely
+to have the most energy and when photography would become intrusive.
 
 ## In the session
 
-Short demos, then feedback aimed at the decision rather than the polish. What
-makes a review worth attending is that the feedback changes what someone does
-next, so build in the time to act on it.
+Map the outing as a shared day first and a photographic opportunity second.
+Mark two locations where a short stop fits naturally into the activity. For
+each stop, decide what light you expect, how long you will spend and what will
+make you move on.
+
+Pairs then exchange plans and test them against three disruptions: the weather
+changes, the location is crowded, or the partner does not want another photo.
+Revise the plan without turning the outing into a production schedule.
 
 ## Afterwards
 
-If attendance or participation is worth marks, say so here and link the rule to
-the [assessment page](/assessments/) rather than restating it.
+Submit a one-page field plan containing the route, two photo windows, a backup
+and the sentence you will use to ask before beginning. Bring it to Week 3.
