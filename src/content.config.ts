@@ -48,6 +48,7 @@ export const collections = {
     schema: courseNodeSchema
       .extend({
         week: weekSchema,
+        release: z.coerce.date(),
         due: z.coerce.date(),
         weight: z.coerce.number().positive().max(100),
         marking: z.discriminatedUnion("mode", [weightedMarking, holisticMarking]).optional(),

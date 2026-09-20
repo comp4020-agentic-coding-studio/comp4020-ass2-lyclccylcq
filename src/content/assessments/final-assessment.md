@@ -1,43 +1,62 @@
 ---
-title: Final Assessment
+title: "Assessment 03: Final Partner Portrait Series"
 description:
-  The capstone — a placeholder brief for the larger piece of work the
-  semester builds towards
+  Design, photograph and finish your strongest partner portrait series, then
+  submit the final images with partner feedback and your own reflection.
 week: 12
-due: 2027-05-28T12:00:00+10:00
+release: 2027-05-10T00:00:00+10:00
+due: 2027-05-24T23:59:00+10:00
 weight: 40
 marking:
-  mode: holistic
-  description:
-    The final assessment is judged as a whole against the brief, with
-    particular attention to whether the result stands alone and whether its
-    scope fits the semester that produced it.
+  mode: weighted
+  criteria:
+    - name: Final partner portrait series
+      weight: 80
+    - name: Partner feedback and self-reflection
+      weight: 20
 spec:
-  - submitted by the deadline, in the format named below
-  - it stands on its own, without you there to explain it
-  - it answers the brief rather than restating it
+  - the project demonstrates the complete process from design through capture and post-production
+  - the final edited portrait series represents your highest level of work in the course
+  - partner feedback is collected in an interview after the photographs are finished
+  - the submission includes the final photographs, partner feedback and self-reflection
+  - no separate process statement is required
 ---
-
-Developing. The real brief for the Final Assessment is still being written;
-this page shows the shape every assessment page follows.
 
 ## Brief
 
-> One sentence, again as a blockquote.
+> Bring together the full course to create the strongest portrait series you
+> can make of your partner, from initial design through capture and final
+> post-production.
 
-Say what scope is realistic in the time available.
+This capstone asks you to complete the whole photographic process. Define the
+purpose and visual direction, design the shoot around your partner, make and
+select the photographs, and complete the post-production needed for a coherent
+final series. The submitted images should represent the highest level of your
+partner portrait work at the end of the course.
+
+After the photographs are completely finished, interview your partner about
+the final series. Record their evaluation, including what they are satisfied
+or dissatisfied with and why. Use that feedback as evidence in your own
+critical reflection on the result.
 
 ## Deliverables
 
-The artefact, and whatever a marker needs to run or read it.
+Submit all three components:
 
-## Submission
+1. **Final partner portrait series — 80%.** A coherent set of finished,
+   post-produced photographs that demonstrates the full range of relevant
+   course learning.
+2. **Partner feedback.** An authentic account of the interview conducted after
+   the final photographs were completed.
+3. **Self-reflection.** Your analysis of the final result, informed by the
+   partner's response and your own judgement.
 
-How and where the work is handed in — to be confirmed.
+You do not need to submit a process statement or a step-by-step account of the
+shoot and editing process.
 
-## Examples / References
+## Marking approach
 
-Worked examples and reference material will be linked here once available.
-
-This one demonstrates the alternative marking mode: a holistic explanation
-rather than weighted criteria. The site renders either mode from frontmatter.
+The teaching team awards the complete mark. The final photographs contribute
+80%; the partner's satisfaction as evidenced in their feedback, together with
+the quality of your self-reflection, contributes 20%. Your partner provides
+feedback but does not directly assign the grade.

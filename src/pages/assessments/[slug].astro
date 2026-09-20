@@ -7,7 +7,7 @@ import Callout from "astro-theme-university/components/Callout.astro";
 import ContentLayout from "astro-theme-university/layouts/ContentLayout.astro";
 import MarkingModel from "../../components/MarkingModel.astro";
 import MetaLine from "../../components/MetaLine.astro";
-import { formatCourseDate } from "../../lib/dates";
+import { formatCourseDateTime, formatCourseWeekdayDate } from "../../lib/dates";
 import { courseMeta } from "../../course-config";
 import { graphCollections, siteConfig } from "../../site-config";
 import "../../styles/photo.css";
@@ -31,7 +31,7 @@ const padded = String(assessment.data.week).padStart(2, "0");
   mainAttrs={{ "data-week-number": padded, "data-page": "assessments" }}
   {...siteConfig}
 >
-  <MetaLine parts={[courseMeta.code, `WEEK ${padded}`, `Due ${formatCourseDate(assessment.data.due)}`, `Weight ${assessment.data.weight}%`]} />
+  <MetaLine parts={[courseMeta.code, `Released ${formatCourseWeekdayDate(assessment.data.release)}`, `Due ${formatCourseDateTime(assessment.data.due)}`, `Weight ${assessment.data.weight}%`]} />
   {
     assessment.data.draft && (
       <Callout type="warning">
@@ -41,6 +41,21 @@ const padded = String(assessment.data.week).padStart(2, "0");
       </Callout>
     )
   }
+  <section aria-labelledby="key-dates">
+    <h2 id="key-dates">Key dates</h2>
+    <table>
+      <tbody>
+        <tr>
+          <th scope="row">Release</th>
+          <td>{formatCourseWeekdayDate(assessment.data.release)}</td>
+        </tr>
+        <tr>
+          <th scope="row">Deadline</th>
+          <td>{formatCourseDateTime(assessment.data.due)}</td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
   <Content />
   <SpecList spec={assessment.data.spec}>
     The brief poses the problem and leaves room for a response. The spec is the
