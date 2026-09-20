@@ -22,9 +22,11 @@ observed test baseline use [`docs/check-status.md`](docs/check-status.md).
   paths. For a reported bug, reproduce the failing path before the edit and
   repeat that same path afterward. A root-path preview is insufficient.
 - Keep `pnpm dev` running while designing. Use screenshots or browser states as
-  evidence, not a mental model of the DOM. Check reverse motion, narrow screens,
-  keyboard access, reduced motion and route returns when the change touches
-  them.
+  evidence, not a mental model of the DOM. Reproduce the two marking viewports
+  exactly (1920×1080 desktop and 390×844 phone); a resized browser window or a
+  screenshot cropped to phone width is not equivalent to device emulation.
+  Check reverse motion, keyboard access, reduced motion and route returns when
+  the change touches them.
 - Once a structural or interaction decision is accepted, update the relevant
   contract document with the new rule, rationale and verification path. Keep
   `PROCESS.md` as the retrospective account, not a duplicate rulebook. Do not
@@ -100,6 +102,47 @@ student-controlled: a later explicit user request can revise it. Read
 [`docs/homepage-contract.md`](docs/homepage-contract.md) before homepage,
 camera, gallery or menu work; update that contract when a new direction is
 accepted.
+
+### Responsive geometry and media
+
+- A clean desktop render is never evidence that a page fits on a phone. At both
+  marking viewports inspect the first screen and the entire scroll path, then
+  verify `document.documentElement.scrollWidth === clientWidth`. Text, cards,
+  navigation and controls must reflow without horizontal clipping; do not hide
+  overflow to conceal an oversized child.
+- Diagnose narrow-screen failures structurally. Check fixed widths,
+  `min-width`/`min-height`, grid intrinsic sizing, absolute layers, long
+  unbreakable text and viewport units before adjusting individual offsets.
+  Prefer fluid tracks such as `minmax(0, 1fr)`, bounded `clamp()` sizing and an
+  explicit single-column breakpoint over a desktop composition scaled down as
+  one object.
+- Layered artwork must share one coordinate system. A still background, GIF or
+  overlay that forms one composition uses the same intrinsic canvas, aspect
+  ratio, positioning origin and `contain`/`cover` rule at every viewport. When
+  a figure and its surrounding photographs change size, scale their common
+  wrapper so their spatial relationship does not drift. Recheck after image
+  decode, refresh and resize.
+- Use `cover` only where cropping is intentional, such as photographic hero
+  backgrounds. Use `contain` for transparent character art, camera drawings,
+  wordmarks and other assets whose full silhouette matters. Optimise ordinary
+  raster assets through `astro:assets`; keep an animated GIF outside transforms
+  that would flatten it, and provide a useful reduced-motion fallback.
+
+### Course voice and site-wide presentation
+
+- The course's central claim is that a successful partner portrait reflects
+  care and the subject's wishes before the photographer's artistic ambition.
+  Keep all twelve weeks distinct while carrying that claim through lectures,
+  sessions, assessments and the Week 1 deck. Reject generic “content-shaped”
+  filler even when it satisfies a schema.
+- The accepted visual system is dark-only. `siteConfig.colorScheme` stays
+  `dark`; do not restore the theme toggle or introduce an unreviewed light
+  palette. SlopU's fixed gold brand colour remains an accent rather than a new
+  page background.
+- Navigation exposes Teaching Team as a primary destination and keeps Policies
+  reachable from Course. Supporting experiences—the social card, people pages
+  and 404 recovery actions—must use the same voice, base-path-safe links,
+  responsive checks and accessible labels as the core course pages.
 
 ## The checks
 

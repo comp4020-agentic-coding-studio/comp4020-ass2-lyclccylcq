@@ -1,31 +1,25 @@
 # Check status snapshot
 
-This records observed results, not a waiver for failing tests. Re-run the
-commands after code or content changes, compare the exact failures, and update
-the snapshot only with results actually observed. Fix every newly introduced
-failure before committing; disclose any unchanged baseline failure in the
-handoff and continue working toward a green submission.
+This records observed results, not a waiver for failing tests. Re-run both
+commands after code or content changes and update this file only with results
+actually observed.
 
-Snapshot: 19 September 2026, working tree based on `f8dd5a9`, including the
-uncommitted shorter, smoothed homepage camera-reveal sequence.
+Snapshot: 20 September 2026, based on `67e74b7` plus the current documentation
+updates.
 
 | Command | Observed result |
 | --- | --- |
-| `pnpm check` | Failed: 2 of 5 spec tests failed. Astro type checking had 0 errors and the production build generated 42 pages; accessibility, base-path and internal-link checks passed. |
-| `pnpm check:evidence` | Failed: starter content and assets remain. |
+| `pnpm check` | Passed. Astro type checking reported 0 errors and one existing unused-type hint in `MetaLine.astro`; the production build generated 54 pages; all 5 spec tests passed; accessibility, base-path, internal-link and deck checks passed. |
+| `pnpm check:evidence` | Passed. No starter text or unchanged starter assets remain, and every commit cited by `PROCESS.md` resolves. |
 
-The two `pnpm check` failures are in `spec/assignment-2.test.ts`: only dated
-sessions for Weeks 1 and 2 exist instead of all twelve, and the linked Week 1
-deck remains a starter placeholder. Do not weaken or edit the spec tests to
-make these failures disappear.
+Manual browser verification uses the real base-path URL at the two marking
+viewports, 1920×1080 and 390×844. The exercised matrix covers fresh Home load,
+the complete scroll sequence, reverse scroll, keyboard and reduced-motion
+states, logo return, browser Back, repeated route trips, direct refresh and
+resize after return. The site is intentionally fixed to its designed dark
+scheme; the theme toggle is absent.
 
-The evidence gate reports `STARTER_CONTENT` in both session entries and
-`src/decks/week-01.deck.mdx`. The people entries no longer contain starter
-text, but their portraits are still starter assets. The gate also identifies the
-unchanged starter assets `src/assets/images/card.png`,
-`src/assets/images/hero-home.avif`, and both person images in
-`src/content/people/`. Replace the content and assets deliberately; removing
-markers or changing hashes alone is not completion.
-
-There is no configured automated browser test for the camera/navigation flow.
-Use the manual matrix in [homepage-contract.md](homepage-contract.md) for now.
+There is no configured automated browser-navigation test for the
+camera/gallery lifecycle. The manual matrix in
+[homepage-contract.md](homepage-contract.md) remains required for any change to
+that interaction; do not describe it as automated coverage.
