@@ -4,8 +4,34 @@ import ContentLayout from "astro-theme-university/layouts/ContentLayout.astro";
 import ContactSheetGrid from "../../components/ContactSheetGrid.astro";
 import { siteConfig } from "../../site-config";
 import "../../styles/photo.css";
+import week01 from "../../assets/images/gallery/week-01.png";
+import week02 from "../../assets/images/gallery/week-02.png";
+import week03 from "../../assets/images/gallery/week-03.png";
+import week04 from "../../assets/images/gallery/week-04.png";
+import week05 from "../../assets/images/gallery/week-05.png";
+import week06 from "../../assets/images/gallery/week-06.png";
+import week07 from "../../assets/images/gallery/week-07.png";
+import week08 from "../../assets/images/gallery/week-08.png";
+import week09 from "../../assets/images/gallery/week-09.png";
+import week10 from "../../assets/images/gallery/week-10.png";
+import week11 from "../../assets/images/gallery/week-11.png";
+import week12 from "../../assets/images/gallery/week-12.png";
 
 const lectures = await getPublishedCollection("lectures");
+const weekImages = [
+  week01,
+  week02,
+  week03,
+  week04,
+  week05,
+  week06,
+  week07,
+  week08,
+  week09,
+  week10,
+  week11,
+  week12,
+];
 
 const frames = Array.from({ length: 12 }, (_, i) => {
   const n = i + 1;
@@ -16,6 +42,7 @@ const frames = Array.from({ length: 12 }, (_, i) => {
     title: `Week ${padded}`,
     href: `/weeks/${padded}/`,
     caption: lecture?.data.title,
+    image: weekImages[i],
   };
 });
 ---
