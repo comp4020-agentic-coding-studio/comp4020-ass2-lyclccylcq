@@ -1,82 +1,318 @@
 ---
+import { getPublishedCollection } from "astro-course-university/content";
 import ContentLayout from "astro-theme-university/layouts/ContentLayout.astro";
+import { withBase } from "astro-theme-university/url";
+import { courseMeta } from "../../course-config";
 import { siteConfig } from "../../site-config";
 import "../../styles/photo.css";
 
-const sections = [
-  {
-    id: "attendance",
-    title: "Attendance",
-    body: "Policy to be confirmed.",
-  },
-  {
-    id: "academic-integrity",
-    title: "Academic integrity",
-    body: "Policy to be confirmed.",
-  },
-  {
-    id: "ai-use",
-    title: "AI use",
-    body: "Policy to be confirmed.",
-  },
-  {
-    id: "extensions",
-    title: "Extensions",
-    body: "Policy to be confirmed.",
-  },
-  {
-    id: "accessibility",
-    title: "Accessibility",
-    body: "Policy to be confirmed.",
-  },
-  {
-    id: "equipment",
-    title: "Equipment",
-    body: "Policy to be confirmed.",
-  },
-  {
-    id: "safety",
-    title: "Safety",
-    body: "Policy to be confirmed.",
-  },
-];
+const convenors = (await getPublishedCollection("people")).filter(
+  (person) => person.data.role === "convenor" && person.data.email,
+);
+
+const policyLinks = [
+  ["attendance", "Attendance and participation"],
+  ["consent", "Consent, privacy and sharing"],
+  ["academic-integrity", "Academic integrity"],
+  ["ai-use", "AI use"],
+  ["assessment-support", "Extensions and late work"],
+  ["equipment", "Equipment and files"],
+  ["safety", "Safety and respectful practice"],
+  ["accessibility", "Accessibility and adjustments"],
+] as const;
 ---
 
 <ContentLayout
   title="Policies and support"
-  description="Course-wide rules for attendance, integrity, extensions and support. Still being confirmed."
+  description={`Course expectations for attendance, consent, privacy, integrity, equipment and safe photographic practice in ${courseMeta.code}.`}
   {...siteConfig}
 >
   <div class="policies">
-    {
-      sections.map((section) => (
-        <section aria-labelledby={section.id}>
-          <h2 id={section.id}>{section.title}</h2>
-          <p>{section.body}</p>
-        </section>
-      ))
-    }
+    <aside class="policy-principles" aria-labelledby="policy-principles-title">
+      <p class="policy-eyebrow">The short version</p>
+      <h2 id="policy-principles-title">Care comes before the photograph.</h2>
+      <ul>
+        <li>Ask before photographing, reviewing or sharing an image.</li>
+        <li>Keep photographs private unless permission is explicit.</li>
+        <li>Stop when the person or the situation asks you to stop.</li>
+        <li>Submit your own work and declare every form of assistance.</li>
+      </ul>
+    </aside>
+
+    <nav class="policy-index" aria-label="Policies on this page">
+      <h2>On this page</h2>
+      <ol>
+        {
+          policyLinks.map(([id, title], index) => (
+            <li>
+              <a href={`#${id}`}>
+                <span aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
+                {title}
+              </a>
+            </li>
+          ))
+        }
+      </ol>
+    </nav>
+
+    <div class="policy-sections">
+      <section id="attendance" aria-labelledby="attendance-title">
+        <h2 id="attendance-title">Attendance and participation</h2>
+        <p>
+          This is a fully in-person course. Lectures introduce the week's
+          problem; practical sessions depend on paired exercises, live feedback
+          and reviewing photographs together. Website material supports
+          preparation and revision, but it is not an online replacement for
+          attending class.
+        </p>
+        <p>
+          Arrive prepared for the role assigned that week and bring the
+          requested phone, camera, files or planning material. If illness or
+          another serious circumstance prevents attendance, contact a convenor
+          as early as reasonably possible. The teaching team will explain what
+          can be made up and what depended on being present.
+        </p>
+      </section>
+
+      <section id="consent" aria-labelledby="consent-title">
+        <h2 id="consent-title">Consent, privacy and sharing</h2>
+        <p>
+          Permission to take a photograph is not automatically permission to
+          show it in class, submit it for assessment, publish it online or use
+          it in a portfolio. Treat each use as a separate decision and make sure
+          the person understands where the image will appear.
+        </p>
+        <ul>
+          <li>Ask before the camera comes out and check again if the plan changes.</li>
+          <li>Do not pressure anyone to pose, continue or explain a refusal.</li>
+          <li>Keep classmates' and partners' photographs private by default.</li>
+          <li>Do not download, repost or retain another student's images.</li>
+          <li>
+            If permission is withdrawn before publication or assessment, stop
+            using the image and speak to the teaching team about a replacement.
+          </li>
+        </ul>
+      </section>
+
+      <section id="academic-integrity" aria-labelledby="academic-integrity-title">
+        <h2 id="academic-integrity-title">Academic integrity</h2>
+        <p>
+          Submit photographs you took and edits and written reflections you
+          completed. Collaboration is expected, but the assessable decisions
+          attributed to you must be yours. Credit references, presets, supplied
+          assets and substantial help from another person.
+        </p>
+        <p>
+          Do not submit a photograph taken by your girlfriend, classmate or
+          tutor as your own, invent camera settings or feedback, or present an
+          earlier unrelated shoot as work produced for the assessment.
+        </p>
+      </section>
+
+      <section id="ai-use" aria-labelledby="ai-use-title">
+        <h2 id="ai-use-title">AI use</h2>
+        <p>
+          AI tools may support brainstorming, planning and copy-editing when
+          their use is acknowledged. They must not replace the assessed act of
+          photographing your girlfriend or fabricate evidence of the process.
+        </p>
+        <p>
+          Generating a substitute portrait, inventing partner feedback or EXIF
+          data, and using generative fill to add, remove or rebuild meaningful
+          image content are not permitted unless an assessment brief explicitly
+          says otherwise. Declare any AI-assisted retouching or writing in the
+          submitted process note.
+        </p>
+      </section>
+
+      <section id="assessment-support" aria-labelledby="assessment-support-title">
+        <h2 id="assessment-support-title">Extensions and late work</h2>
+        <p>
+          Assessment pages state the due date and required format. Submit
+          through the named course channel; emailing files to a tutor is not a
+          substitute unless the teaching team has asked you to do so.
+        </p>
+        <p>
+          If circumstances affect your ability to complete the work, use the
+          university's approved extension or adjustment process and contact a
+          convenor before the deadline whenever possible. The applicable
+          university decision takes precedence over informal arrangements.
+        </p>
+      </section>
+
+      <section id="equipment" aria-labelledby="equipment-title">
+        <h2 id="equipment-title">Equipment and files</h2>
+        <p>
+          A phone or camera is suitable unless a weekly task names a specific
+          capability. Choose equipment that can remain part of the date rather
+          than turning it into a production. Bring charged batteries, available
+          storage and the accessories requested for the exercise.
+        </p>
+        <p>
+          Keep at least two copies of assessment photographs and preserve the
+          original files. Equipment failure or a lost memory card does not
+          automatically change a deadline, so contact the teaching team as soon
+          as a problem occurs rather than waiting until submission time.
+        </p>
+      </section>
+
+      <section id="safety" aria-labelledby="safety-title">
+        <h2 id="safety-title">Safety and respectful practice</h2>
+        <p>
+          No photograph requires trespassing, entering traffic, ignoring venue
+          rules or continuing in unsafe weather or light. Check the location,
+          route home and any permission requirements before the date. Stop the
+          exercise if either person feels unsafe or uncomfortable.
+        </p>
+        <p>
+          Respect members of the public and the spaces you use. Do not block
+          paths, photograph bystanders as the main subject without permission,
+          or ask your girlfriend to take a physical risk for the frame.
+        </p>
+      </section>
+
+      <section id="accessibility" aria-labelledby="accessibility-title">
+        <h2 id="accessibility-title">Accessibility and adjustments</h2>
+        <p>
+          Contact a convenor early if a location, equipment requirement, paired
+          role or assessment format creates an access barrier. The teaching team
+          can discuss an accessible location, alternative practical role or
+          approved adjustment without requiring you to disclose personal
+          details to classmates.
+        </p>
+      </section>
+    </div>
+
+    <section class="policy-contact" aria-labelledby="policy-contact-title">
+      <p class="policy-eyebrow">Questions or support</p>
+      <h2 id="policy-contact-title">Contact the course convenors</h2>
+      <p>
+        Contact the convenors for policy clarification, a consent concern or
+        help finding the correct university process. For teaching questions,
+        the full <a href={withBase("/people/")}>teaching team</a> is also listed
+        on the course site.
+      </p>
+      <ul>
+        {
+          convenors.map((person) => (
+            <li>
+              <a
+                href={`mailto:${person.data.email}?subject=${encodeURIComponent(`${courseMeta.code} policy or support question`)}`}
+              >
+                {person.data.title} · {person.data.email}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
   </div>
 </ContentLayout>
 
 <style>
   .policies {
-    max-width: 42rem;
+    max-width: 50rem;
   }
 
-  .policies section + section {
-    margin-block-start: clamp(2rem, 4vw, 3.5rem);
-    padding-block-start: clamp(2rem, 4vw, 3.5rem);
+  .policy-principles,
+  .policy-contact {
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    border: 1px solid var(--at-divider);
+    border-radius: 1rem;
+    background: var(--at-bg-elevated);
+  }
+
+  .policy-principles h2,
+  .policy-contact h2 {
+    margin-block-start: 0.35rem;
+    color: var(--at-text);
+  }
+
+  .policy-eyebrow {
+    margin: 0;
+    font-family: var(--photo-metadata-font, var(--at-font-mono));
+    font-size: var(--at-font-size-xs);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--at-accent);
+  }
+
+  .policy-principles ul,
+  .policy-contact ul {
+    margin-block-end: 0;
+  }
+
+  .policy-index {
+    margin-block: clamp(2.5rem, 6vw, 4rem);
+  }
+
+  .policy-index h2 {
+    font-size: var(--at-font-size-sm);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--at-text-secondary);
+  }
+
+  .policy-index ol {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.65rem 1.5rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  .policy-index a {
+    display: flex;
+    gap: 0.75rem;
+    align-items: baseline;
+    padding-block: 0.5rem;
+    border-bottom: 1px solid var(--at-divider);
+    color: var(--at-text);
+    text-decoration: none;
+  }
+
+  .policy-index a:hover {
+    color: var(--at-accent);
+  }
+
+  .policy-index a span {
+    font-family: var(--photo-metadata-font, var(--at-font-mono));
+    font-size: var(--at-font-size-xs);
+    color: var(--at-text-secondary);
+  }
+
+  .policy-sections section + section {
+    margin-block-start: clamp(2.5rem, 6vw, 4.5rem);
+    padding-block-start: clamp(2.5rem, 6vw, 4.5rem);
     border-top: 1px solid var(--at-divider);
   }
 
-  .policies h2 {
+  .policy-sections h2 {
     font-family: var(--photo-font-display);
-    font-size: var(--at-font-size-lg);
+    font-size: var(--at-font-size-xl);
+    color: var(--at-text);
+  }
+
+  .policy-sections :is(p, li),
+  .policy-contact p {
     color: var(--at-text-secondary);
   }
 
-  .policies p {
-    color: var(--at-text-secondary);
+  .policy-contact {
+    margin-block-start: clamp(3rem, 7vw, 5rem);
+  }
+
+  .policy-contact ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.5rem;
+    padding: 0;
+    list-style: none;
+  }
+
+  @media (max-width: 42rem) {
+    .policy-index ol {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
