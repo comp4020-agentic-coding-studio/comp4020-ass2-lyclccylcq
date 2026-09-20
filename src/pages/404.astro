@@ -1,0 +1,66 @@
+---
+import { Image } from "astro:assets";
+import BaseLayout from "astro-theme-university/layouts/BaseLayout.astro";
+import { withBase } from "astro-theme-university/url";
+import contactTeamArt from "../assets/images/404-contact-team.png";
+import returnHomeArt from "../assets/images/404-return-home.png";
+import heroImage from "../assets/images/hero-404-background-final.png";
+import { siteConfig } from "../site-config";
+import "../styles/photo.css";
+
+const supportHref =
+  "mailto:lion.yuu@anu.edu.au?subject=Partner%20Photography%20website%20support";
+---
+
+<BaseLayout
+  {...siteConfig}
+  title="Page not found"
+  description="The page you were looking for never made it into the final frame."
+  heroTitle="Lost in transit."
+  heroImage={heroImage}
+  heroImageAlt="A fox-eared courier carrying a parcel past a hand-drawn 404 and scattered photographs"
+  mainAttrs={{ "data-page": "not-found" }}
+  unlisted={true}
+>
+  <section class="not-found-copy" aria-labelledby="not-found-explanation">
+    <h2 id="not-found-explanation" class="visually-hidden">Page recovery options</h2>
+    <p class="lead">The page you were looking for never made it into the final frame.</p>
+    <p>It may have moved, or the link may be out of date.</p>
+  </section>
+
+  <nav class="not-found-actions" aria-label="Page recovery options">
+    <a class="not-found-action not-found-action--home" href={withBase("/")}>
+      <span class="not-found-action-art" aria-hidden="true">
+        <Image
+          src={returnHomeArt}
+          alt=""
+          widths={[240, 384, 512]}
+          sizes="(max-width: 640px) 72vw, 20rem"
+          format="webp"
+          loading="lazy"
+        />
+      </span>
+      <strong>Return home</strong>
+      <span>Back to the course</span>
+    </a>
+
+    <a
+      class="not-found-action not-found-action--contact"
+      href={supportHref}
+      aria-label="Contact the site team by email"
+    >
+      <span class="not-found-action-art" aria-hidden="true">
+        <Image
+          src={contactTeamArt}
+          alt=""
+          widths={[240, 384, 512]}
+          sizes="(max-width: 640px) 72vw, 20rem"
+          format="webp"
+          loading="lazy"
+        />
+      </span>
+      <strong>Contact the site team</strong>
+      <span>Send us an email</span>
+    </a>
+  </nav>
+</BaseLayout>
