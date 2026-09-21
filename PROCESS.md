@@ -67,15 +67,41 @@ I encoded stable decisions in `CLAUDE.md`: one course argument, one dark visual
 system, fixed branding, base-path-safe routing, shared responsive geometry and
 exact 1920×1080 and 390×844 review sizes. Automated checks protect the floor:
 course-code digits, twelve week routes, the lecture deck, navigation, assessment
-weighting, accessibility, internal links and base-path behaviour. I deliberately
+weighting, accessibility, internal links and base-path behaviour. Widening that
+suite from eight checks to fifteen
+([`07a55dc`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/07a55dc))
+pinned down the assessment titles and dates, the ten two-mark tutorials, the
+preparation/action/review shape of every practical, the ANU and AI policy
+boundaries, and one descriptive heading per index page. The count mattered less
+than the act of writing them down: each check turns an expectation I had been
+restating in prompts into something the build enforces, so the work depends less
+on a model reading the same requirement the same way twice. I deliberately
 left subjective decisions—whether the writing feels caring, the camera motion
 feels coherent, and the examples serve ordinary partners—to manual review;
 those cannot be reduced honestly to string assertions.
+
+## Comparing agents, not just models
+
+Working the same design problems through two assistants, I consistently got
+stronger results from GPT-5.6 than from Claude Sonnet 5 on comparable prompts.
+I first read that as raw model capability. Comparing their behaviour more
+carefully suggested something narrower: the better runs were better at holding
+vague design intent, connecting a visual judgement to the code that actually
+produced it, reasoning across several files at once, and tracing a fault past
+the component where it first appeared.
+
+Those are habits of the agentic system as much as of the model underneath it—how
+context is gathered and kept, how the project is navigated, which tools get
+used and when, whether the rendered result is inspected rather than assumed, and
+how willingly the loop iterates instead of stopping at the first plausible edit.
+`CLAUDE.md` supports all of that by supplying context, but a document cannot
+navigate, inspect or retry on its own; it can only tell an agent what to care
+about once it does.
 
 ## Acceptance
 
 I tested fresh load, reverse scroll, logo return, browser Back, refresh, resize,
 keyboard navigation and reduced motion at both marking viewports. The current
-site builds 54 pages and passes all eight automated tests plus the evidence
+site builds 54 pages and passes all fifteen automated tests plus the evidence
 gate. I accepted it only when the checks were green **and** the curriculum,
 interaction, failure states and assessment story still felt like one course.
