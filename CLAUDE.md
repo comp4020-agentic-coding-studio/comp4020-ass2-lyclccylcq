@@ -154,13 +154,18 @@ remain legible.
 
 ### Current teaching, assessment and policy decisions
 
-- Week 1 begins with “Does your girlfriend like the photos you take?” and uses
-  questions to distinguish a technically sound photograph, a photograph the
-  subject likes, and an artistic image from a useful everyday image. It treats
+- Week 1 opens on its deck's question, “Does Your Girlfriend Like Your
+  Photos?”, and uses questions to distinguish a technically sound photograph, a
+  photograph the subject likes, and an artistic image from a useful everyday
+  image. It treats
   failed composition or editing, mismatched viewpoints, fatigue and disruption
   to the date as one connected experience rather than isolated camera errors.
 - The Week 1 page remains a readable lesson while its deck is the live teaching
   version. Keep the **Open the slides** action near the start of the week page.
+  Deck background images stay under `src/decks/assets/` and use paths relative
+  to the deck file: Astromotion only copies deck-local assets into the published
+  build. The course spec test resolves every built Week 1 background URL to a
+  real output file so a green build cannot hide missing slide images.
   The deck's “a portrait needs three things: a good-looking person, a
   good-looking person, and a good-looking person” line is a joke that opens a
   serious comparison: professional models already manage expression and body

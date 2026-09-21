@@ -114,6 +114,20 @@ describe("assignment 2 spec", () => {
     expect(real.length, "every linked deck is still the starter placeholder").toBeGreaterThan(0);
   });
 
+  it("ships every Week 1 deck background at the URL used by the built slides", () => {
+    const deck = readBuiltPage("decks", "week-01");
+    const urls = Array.from(
+      deck.matchAll(/background-image:\s*url\(['"]?([^'"\)]+)['"]?\)/g),
+      (match) => match[1],
+    );
+
+    expect(urls.length, "the Week 1 deck has no background images").toBeGreaterThan(0);
+    for (const url of urls) {
+      const outputPath = url.replace(/^\/comp4020-ass2-lyclccylcq\//, "");
+      expect(existsSync(resolve("dist", outputPath)), `missing built deck image: ${url}`).toBe(true);
+    }
+  });
+
   it("preserves the accepted assessment titles, timing and 20/20/40/20 weighting", () => {
     const summary = nodesOfType("assessments")
       .map((node) => ({
