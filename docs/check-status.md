@@ -4,12 +4,12 @@ This records observed results, not a waiver for failing tests. Re-run both
 commands after code or content changes and update this file only with results
 actually observed.
 
-Snapshot: 20 September 2026, based on `67e74b7` plus the current documentation
-updates.
+Snapshot: 21 September 2026, based on `8da4ab2` plus the current assessment-title
+and course-check updates.
 
 | Command | Observed result |
 | --- | --- |
-| `pnpm check` | Passed. Astro type checking reported 0 errors and one existing unused-type hint in `MetaLine.astro`; the production build generated 54 pages; all 5 spec tests passed; accessibility, base-path, internal-link and deck checks passed. |
+| `pnpm check` | Passed. Astro type checking reported 0 errors and one existing unused-type hint in `MetaLine.astro`; the production build generated 54 pages; all 15 spec tests passed; accessibility, base-path, internal-link and deck checks passed. |
 | `pnpm check:evidence` | Passed. No starter text or unchanged starter assets remain, and every commit cited by `PROCESS.md` resolves. |
 
 Manual browser verification uses the real base-path URL at the two marking

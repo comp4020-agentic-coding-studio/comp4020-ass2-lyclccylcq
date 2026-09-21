@@ -1,9 +1,36 @@
 ---
-import MdxPageLayout from "astro-theme-university/layouts/MdxPageLayout.astro";
+import BaseLayout, {
+  type BaseLayoutProps,
+} from "astro-theme-university/layouts/BaseLayout.astro";
 import { siteConfig } from "../site-config";
 import "../styles/photo.css";
+
+const { frontmatter, ...direct } = Astro.props;
+const props = frontmatter ?? direct;
+const {
+  title,
+  description,
+  heroTitle,
+  heroImage,
+  lead = true,
+  ...rest
+} = props as BaseLayoutProps & {
+  heroTitle?: string;
+  lead?: boolean;
+};
+const pageHeading = heroTitle ?? title;
 ---
 
-<MdxPageLayout siteConfig={siteConfig} {...Astro.props}>
+<BaseLayout
+  title={`${title} — ${siteConfig.name}`}
+  description={description}
+  {...siteConfig}
+  {...rest}
+  heroTitle={pageHeading}
+  heroImage={heroImage}
+>
+  <slot name="head" slot="head" />
+  {!heroImage && <h1>{pageHeading}</h1>}
+  {lead && description && <p class="lead">{description}</p>}
   <slot />
-</MdxPageLayout>
+</BaseLayout>
