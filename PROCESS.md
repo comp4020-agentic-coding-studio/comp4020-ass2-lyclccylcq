@@ -1,132 +1,81 @@
 # Process overview
 
-## What I decided a good course should be
+## Defining the course
 
-I built **Partner Photography**, a twelve-week course about photographing with,
-rather than merely of, another person. Its argument is that a photograph the
-subject feels loved in matters more than one that only demonstrates the
-photographer's artistry. The first framework and course routes arrived in
-[`17d0279`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/17d0279);
-the teaching arc in
+I decided that a good course needs more than accurate content. It needs a clear
+purpose, visible progression, assessments aligned with practice, and concrete
+cases that show why a choice fails and how to improve it. I built **Partner
+Photography**, a twelve-week course about photographing with, rather than merely
+of, another person. It does not train professional portrait photographers; it
+helps students plan, communicate and photograph an ordinary partner to produce
+better images and a comfortable shared experience. A technically correct
+portrait is not successful if the subject dislikes it or the process damages
+the day. Technical knowledge serves that relationship rather than replacing it.
+The early structure in
+[`17d0279`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/17d0279)
+and teaching arc in
 [`31c68e7`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/31c68e7)
-moves from consent and planning through direction, body language, light,
-selection and a final partner shoot. Coherence became my acceptance criterion:
-every page had to advance that relationship, not merely fill a schema.
+established that direction, but later revisions made it much more specific.
 
-## Directing the artefact
+Week 1 now begins with “Does she like the photos you take?”, separating
+technical quality, artistic ambition and a partner's everyday preferences
+([`7afaa5f`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/7afaa5f)).
+Weeks 2–3 turn care into preparation: researching locations, pacing a date,
+choosing equipment that will actually be carried, and matching lenses to the
+intended feeling
+([`5b33274`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/5b33274)).
+The final curriculum pass rebuilt Weeks 4–12 around perspective, light,
+composition, exposure, style, communication, movement, collaborative
+selection and restrained editing. It also aligned every practical with that
+progression. Each topic pairs theory with recognisable failures and a practical
+correction: bad distance, harsh overhead light, cluttered backgrounds, vague
+directions or blame. Students compare the
+outcomes and practise a better response instead of only memorising rules. Week
+10's contrasting “photography bibles” use humour to expose blame and show how
+short, genuine encouragement builds confidence
+([`488a02b`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/488a02b)).
 
-I tested pastel, asymmetric editorial and image-led layouts across
-[`f1be349...07daada`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/compare/f1be349...07daada).
-They improved hierarchy but still felt like interchangeable course templates.
-The rear-camera prototype in
-[`d3417c8`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/d3417c8)
-made the interface itself express the subject: scrolling materialises a camera,
-powers its monitor and opens twelve weeks as a moving contact sheet.
-
-Browser testing changed what I accepted. The first photo stream was sparse on
-the left, later tiles stretched, the monitor shifted during expansion, and
-returning through the logo or browser Back could duplicate state. Across
-[`1d6b932...75eb717`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/compare/1d6b932...75eb717)
-I replaced visual guesses with geometry: square tiles follow a positional scale
-ramp; the SVG LCD and DOM anchor share one centre; setup is idempotent; rAF,
-observers and listeners clean up before Astro swaps. Exact 1920×1080 and
-390×844 checks also exposed a second class of failure: a composition could look
-correct in my browser while fixed widths, intrinsic grid sizing or independently
-scaled layers clipped on the phone. The 404 composition repeated that mistake;
-I put its layers on one responsive canvas in
-[`01c3698`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/01c3698).
-I encoded those diagnoses, not one-off offsets, in
-[`8cb6800`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/8cb6800)
-and the [homepage contract](docs/homepage-contract.md).
-
-The final content pass made the visual promise real. Course branding and four
-teaching-team profiles landed in
-[`c51aabe`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/c51aabe),
-the Week 1 deck in
-[`619f885`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/619f885),
-and twelve practical sessions plus original sharing artwork in
-[`01c3698`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/01c3698).
-An illustrated, base-path-safe recovery page
-[`66c8b8a`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/66c8b8a)
-extended the same voice beyond the happy path; I then locked the single designed
-dark scheme in
-[`67e74b7`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/67e74b7)
-instead of pretending an untested light theme was a feature.
-
-## Revising the course after the visual system
-
-Once the visual system was stable, the remaining weaknesses were curricular,
-not cosmetic. The initial policy route existed without enough course-specific
-guidance. In
-[`cbf2171`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/cbf2171)
-and
-[`44a47c2`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/44a47c2)
-I turned it into a usable policy surface: academic integrity, extensions and
-respectful practice now lead to the relevant ANU sources; AI retouching of the
-student's own capture is allowed, while generating the submitted image or
-falsifying capture parameters is not. This distinction mattered because a
-generic “AI prohibited” statement would contradict a course that explicitly
-teaches post-production.
-
-The assessment model also became concrete across
+The assessments test the same arc: analysis (20%), an unedited planned shoot
+(20%), a complete portrait project with partner feedback (40%), and ten
+tutorials combining participation with submitted photographs (20%). Their
+dates and marking logic were made explicit across
 [`c4e267e...2e007d8`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/compare/c4e267e...2e007d8).
-Three assignments contribute 20%, 20% and 40%; ten Week 2–11 tutorials add the
-remaining 20% through one participation mark and one submitted-photo mark each.
-The first task analyses supplied photographs and their date plan, the second
-tests planning and capture without editing, and the final task carries a
-portrait series through post-production before partner feedback and
-self-reflection. Moving the final task to a Week 8 release and Week 12 Friday
-deadline gave that complete process a defensible span. I removed the Resources
-route in
-[`a41b584`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/a41b584)
-because it duplicated material without serving a distinct task; completeness
-did not justify an unnecessary page.
+Policies were also made course-specific: ANU guidance anchors integrity,
+extensions and respectful practice, while AI-assisted retouching is
+distinguished from generating a submitted image or falsifying capture data
+([`cbf2171...44a47c2`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/compare/cbf2171...44a47c2)).
 
-Week 1 then changed from a conventional introduction into the question the
-whole course needed to answer: “Does your girlfriend like the photos you
-take?” In
-[`7afaa5f`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/7afaa5f)
-the lecture, practical and deck distinguish technical correctness from subject
-preference, art photographs from everyday shareable images, and one failed
-frame from the fatigue and disrupted date around it. The repeated
-“good-looking person” joke exposes how much published portraiture relies on a
-trained model; the follow-up asks students to observe an ordinary partner's
-preferred angle and help expression and body confidence develop together. The
-slide link now appears before the lesson so the web page can remain a readable
-version without hiding the teaching presentation.
+## Designing the site as part of the argument
 
-Finally,
-[`39bc7ec`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/39bc7ec)
-carried the homepage's photographic language into the Weeks index. Each week
-card now uses its matching gallery photograph with a legible overlay, while the
-course-intent paragraph gains an intentional break before “Across twelve
-weeks”. This was a small interface change, but it made the route students use
-to enter the curriculum feel connected to the opening rather than like a
-fallback content grid.
+Pastel, editorial and image-led experiments improved hierarchy but still felt
+like interchangeable course templates
+([`f1be349...07daada`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/compare/f1be349...07daada)).
+The rear-camera prototype made the interface express the subject: scrolling
+materialises a camera, powers its monitor and reveals the twelve weeks as a
+moving contact sheet
+([`d3417c8`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/d3417c8)).
+Browser testing then exposed sparse composition, stretched tiles, shifted
+alignment and duplicated navigation state. I replaced visual offsets with
+shared geometry, idempotent setup and lifecycle cleanup across
+[`1d6b932...75eb717`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/compare/1d6b932...75eb717).
+The same course voice now continues through the Week 1 deck, photographic week
+cards and responsive 404 page rather than stopping at the homepage.
 
-## Model capability or agent framework?
+## Turning judgement into a harness
 
-This work made me question whether agent quality comes from the base model or
-its surrounding framework. GPT-5.6 often reached a layout after one prompt,
-while my Sonnet setup needed repeated clarification that I wanted structural,
-not cosmetic, change. This was not a controlled benchmark: tools, context and
-browser feedback differed. The useful conclusion was operational. A capable
-model proposes; a harness preserves judgement. In
-[`b4f4d6d...fd2c7c9`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/compare/b4f4d6d...fd2c7c9)
-I turned feedback into durable rules for lifecycle cleanup, shared geometry,
-responsive media and verification, so later agents did not relearn the same
-failure.
+I encoded stable decisions in `CLAUDE.md`: one course argument, one dark visual
+system, fixed branding, base-path-safe routing, shared responsive geometry and
+exact 1920×1080 and 390×844 review sizes. Automated checks protect the floor:
+course-code digits, twelve week routes, the lecture deck, navigation, assessment
+weighting, accessibility, internal links and base-path behaviour. I deliberately
+left subjective decisions—whether the writing feels caring, the camera motion
+feels coherent, and the examples serve ordinary partners—to manual review;
+those cannot be reduced honestly to string assertions.
 
-## How I knew it was ready
+## Acceptance
 
-I repeated fresh load, reverse scroll, logo return, browser Back, refresh and
-resize at both marking viewports, including keyboard and reduced-motion paths.
-The current observed state builds 54 pages; all eight automated tests,
-accessibility, base-path, internal-link and deck checks pass. Astro type
-checking reports no errors and retains one pre-existing unused-type hint in
-`MetaLine.astro`. The dated submission baseline and remaining manual boundary
-are recorded in
-[`8cb6800`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/8cb6800)
-and the [verification snapshot](docs/check-status.md). Green checks established the
-floor; I accepted the result only when the course's voice, interaction and
-failure states remained coherent under real navigation.
+I tested fresh load, reverse scroll, logo return, browser Back, refresh, resize,
+keyboard navigation and reduced motion at both marking viewports. The current
+site builds 54 pages and passes all eight automated tests plus the evidence
+gate. I accepted it only when the checks were green **and** the curriculum,
+interaction, failure states and assessment story still felt like one course.
