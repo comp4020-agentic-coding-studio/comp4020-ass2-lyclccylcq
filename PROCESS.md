@@ -2,101 +2,96 @@
 
 ## Defining the course
 
-I built **Partner Photography**, a twelve-week course that teaches students to
-take photographs their partner—in the course's framing, their girlfriend—will
-genuinely like. It does not train professional portrait photographers: planning,
-communication and camera technique are tools for that one goal, and for making
-the shoot itself something both people enjoy. The early structure in
-[`17d0279`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/17d0279)
-and teaching arc in
-[`31c68e7`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/31c68e7)
-set that direction; later revisions made it far more specific.
+**Partner Photography** teaches students to take photographs their partner—in
+the course's framing, their girlfriend—actually likes. It does not train
+professional portrait photographers: planning, communication and camera
+technique are tools for that one goal, and for making the shoot itself
+something both people enjoy.
 
-Week 1 now begins with “Does she like the photos you take?”, separating
-technical quality, artistic ambition and a partner's everyday preferences
-([`7afaa5f`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/7afaa5f)).
-Weeks 2–3 turn care into preparation: researching locations, pacing a date,
-choosing equipment that will actually be carried, and matching lenses to the
-intended feeling
-([`5b33274`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/5b33274)).
-The final curriculum pass rebuilt Weeks 4–12 around perspective, light,
-composition, exposure, style, communication, movement, collaborative
-selection and restrained editing. It also aligned every practical with that
-progression. Each topic pairs theory with recognisable failures and a practical
-correction: bad distance, harsh overhead light, cluttered backgrounds, vague
-directions or blame. Students compare the
-outcomes and practise a better response instead of only memorising rules. Week
-10's contrasting “photography bibles” use humour to expose blame and show how
-short, genuine encouragement builds confidence
+The twelve weeks move from why partner photos disappoint, through preparation
+and equipment, into core craft, and then into direction, joint selection and
+restrained editing. I set that skeleton early
+([`17d0279`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/17d0279),
+[`31c68e7`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/31c68e7)),
+but only the final content pass made it specific, pairing each topic with a
+recognisable failure and a practical correction rather than a rule to memorise
 ([`488a02b`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/488a02b)).
-
-The assessments test the same arc: analysis (20%), an unedited planned shoot
-(20%), a complete portrait project with partner feedback (40%), and ten
-tutorials combining participation with submitted photographs (20%). Their
-dates and marking logic were made explicit across
+The assessments follow the same arc, and their dates and marking logic were
+settled across
 [`c4e267e...2e007d8`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/compare/c4e267e...2e007d8).
-Policies were also made course-specific: ANU guidance anchors integrity,
-extensions and respectful practice, while AI-assisted retouching is
-distinguished from generating a submitted image or falsifying capture data
-([`cbf2171...44a47c2`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/compare/cbf2171...44a47c2)).
 
 ## Designing the site as part of the argument
 
-Pastel, editorial and image-led experiments improved hierarchy but still felt
-like interchangeable course templates
+Pastel, editorial and image-led layouts improved hierarchy but still read as
+interchangeable course templates
 ([`f1be349...07daada`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/compare/f1be349...07daada)).
-The rear-camera prototype made the interface express the subject: scrolling
-materialises a camera, powers its monitor and reveals the twelve weeks as a
-moving contact sheet
+The turn came from letting the interface express its subject: scrolling
+materialises a camera, powers its monitor, and opens it into the twelve weeks
+as a moving contact sheet
 ([`d3417c8`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/d3417c8)).
-Browser testing then exposed sparse composition, stretched tiles, shifted
-alignment and duplicated navigation state. I replaced visual offsets with
-shared geometry, idempotent setup and lifecycle cleanup across
-[`1d6b932...75eb717`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/compare/1d6b932...75eb717).
-The same course voice now continues through the Week 1 deck, photographic week
-cards and responsive 404 page rather than stopping at the homepage.
+Browser testing then exposed what the idea had hidden—sparse composition,
+drifting alignment, duplicated navigation state—so I replaced visual offsets
+with shared geometry, idempotent setup and lifecycle cleanup
+([`1d6b932...75eb717`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/compare/1d6b932...75eb717)).
+That photographic language now carries through the Week 1 deck, the week cards
+and the 404 page.
 
 ## Turning judgement into a harness
 
-I encoded stable decisions in `CLAUDE.md`: one course argument, one dark visual
-system, fixed branding, base-path-safe routing, shared responsive geometry and
-exact 1920×1080 and 390×844 review sizes. Automated checks protect the floor:
-course-code digits, twelve week routes, the lecture deck, navigation, assessment
-weighting, accessibility, internal links and base-path behaviour. Widening that
-suite from eight checks to fifteen
+Two things carry decisions between sessions, and they do different work.
+`CLAUDE.md` holds the stable ones—one course argument, one dark visual system,
+fixed branding, base-path-safe routing, shared responsive geometry, the exact
+1920×1080 and 390×844 review sizes—so a new session starts from the current
+direction instead of relitigating it.
+
+The automated checks do something `CLAUDE.md` cannot: they make a requirement
+enforceable. Widening the suite from eight checks to fifteen
 ([`07a55dc`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/07a55dc))
 pinned down the assessment titles and dates, the ten two-mark tutorials, the
 preparation/action/review shape of every practical, the ANU and AI policy
-boundaries, and one descriptive heading per index page. The count mattered less
-than the act of writing them down: each check turns an expectation I had been
-restating in prompts into something the build enforces, so the work depends less
-on a model reading the same requirement the same way twice. I deliberately
-left subjective decisions—whether the writing feels caring, the camera motion
-feels coherent, and the examples serve ordinary partners—to manual review;
-those cannot be reduced honestly to string assertions.
+boundaries, and one descriptive heading per index page. Each of those was
+something I had been restating in prompts and then re-checking by hand. Written
+as a test, it no longer depends on a model reading the same sentence the same
+way on a different day, in a different run, with different context in view; the
+build either agrees or fails.
+
+I deliberately left the subjective decisions—whether the writing feels caring,
+whether the camera motion feels coherent, whether the examples serve ordinary
+partners—to manual review. Those cannot be reduced honestly to string
+assertions.
 
 ## Comparing agents, not just models
 
-Working the same design problems through two assistants, I consistently got
-stronger results from GPT-5.6 than from Claude Sonnet 5 on comparable prompts.
-I first read that as raw model capability. Comparing their behaviour more
-carefully suggested something narrower: the better runs were better at holding
-vague design intent, connecting a visual judgement to the code that actually
-produced it, reasoning across several files at once, and tracing a fault past
-the component where it first appeared.
+While designing the site I worked the same problems through two assistants, and
+GPT-5.6 consistently produced better results than Claude Sonnet 5 from
+comparable prompts. My first reading was the obvious one: a difference in model
+capability.
 
-Those are habits of the agentic system as much as of the model underneath it—how
-context is gathered and kept, how the project is navigated, which tools get
-used and when, whether the rendered result is inspected rather than assumed, and
-how willingly the loop iterates instead of stopping at the first plausible edit.
-`CLAUDE.md` supports all of that by supplying context, but a document cannot
-navigate, inspect or retry on its own; it can only tell an agent what to care
-about once it does.
+Looking more closely, the gap showed up in particular behaviours rather than in
+general fluency. The stronger runs held onto vague design intent instead of
+narrowing it to the nearest literal instruction. They connected a visual
+judgement—this feels sparse, this drifts on scroll—to the code that actually
+produced it. They reasoned across several files at once rather than editing the
+first one that matched. They traced a fault past the component where it
+surfaced to the one causing it. They looked at the rendered result instead of
+assuming the edit had worked, and they kept iterating rather than stopping at
+the first plausible fix.
+
+Listed like that, most of those are not really properties of a model. They are
+properties of the system around it: what context gets gathered and kept, how the
+project is navigated, which tools are reached for and when, whether output is
+inspected or trusted, and how long the loop runs before it declares success. So
+I was not comparing two models. I was comparing two complete agentic coding
+systems, and attributing the whole difference to the weights inside them was the
+wrong inference. `CLAUDE.md` matters here, but its role is bounded: it can tell
+an agent what this project has already decided and what to care about. It cannot
+navigate the repository, run the build, look at the page or try again—those are
+things an agent either does or does not do.
 
 ## Acceptance
 
 I tested fresh load, reverse scroll, logo return, browser Back, refresh, resize,
-keyboard navigation and reduced motion at both marking viewports. The current
-site builds 54 pages and passes all fifteen automated tests plus the evidence
-gate. I accepted it only when the checks were green **and** the curriculum,
-interaction, failure states and assessment story still felt like one course.
+keyboard navigation and reduced motion at both marking viewports. The site
+builds 54 pages and passes all fifteen automated tests plus the evidence gate. I
+accepted it only when the checks were green **and** the curriculum, interaction,
+failure states and assessment story still felt like one course.
