@@ -1,5 +1,5 @@
 ---
-title: Plan the Date Before the Photograph
+title: Plan a Date She Can Enjoy
 description:
   Research the season, scout the location, protect time for getting ready and
   build soft-light photo windows into a day that both people can still enjoy.

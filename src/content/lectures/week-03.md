@@ -1,5 +1,5 @@
 ---
-title: The Camera You Will Actually Carry
+title: Choose the Camera You Will Carry With Her
 description:
   Choose between a phone, compact or interchangeable-lens camera, understand
   portrait focal lengths and build the smallest kit that suits the photograph.

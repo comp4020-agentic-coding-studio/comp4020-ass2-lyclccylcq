@@ -1,39 +1,58 @@
 ---
-title: The Face at 0.5×, 1× and 2×
+title: Translate the Picture Into Direction
 description:
-  Separate focal length from working distance by making a controlled facial
-  perspective comparison with a phone or interchangeable-lens camera.
+  Convert a visual reference into short instructions for place, body, action,
+  gaze and timing, then improve them through subject feedback.
 week: 9
 date: 2027-04-19
 teachers:
   - suika-wang
   - lion-yuu
 spec:
-  - the subject's head remains approximately the same size in every frame
-  - the comparison records both lens setting and photographer distance
-  - your conclusion distinguishes perspective from background compression
+  - the shoot begins with an agreed purpose, feeling and boundary
+  - each direction changes only one or two observable actions at a time
+  - vague phrases are rewritten as place, action, gaze or timing cues
+  - the subject evaluates clarity and comfort before the photographer evaluates the frame
 related:
   - lectures/week-09
-  - assessments/assessment-02
+  - assessments/final-assessment
 ---
 
 ## Before the session
 
-Bring a phone with multiple camera options or a camera with a zoom lens. Ask
-your partner which facial features they feel cameras often exaggerate.
+Bring one reference portrait that both photographer and subject like. Write the
+intended feeling in three words and identify one element the subject does not
+want copied. Prepare five directions without using “natural”, “relax”, “pose”,
+“look good” or “smile”.
 
 ## In the session
 
-Photograph the same head-and-shoulders frame at 0.5×, 1× and 2×, moving the
-camera each time so the face stays a similar size. Mark the floor position for
-both subject and photographer.
+### 1. Make the shared brief
 
-Compare nose, ears, jaw and the visible background. Then repeat one setting as
-an environmental portrait, allowing the location to become part of the image.
-Discuss which change comes from distance and which comes from field of view.
+Agree on purpose, feeling, time limit and one boundary. The subject explains
+what they like in the reference before the photographer explains how to make
+it.
+
+### 2. Translate the image
+
+Break the reference into place, body direction, action, gaze and timing. Give
+one instruction, photograph the result and ask the subject to repeat the words
+they understood.
+
+### 3. Test vague versus specific
+
+Use one deliberately vague prompt, then replace it with a visible action and
+destination. Compare the subject's comfort, movement and expression.
+
+### 4. Practise feedback
+
+After each sequence, name one specific thing that worked before giving the next
+change. Show one representative frame and agree on a single revision.
 
 ## Afterwards
 
-Create a labelled comparison with lens setting, approximate distance and the
-subject's preference. Explain the practical reason for that preference without
-claiming one focal length is universally flattering.
+Submit five final direction lines and a four-frame sequence. Annotate what each
+line controlled and how the subject rated its clarity and comfort.
+
+End with one instruction you removed because it served the photographer's idea
+but did not respect the shared brief.

@@ -1,8 +1,8 @@
 ---
-title: The Partner Shoot
+title: Finish, Approve and Reflect
 description:
-  Run the complete process from shared intent and a short field plan through
-  direction, selection, editing and approved delivery.
+  Complete a consistent edit, agree on retouching and sharing boundaries,
+  collect partner feedback and compare the final series with Week 1.
 week: 12
 date: 2027-05-10
 teachers:
@@ -11,9 +11,10 @@ teachers:
   - kiroro
   - suika-wang
 spec:
-  - the shoot begins from an agreed Partner Photography Profile and field plan
-  - the photographer adapts without sacrificing the subject's comfort or the shared day
-  - the final sequence is selected and approved by photographer and subject together
+  - the final sequence receives a consistent exposure, colour and crop pass
+  - retouching preserves recognition and follows the subject's agreed boundaries
+  - the subject approves the delivered sequence and its permitted uses
+  - partner feedback and self-reflection use specific evidence from the finished work
 related:
   - lectures/week-12
   - assessments/final-assessment
@@ -21,22 +22,47 @@ related:
 
 ## Before the session
 
-Bring the current Partner Photography Profile, a realistic field plan and one
-clear intention for the final sequence. Confirm consent for photographing,
-classroom review and any public display as separate decisions.
+Bring the agreed Week 11 sequence, original files, working edits and one Week 1
+photograph for comparison. Ask the subject about temporary blemish cleanup,
+stray hair, background removal and any face or body reshaping before detailed
+retouching begins.
 
 ## In the session
 
-Run a compact partner shoot. Tutors observe the transition from preparation to
-direction rather than judging isolated frames. Midway through, pause for the
-subject to review a small sample and change the plan if the photographs no
-longer match the shared intention.
+### 1. Establish the anchor edit
 
-Return for a joint shortlist. Sequence the selected images so they read as one
-experience rather than a collection of unrelated successes.
+Choose the image that best represents the final style. Refine exposure, white
+balance, contrast, colour, crop and skin tone without changing identity.
+
+### 2. Match the series
+
+Bring the remaining photographs into a coherent relationship with the anchor.
+Preserve real differences between daylight, interior and night scenes. Review
+at thumbnail size and remove repeated images.
+
+### 3. Complete the recognition review
+
+The subject compares edited and original versions at normal viewing size.
+Revise or remove any retouching that makes the person feel less recognisable or
+crosses an agreed boundary.
+
+### 4. Prepare delivery and feedback
+
+Agree on order, file format and which images may be submitted, shared or kept
+private. Conduct the final partner interview using specific questions about
+favourite images, style, comfort and changes for next time.
 
 ## Afterwards
 
-Complete the final edit and deliver the approved sequence. Revisit the Week 1
-Bad Photo Autopsy and write a short account of which system you now notice
-first, what changed in your practice and what still needs attention.
+Submit the final portrait sequence, authentic partner feedback and
+self-reflection required by Assessment 03. The reflection compares Week 1 with
+the finished work and identifies:
+
+1. one technical decision that improved;
+2. one communication or relationship decision that improved;
+3. one part of the final series supported by partner feedback; and
+4. one limitation to address in the next shoot.
+
+The course ends with an approved set of photographs and a photographer who can
+explain not only how the images were made, but why the person in them wants to
+keep them.

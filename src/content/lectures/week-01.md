@@ -1,5 +1,5 @@
 ---
-title: Does Your Girlfriend Like the Photos You Take?
+title: Learn Which Photos She Likes
 description: >-
   Start with the question that matters in everyday partner photography: not
   whether a portrait is technically correct, but whether your girlfriend

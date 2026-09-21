@@ -1,8 +1,8 @@
 ---
-title: Two Shortlists, One Delivery
+title: Two Shortlists, One Story
 description:
-  Compare photographer and subject selections, then agree on cropping, colour
-  and retouching boundaries before delivering a final set.
+  Compare independent selections, remove repeated frames and agree on a varied
+  sequence of environment, portrait, movement and detail.
 week: 11
 date: 2027-05-03
 teachers:
@@ -10,31 +10,51 @@ teachers:
   - suika-wang
 spec:
   - photographer and subject shortlist independently before discussion
-  - every edit follows an agreed boundary rather than an assumed preference
-  - the delivered set includes the subject's final approval
+  - duplicate groups are reduced through visible expression and gesture differences
+  - the final set contains purposeful variation in framing, action and context
+  - every delivered image has subject approval and a clear role in the sequence
 related:
   - lectures/week-11
-  - assessments/assessment-02
   - assessments/final-assessment
 ---
 
 ## Before the session
 
-Bring twenty to thirty frames from one shoot, including adjacent frames from
-short bursts. Make a private shortlist of five without deleting the rest.
+Bring thirty to fifty photographs from one outing, including short bursts,
+wide views and details. Do not pre-delete the subject's possible favourites.
+The photographer makes a private shortlist of eight and writes one visible
+reason for each choice.
 
 ## In the session
 
-The subject creates a second shortlist from the same set. Compare selections
-at equal size and identify the micro-expressions or proportions that changed
-each decision. Agree on a combined set before editing begins.
+### 1. Remove clear failures
 
-Edit one image together. Discuss crop, brightness, colour, skin tone and what
-should remain untouched. Stop when the image still feels recognisable to the
-person in it.
+Together, hide tests, unintended missed focus, accidental blinks and images
+that cross a consent boundary. Keep intentional blur or unusual expressions
+when they may serve the style.
+
+### 2. Make the subject's shortlist
+
+The subject chooses eight without seeing the photographer's list. Compare the
+two sets and identify expression, proportion, timing or context behind every
+difference.
+
+### 3. Group and reduce
+
+Place near-duplicates side by side. Keep no more than two unless each performs
+a distinct role. Select for the whole person, not sharpness alone.
+
+### 4. Build the story
+
+Create a sequence of five to eight photographs using purposeful variety:
+environment, full or half body, close-up, movement, interaction and detail.
+Reorder until the set has an opening, changing rhythm and ending.
 
 ## Afterwards
 
-Deliver three to five approved images with consistent export settings. Record
-one disagreement, how it was resolved and the boundary you will carry into the
-final assessment.
+Submit the photographer shortlist, subject shortlist and agreed sequence.
+Caption each final image with its role and record one disagreement that changed
+the result for the better.
+
+The set is complete only after the subject approves both the individual images
+and how the sequence represents the day.
