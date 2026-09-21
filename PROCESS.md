@@ -2,20 +2,15 @@
 
 ## Defining the course
 
-I decided that a good course needs more than accurate content. It needs a clear
-purpose, visible progression, assessments aligned with practice, and concrete
-cases that show why a choice fails and how to improve it. I built **Partner
-Photography**, a twelve-week course about photographing with, rather than merely
-of, another person. It does not train professional portrait photographers; it
-helps students plan, communicate and photograph an ordinary partner to produce
-better images and a comfortable shared experience. A technically correct
-portrait is not successful if the subject dislikes it or the process damages
-the day. Technical knowledge serves that relationship rather than replacing it.
-The early structure in
+I built **Partner Photography**, a twelve-week course that teaches students to
+take photographs their partner—in the course's framing, their girlfriend—will
+genuinely like. It does not train professional portrait photographers: planning,
+communication and camera technique are tools for that one goal, and for making
+the shoot itself something both people enjoy. The early structure in
 [`17d0279`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/17d0279)
 and teaching arc in
 [`31c68e7`](https://github.com/comp4020-agentic-coding-studio/comp4020-ass2-lyclccylcq/commit/31c68e7)
-established that direction, but later revisions made it much more specific.
+set that direction; later revisions made it far more specific.
 
 Week 1 now begins with “Does she like the photos you take?”, separating
 technical quality, artistic ambition and a partner's everyday preferences
